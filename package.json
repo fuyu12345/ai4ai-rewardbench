@@ -1,0 +1,13 @@
+{
+  "name": "ai4ai-rewardbench",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "AI4AI RewardBench — evidence-grounded algorithmic preference evaluation",
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "dev": "node scripts/serve.mjs",
+    "test": "python3 -m unittest discover -s tests -v && node --check web/src/app.js"
+  },
+  "engines": { "node": ">=20.11" }
+}

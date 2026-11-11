@@ -1,0 +1,3801 @@
+{
+  "schema_version": "0.1.0",
+  "dataset_version": "golden_pairs_2",
+  "snapshot_date": "2026-11-11",
+  "disclosure": "Curated task descriptions, authored summaries of verified source files, and actual tool-action metadata. No third-party source code is distributed. This is not a full raw trace release. Reference labels, private scoring evidence, raw reasoning, response bodies and internal paths are omitted.",
+  "models": [
+    "gpt-6.1-sol",
+    "gemini-4-argon",
+    "claude-sonnet-5-5"
+  ],
+  "cases": [
+    {
+      "id": "AAB15-P016",
+      "pair_id": "AAB15-P016",
+      "title": "How much calibration-mean repair should survive pruning?",
+      "bench": "AABench",
+      "mode": "agent",
+      "file_count": 94,
+      "input_bytes": 3963911,
+      "evidence": [
+        {
+          "label": "A · authored source summary",
+          "source": "A/rsi_method/reconstruct.py",
+          "line_start": 9,
+          "line_end": 12,
+          "lines": "9–12",
+          "text": "The repair uses an interpolation coefficient of 0.4. Raw rescaling ratios are bounded to 0.5–2.0, with a final multiplier cap of 1.5.",
+          "sha256": "e6259844eb2415e395f85700de1ee5ce746f737d5026d24252cbebbd508d4e96",
+          "kind": "authored_summary",
+          "hash_scope": "complete_source_file"
+        },
+        {
+          "label": "B · authored source summary",
+          "source": "B/rsi_method/reconstruct.py",
+          "line_start": 9,
+          "line_end": 12,
+          "lines": "9–12",
+          "text": "The repair uses an interpolation coefficient of 0.1. Raw rescaling ratios are bounded to 0.5–2.0, with a final multiplier cap of 1.15.",
+          "sha256": "87496f70906b56a1f504838a0b53e2f853a10d118120fe0633a269b844222b1a",
+          "kind": "authored_summary",
+          "hash_scope": "complete_source_file"
+        }
+      ],
+      "traces": [
+        {
+          "model": "gpt-6.1-sol",
+          "repeat": 1,
+          "orientation": "AB",
+          "mode": "agent",
+          "status": "valid",
+          "scoring_included": true,
+          "accepted_turn": 9,
+          "answer": "B",
+          "layers": [
+            {
+              "id": "main",
+              "label": "Initial run",
+              "resume_turn": 1,
+              "raw_status": "valid",
+              "selected": true,
+              "model_turns_attempted": 9,
+              "last_model_turn": 9,
+              "tool_interaction_rounds": 8,
+              "tool_calls_attempted": 52
+            }
+          ],
+          "events": [
+            {
+              "kind": "tool",
+              "layer": "main",
+              "turn": 1,
+              "title": "list_files · 1 call",
+              "detail": "Inspect the manifest-listed public files.",
+              "tools": [
+                {
+                  "name": "list_files",
+                  "arguments": {
+                    "limit": 100
+                  },
+                  "error": false
+                }
+              ]
+            },
+            {
+              "kind": "tool",
+              "layer": "main",
+              "turn": 2,
+              "title": "read_file · 5 calls",
+              "detail": "shared/method-contract.md; A/rsi_method/reconstruct.py; B/rsi_method/reconstruct.py; A/effective-environment.json; B/effective-environment.json",
+              "tools": [
+                {
+                  "name": "read_file",
+                  "arguments": {
+                    "path": "shared/method-contract.md"
+                  },
+                  "error": false
+                },
+                {
+                  "name": "read_file",
+                  "arguments": {
+                    "path": "A/rsi_method/reconstruct.py"
+                  },
+                  "error": false
+                },
+                {
+                  "name": "read_file",
+                  "arguments": {
+                    "path": "B/rsi_method/reconstruct.py"
+                  },
+                  "error": false
+                },
+                {
+                  "name": "read_file",
+                  "arguments": {
+                    "path": "A/effective-environment.json"
+                  },
+                  "error": false
+                },
+                {
+                  "name": "read_file",
+                  "arguments": {
+                    "path": "B/effective-environment.json"
+                  },
+                  "error": false
+                }
+              ]
+            },
+            {
+              "kind": "tool",
+              "layer": "main",
+              "turn": 3,
+              "title": "read_file · 7 calls",
+              "detail": "A/rsi_method/reconstruct.py; B/rsi_method/reconstruct.py; A/rsi_method/sitecustomize.py; B/rsi_method/sitecustomize.py; A/owl_opt.py; A/run.sh; A/prune.py",
+              "tools": [
+                {
+                  "name": "read_file",
+                  "arguments": {
+                    "path": "A/rsi_method/reconstruct.py",
+                    "start": 201
+                  },
+                  "error": false
+                },
+                {
+                  "name": "read_file",
+                  "arguments": {
+                    "path": "B/rsi_method/reconstruct.py",
+                    "start": 201
+                  },
+                  "error": false
+                },
+                {
+                  "name": "read_file",
+                  "arguments": {
+                    "path": "A/rsi_method/sitecustomize.py"
+                  },
+                  "error": false
+                },
+                {
+                  "name": "read_file",
+                  "arguments": {
+                    "path": "B/rsi_method/sitecustomize.py"
+                  },
+                  "error": false
+                },
+                {
+                  "name": "read_file",
+                  "arguments": {
+                    "path": "A/owl_opt.py"
+                  },
+                  "error": false
+                },
+                {
+                  "name": "read_file",
+                  "arguments": {
+                    "path": "A/run.sh"
+                  },
+                  "error": false
+                },
+                {
+                  "name": "read_file",
+                  "arguments": {
+                    "path": "A/prune.py"
+                  },
+                  "error": false
+                }
+              ]
+            },
+            {
+              "kind": "tool",
+              "layer": "main",
+              "turn": 4,
+              "title": "read_file · 7 calls",
+              "detail": "A/owl_opt.py; A/prune.py; A/owl/main.py; A/owl/lib/prune_all.py; shared/data-summary.json; shared/harness/fast_eval.py; shared/harness/validate_checkpoint.py",
+              "tools": [
+                {
+                  "name": "read_file",
+                  "arguments": {
+                    "path": "A/owl_opt.py",
+                    "start": 201
+                  },
+                  "error": false
+                },
+                {
+                  "name": "read_file",
+                  "arguments": {
+                    "path": "A/prune.py",
+                    "start": 201
+                  },
+                  "error": false
+                },
+                {
+                  "name": "read_file",
+                  "arguments": {
+                    "path": "A/owl/main.py"
+                  },
+                  "error": false
+                },
+                {
+                  "name": "read_file",
+                  "arguments": {
+                    "path": "A/owl/lib/prune_all.py",
+                    "start": 1
+                  },
+                  "error": false
+                },
+                {
+                  "name": "read_file",
+                  "arguments": {
+                    "path": "shared/data-summary.json"
+                  },
+                  "error": false
+                },
+                {
+                  "name": "read_file",
+                  "arguments": {
+                    "path": "shared/harness/fast_eval.py"
+                  },
+                  "error": false
+                },
+                {
+                  "name": "read_file",
+                  "arguments": {
+                    "path": "shared/harness/validate_checkpoint.py"
+                  },
+                  "error": false
+                }
+              ]
+            },
+            {
+              "kind": "tool",
+              "layer": "main",
+              "turn": 5,
+              "title": "read_file · 9 calls",
+              "detail": "A/owl/main.py; A/owl/main.py; shared/harness/grade.py; shared/harness/fast_eval.py; B/owl_opt.py; B/owl_opt.py; B/run.sh; A/rsi_method/method.py; B/rsi_method/method.py",
+              "tools": [
+                {
+                  "name": "read_file",
+                  "arguments": {
+                    "path": "A/owl/main.py",
+                    "start": 201
+                  },
+                  "error": false
+                },
+                {
+                  "name": "read_file",
+                  "arguments": {
+                    "path": "A/owl/main.py",
+                    "start": 401
+                  },
+                  "error": false
+                },
+                {
+                  "name": "read_file",
+                  "arguments": {
+                    "path": "shared/harness/grade.py"
+                  },
+                  "error": false
+                },
+                {
+                  "name": "read_file",
+                  "arguments": {
+                    "path": "shared/harness/fast_eval.py",
+                    "start": 201
+                  },
+                  "error": false
+                },
+                {
+                  "name": "read_file",
+                  "arguments": {
+                    "path": "B/owl_opt.py"
+                  },
+                  "error": false
+                },
+                {
+                  "name": "read_file",
+                  "arguments": {
+                    "path": "B/owl_opt.py",
+                    "start": 201
+                  },
+                  "error": false
+                },
+                {
+                  "name": "read_file",
+                  "arguments": {
+                    "path": "B/run.sh"
+                  },
+                  "error": false
+                },
+                {
+                  "name": "read_file",
+                  "arguments": {
+                    "path": "A/rsi_method/method.py"
+                  },
+                  "error": false
+                },
+                {
+                  "name": "read_file",
+                  "arguments": {
+                    "path": "B/rsi_method/method.py"
+                  },
+                  "error": false
+                }
+              ]
+            },
+            {
+              "kind": "tool",
+              "layer": "main",
+              "turn": 6,
+              "title": "read_file · 8 calls",
+              "detail": "A/owl/lib/prune_all.py; A/owl/lib/prune_all.py; A/owl/lib/prune_all.py; A/owl/lib/prune_all.py; A/owl/lib/prune_all.py; A/owl/lib/prune_all.py; A/owl/lib/prune_all.py; shared/harness/grade.py",
+              "tools": [
+                {
+                  "name": "read_file",
+                  "arguments": {
+                    "path": "A/owl/lib/prune_all.py",
+                    "start": 201
+                  },
+                  "error": false
+                },
+                {
+                  "name": "read_file",
+                  "arguments": {
+                    "path": "A/owl/lib/prune_all.py",
+                    "start": 401
+                  },
+                  "error": false
+                },
+                {
+                  "name": "read_file",
+                  "arguments": {
+                    "path": "A/owl/lib/prune_all.py",
+                    "start": 601
+                  },
+                  "error": false
+                },
+                {
+                  "name": "read_file",
+                  "arguments": {
+                    "path": "A/owl/lib/prune_all.py",
+                    "start": 801
+                  },
+                  "error": false
+                },
+                {
+                  "name": "read_file",
+                  "arguments": {
+                    "path": "A/owl/lib/prune_all.py",
+                    "start": 1001
+                  },
+                  "error": false
+                },
+                {
+                  "name": "read_file",
+                  "arguments": {
+                    "path": "A/owl/lib/prune_all.py",
+                    "start": 1201
+                  },
+                  "error": false
+                },
+                {
+                  "name": "read_file",
+                  "arguments": {
+                    "path": "A/owl/lib/prune_all.py",
+                    "start": 1401
+                  },
+                  "error": false
+                },
+                {
+                  "name": "read_file",
+                  "arguments": {
+                    "path": "shared/harness/grade.py",
+                    "start": 201
+                  },
+                  "error": false
+                }
+              ]
+            },
+            {
+              "kind": "tool",
+              "layer": "main",
+              "turn": 7,
+              "title": "read_file · 8 calls",
+              "detail": "B/owl/lib/prune_all.py; B/owl/lib/prune_all.py; B/owl/main.py; B/owl/main.py; B/owl/main.py; shared/input-assets/models/dense/config.json; B/prune.py; B/prune.py",
+              "tools": [
+                {
+                  "name": "read_file",
+                  "arguments": {
+                    "path": "B/owl/lib/prune_all.py",
+                    "start": 1
+                  },
+                  "error": false
+                },
+                {
+                  "name": "read_file",
+                  "arguments": {
+                    "path": "B/owl/lib/prune_all.py",
+                    "start": 201,
+                    "end": 204
+                  },
+                  "error": false
+                },
+                {
+                  "name": "read_file",
+                  "arguments": {
+                    "path": "B/owl/main.py",
+                    "start": 1
+                  },
+                  "error": false
+                },
+                {
+                  "name": "read_file",
+                  "arguments": {
+                    "path": "B/owl/main.py",
+                    "start": 201
+                  },
+                  "error": false
+                },
+                {
+                  "name": "read_file",
+                  "arguments": {
+                    "path": "B/owl/main.py",
+                    "start": 401
+                  },
+                  "error": false
+                },
+                {
+                  "name": "read_file",
+                  "arguments": {
+                    "path": "shared/input-assets/models/dense/config.json"
+                  },
+                  "error": false
+                },
+                {
+                  "name": "read_file",
+                  "arguments": {
+                    "path": "B/prune.py"
+                  },
+                  "error": false
+                },
+                {
+                  "name": "read_file",
+                  "arguments": {
+                    "path": "B/prune.py",
+                    "start": 201
+                  },
+                  "error": false
+                }
+              ]
+            },
+            {
+              "kind": "tool",
+              "layer": "main",
+              "turn": 8,
+              "title": "read_file · 7 calls",
+              "detail": "B/owl/lib/prune_all.py; B/owl/lib/prune_all.py; B/owl/lib/prune_all.py; B/owl/lib/prune_all.py; B/owl/lib/prune_all.py; B/owl/lib/prune_all.py; B/owl/lib/prune_all.py",
+              "tools": [
+                {
+                  "name": "read_file",
+                  "arguments": {
+                    "path": "B/owl/lib/prune_all.py",
+                    "start": 205
+                  },
+                  "error": false
+                },
+                {
+                  "name": "read_file",
+                  "arguments": {
+                    "path": "B/owl/lib/prune_all.py",
+                    "start": 405
+                  },
+                  "error": false
+                },
+                {
+                  "name": "read_file",
+                  "arguments": {
+                    "path": "B/owl/lib/prune_all.py",
+                    "start": 605
+                  },
+                  "error": false
+                },
+                {
+                  "name": "read_file",
+                  "arguments": {
+                    "path": "B/owl/lib/prune_all.py",
+                    "start": 805
+                  },
+                  "error": false
+                },
+                {
+                  "name": "read_file",
+                  "arguments": {
+                    "path": "B/owl/lib/prune_all.py",
+                    "start": 1005
+                  },
+                  "error": false
+                },
+                {
+                  "name": "read_file",
+                  "arguments": {
+                    "path": "B/owl/lib/prune_all.py",
+                    "start": 1205
+                  },
+                  "error": false
+                },
+                {
+                  "name": "read_file",
+                  "arguments": {
+                    "path": "B/owl/lib/prune_all.py",
+                    "start": 1405
+                  },
+                  "error": false
+                }
+              ]
+            },
+            {
+              "kind": "answer",
+              "layer": "main",
+              "turn": 9,
+              "title": "Accepted model answer: B",
+              "detail": "Final selected answer from the merged trace index. This is a model prediction; the reference label is not shown.",
+              "tools": []
+            }
+          ]
+        },
+        {
+          "model": "gemini-4-argon",
+          "repeat": 1,
+          "orientation": "AB",
+          "mode": "agent",
+          "status": "valid",
+          "scoring_included": true,
+          "accepted_turn": 8,
+          "answer": "B",
+          "layers": [
+            {
+              "id": "main",
+              "label": "Initial run",
+              "resume_turn": 1,
+              "raw_status": "failed_final",
+              "selected": false,
+              "model_turns_attempted": 8,
+              "last_model_turn": 8,
+              "tool_interaction_rounds": 7,
+              "tool_calls_attempted": 24
+            },
+            {
+              "id": "recovery-1",
+              "label": "Recovery 1",
+              "resume_turn": 8,
+              "raw_status": "valid",
+              "selected": true,
+              "model_turns_attempted": 1,
+              "last_model_turn": 8,
+              "tool_interaction_rounds": 0,
+              "tool_calls_attempted": 0
+            }
+          ],
+          "events": [
+            {
+              "kind": "tool",
+              "layer": "main",
+              "turn": 1,
+              "title": "read_file + list_files · 2 calls",
+              "detail": "shared/method-contract.md",
+              "tools": [
+                {
+                  "name": "read_file",
+                  "arguments": {
+                    "path": "shared/method-contract.md"
+                  },
+                  "error": false
+                },
+                {
+                  "name": "list_files",
+                  "arguments": {
+                    "limit": 100,
+                    "offset": 0
+                  },
+                  "error": false
+                }
+              ]
+            },
+            {
+              "kind": "tool",
+              "layer": "main",
+              "turn": 2,
+              "title": "read_file · 4 calls",
+              "detail": "A/effective-environment.json; B/effective-environment.json; A/rsi_method/reconstruct.py; B/rsi_method/reconstruct.py",
+              "tools": [
+                {
+                  "name": "read_file",
+                  "arguments": {
+                    "path": "A/effective-environment.json"
+                  },
+                  "error": false
+                },
+                {
+                  "name": "read_file",
+                  "arguments": {
+                    "path": "B/effective-environment.json"
+                  },
+                  "error": false
+                },
+                {
+                  "name": "read_file",
+                  "arguments": {
+                    "path": "A/rsi_method/reconstruct.py"
+                  },
+                  "error": false
+                },
+                {
+                  "name": "read_file",
+                  "arguments": {
+                    "path": "B/rsi_method/reconstruct.py"
+                  },
+                  "error": false
+                }
+              ]
+            },
+            {
+              "kind": "tool",
+              "layer": "main",
+              "turn": 3,
+              "title": "read_file · 4 calls",
+              "detail": "A/rsi_method/reconstruct.py; B/rsi_method/reconstruct.py; A/rsi_method/sitecustomize.py; B/rsi_method/sitecustomize.py",
+              "tools": [
+                {
+                  "name": "read_file",
+                  "arguments": {
+                    "path": "A/rsi_method/reconstruct.py",
+                    "start": 201
+                  },
+                  "error": false
+                },
+                {
+                  "name": "read_file",
+                  "arguments": {
+                    "path": "B/rsi_method/reconstruct.py",
+                    "start": 201
+                  },
+                  "error": false
+                },
+                {
+                  "name": "read_file",
+                  "arguments": {
+                    "path": "A/rsi_method/sitecustomize.py"
+                  },
+                  "error": false
+                },
+                {
+                  "name": "read_file",
+                  "arguments": {
+                    "path": "B/rsi_method/sitecustomize.py"
+                  },
+                  "error": false
+                }
+              ]
+            },
+            {
+              "kind": "tool",
+              "layer": "main",
+              "turn": 4,
+              "title": "read_file · 4 calls",
+              "detail": "A/run.sh; A/prune.py; A/owl_opt.py; shared/data-summary.json",
+              "tools": [
+                {
+                  "name": "read_file",
+                  "arguments": {
+                    "path": "A/run.sh"
+                  },
+                  "error": false
+                },
+                {
+                  "name": "read_file",
+                  "arguments": {
+                    "path": "A/prune.py"
+                  },
+                  "error": false
+                },
+                {
+                  "name": "read_file",
+                  "arguments": {
+                    "path": "A/owl_opt.py"
+                  },
+                  "error": false
+                },
+                {
+                  "name": "read_file",
+                  "arguments": {
+                    "path": "shared/data-summary.json"
+                  },
+                  "error": false
+                }
+              ]
+            },
+            {
+              "kind": "tool",
+              "layer": "main",
+              "turn": 5,
+              "title": "read_file · 4 calls",
+              "detail": "A/rsi_method/method.py; B/rsi_method/method.py; A/rsi_method/hook.py; B/rsi_method/hook.py",
+              "tools": [
+                {
+                  "name": "read_file",
+                  "arguments": {
+                    "path": "A/rsi_method/method.py"
+                  },
+                  "error": false
+                },
+                {
+                  "name": "read_file",
+                  "arguments": {
+                    "path": "B/rsi_method/method.py"
+                  },
+                  "error": false
+                },
+                {
+                  "name": "read_file",
+                  "arguments": {
+                    "path": "A/rsi_method/hook.py"
+                  },
+                  "error": false
+                },
+                {
+                  "name": "read_file",
+                  "arguments": {
+                    "path": "B/rsi_method/hook.py"
+                  },
+                  "error": false
+                }
+              ]
+            },
+            {
+              "kind": "tool",
+              "layer": "main",
+              "turn": 6,
+              "title": "read_file · 3 calls",
+              "detail": "shared/input-assets/models/dense/config.json; A/owl/lib/prune_all.py; A/owl/main.py",
+              "tools": [
+                {
+                  "name": "read_file",
+                  "arguments": {
+                    "path": "shared/input-assets/models/dense/config.json"
+                  },
+                  "error": false
+                },
+                {
+                  "name": "read_file",
+                  "arguments": {
+                    "path": "A/owl/lib/prune_all.py",
+                    "start": 1,
+                    "end": 150
+                  },
+                  "error": false
+                },
+                {
+                  "name": "read_file",
+                  "arguments": {
+                    "path": "A/owl/main.py",
+                    "start": 1,
+                    "end": 150
+                  },
+                  "error": false
+                }
+              ]
+            },
+            {
+              "kind": "tool",
+              "layer": "main",
+              "turn": 7,
+              "title": "read_file · 3 calls",
+              "detail": "shared/harness/fast_eval.py; shared/harness/grade.py; shared/harness/validate_checkpoint.py",
+              "tools": [
+                {
+                  "name": "read_file",
+                  "arguments": {
+                    "path": "shared/harness/fast_eval.py"
+                  },
+                  "error": false
+                },
+                {
+                  "name": "read_file",
+                  "arguments": {
+                    "path": "shared/harness/grade.py"
+                  },
+                  "error": false
+                },
+                {
+                  "name": "read_file",
+                  "arguments": {
+                    "path": "shared/harness/validate_checkpoint.py"
+                  },
+                  "error": false
+                }
+              ]
+            },
+            {
+              "kind": "attempt",
+              "layer": "main",
+              "turn": 8,
+              "title": "Run-layer status",
+              "detail": "This layer required recovery or post-run parsing; see the merged selection below.",
+              "tools": []
+            },
+            {
+              "kind": "answer",
+              "layer": "recovery-1",
+              "turn": 8,
+              "title": "Accepted model answer: B",
+              "detail": "Final selected answer from the merged trace index. This is a model prediction; the reference label is not shown.",
+              "tools": []
+            }
+          ]
+        },
+        {
+          "model": "claude-sonnet-5-5",
+          "repeat": 1,
+          "orientation": "AB",
+          "mode": "agent",
+          "status": "valid",
+          "scoring_included": true,
+          "accepted_turn": 9,
+          "answer": "B",
+          "layers": [
+            {
+              "id": "main",
+              "label": "Initial run",
+              "resume_turn": 1,
+              "raw_status": "valid",
+              "selected": true,
+              "model_turns_attempted": 9,
+              "last_model_turn": 9,
+              "tool_interaction_rounds": 7,
+              "tool_calls_attempted": 11
+            }
+          ],
+          "events": [
+            {
+              "kind": "tool",
+              "layer": "main",
+              "turn": 1,
+              "title": "list_files · 1 call",
+              "detail": "Inspect the manifest-listed public files.",
+              "tools": [
+                {
+                  "name": "list_files",
+                  "arguments": {
+                    "limit": 100
+                  },
+                  "error": false
+                }
+              ]
+            },
+            {
+              "kind": "tool",
+              "layer": "main",
+              "turn": 2,
+              "title": "read_file · 4 calls",
+              "detail": "A/rsi_method/reconstruct.py; shared/method-contract.md; A/effective-environment.json; B/effective-environment.json",
+              "tools": [
+                {
+                  "name": "read_file",
+                  "arguments": {
+                    "path": "A/rsi_method/reconstruct.py"
+                  },
+                  "error": false
+                },
+                {
+                  "name": "read_file",
+                  "arguments": {
+                    "path": "shared/method-contract.md"
+                  },
+                  "error": false
+                },
+                {
+                  "name": "read_file",
+                  "arguments": {
+                    "path": "A/effective-environment.json"
+                  },
+                  "error": false
+                },
+                {
+                  "name": "read_file",
+                  "arguments": {
+                    "path": "B/effective-environment.json"
+                  },
+                  "error": false
+                }
+              ]
+            },
+            {
+              "kind": "tool",
+              "layer": "main",
+              "turn": 3,
+              "title": "read_file + search · 2 calls",
+              "detail": "A/rsi_method/reconstruct.py; B/rsi_method/reconstruct.py",
+              "tools": [
+                {
+                  "name": "read_file",
+                  "arguments": {
+                    "path": "A/rsi_method/reconstruct.py",
+                    "start": 200
+                  },
+                  "error": false
+                },
+                {
+                  "name": "search",
+                  "arguments": {
+                    "path": "B/rsi_method/reconstruct.py"
+                  },
+                  "error": false
+                }
+              ]
+            },
+            {
+              "kind": "tool",
+              "layer": "main",
+              "turn": 4,
+              "title": "read_file · 1 call",
+              "detail": "B/rsi_method/reconstruct.py",
+              "tools": [
+                {
+                  "name": "read_file",
+                  "arguments": {
+                    "path": "B/rsi_method/reconstruct.py",
+                    "start": 52,
+                    "end": 80
+                  },
+                  "error": false
+                }
+              ]
+            },
+            {
+              "kind": "tool",
+              "layer": "main",
+              "turn": 5,
+              "title": "read_file · 1 call",
+              "detail": "shared/data-summary.json",
+              "tools": [
+                {
+                  "name": "read_file",
+                  "arguments": {
+                    "path": "shared/data-summary.json"
+                  },
+                  "error": false
+                }
+              ]
+            },
+            {
+              "kind": "tool",
+              "layer": "main",
+              "turn": 6,
+              "title": "read_file · 1 call",
+              "detail": "shared/harness/fast_eval.py",
+              "tools": [
+                {
+                  "name": "read_file",
+                  "arguments": {
+                    "path": "shared/harness/fast_eval.py",
+                    "start": 1,
+                    "end": 5
+                  },
+                  "error": false
+                }
+              ]
+            },
+            {
+              "kind": "tool",
+              "layer": "main",
+              "turn": 7,
+              "title": "inspect_data · 1 call",
+              "detail": "shared/harness/grade.py",
+              "tools": [
+                {
+                  "name": "inspect_data",
+                  "arguments": {
+                    "path": "shared/harness/grade.py"
+                  },
+                  "error": false
+                }
+              ]
+            },
+            {
+              "kind": "answer",
+              "layer": "main",
+              "turn": 9,
+              "title": "Accepted model answer: B",
+              "detail": "Final selected answer from the merged trace index. This is a model prediction; the reference label is not shown.",
+              "tools": []
+            }
+          ]
+        },
+        {
+          "model": "gpt-6.1-sol",
+          "repeat": 2,
+          "orientation": "AB",
+          "mode": "agent",
+          "status": "valid",
+          "scoring_included": true,
+          "accepted_turn": 8,
+          "answer": "B",
+          "layers": [
+            {
+              "id": "main",
+              "label": "Initial run",
+              "resume_turn": 1,
+              "raw_status": "valid",
+              "selected": true,
+              "model_turns_attempted": 8,
+              "last_model_turn": 8,
+              "tool_interaction_rounds": 7,
+              "tool_calls_attempted": 44
+            }
+          ],
+          "events": [
+            {
+              "kind": "tool",
+              "layer": "main",
+              "turn": 1,
+              "title": "list_files · 1 call",
+              "detail": "Inspect the manifest-listed public files.",
+              "tools": [
+                {
+                  "name": "list_files",
+                  "arguments": {
+                    "limit": 100
+                  },
+                  "error": false
+                }
+              ]
+            },
+            {
+              "kind": "tool",
+              "layer": "main",
+              "turn": 2,
+              "title": "read_file · 5 calls",
+              "detail": "shared/method-contract.md; A/rsi_method/reconstruct.py; B/rsi_method/reconstruct.py; A/effective-environment.json; B/effective-environment.json",
+              "tools": [
+                {
+                  "name": "read_file",
+                  "arguments": {
+                    "path": "shared/method-contract.md"
+                  },
+                  "error": false
+                },
+                {
+                  "name": "read_file",
+                  "arguments": {
+                    "path": "A/rsi_method/reconstruct.py"
+                  },
+                  "error": false
+                },
+                {
+                  "name": "read_file",
+                  "arguments": {
+                    "path": "B/rsi_method/reconstruct.py"
+                  },
+                  "error": false
+                },
+                {
+                  "name": "read_file",
+                  "arguments": {
+                    "path": "A/effective-environment.json"
+                  },
+                  "error": false
+                },
+                {
+                  "name": "read_file",
+                  "arguments": {
+                    "path": "B/effective-environment.json"
+                  },
+                  "error": false
+                }
+              ]
+            },
+            {
+              "kind": "tool",
+              "layer": "main",
+              "turn": 3,
+              "title": "read_file · 7 calls",
+              "detail": "A/rsi_method/reconstruct.py; B/rsi_method/reconstruct.py; A/rsi_method/sitecustomize.py; B/rsi_method/sitecustomize.py; A/owl_opt.py; A/prune.py; A/run.sh",
+              "tools": [
+                {
+                  "name": "read_file",
+                  "arguments": {
+                    "path": "A/rsi_method/reconstruct.py",
+                    "start": 201
+                  },
+                  "error": false
+                },
+                {
+                  "name": "read_file",
+                  "arguments": {
+                    "path": "B/rsi_method/reconstruct.py",
+                    "start": 201
+                  },
+                  "error": false
+                },
+                {
+                  "name": "read_file",
+                  "arguments": {
+                    "path": "A/rsi_method/sitecustomize.py"
+                  },
+                  "error": false
+                },
+                {
+                  "name": "read_file",
+                  "arguments": {
+                    "path": "B/rsi_method/sitecustomize.py"
+                  },
+                  "error": false
+                },
+                {
+                  "name": "read_file",
+                  "arguments": {
+                    "path": "A/owl_opt.py"
+                  },
+                  "error": false
+                },
+                {
+                  "name": "read_file",
+                  "arguments": {
+                    "path": "A/prune.py"
+                  },
+                  "error": false
+                },
+                {
+                  "name": "read_file",
+                  "arguments": {
+                    "path": "A/run.sh"
+                  },
+                  "error": false
+                }
+              ]
+            },
+            {
+              "kind": "tool",
+              "layer": "main",
+              "turn": 4,
+              "title": "read_file · 7 calls",
+              "detail": "A/owl_opt.py; A/prune.py; A/owl/main.py; A/owl/lib/prune_all.py; shared/data-summary.json; shared/harness/fast_eval.py; shared/harness/validate_checkpoint.py",
+              "tools": [
+                {
+                  "name": "read_file",
+                  "arguments": {
+                    "path": "A/owl_opt.py",
+                    "start": 201
+                  },
+                  "error": false
+                },
+                {
+                  "name": "read_file",
+                  "arguments": {
+                    "path": "A/prune.py",
+                    "start": 201
+                  },
+                  "error": false
+                },
+                {
+                  "name": "read_file",
+                  "arguments": {
+                    "path": "A/owl/main.py"
+                  },
+                  "error": false
+                },
+                {
+                  "name": "read_file",
+                  "arguments": {
+                    "path": "A/owl/lib/prune_all.py"
+                  },
+                  "error": false
+                },
+                {
+                  "name": "read_file",
+                  "arguments": {
+                    "path": "shared/data-summary.json"
+                  },
+                  "error": false
+                },
+                {
+                  "name": "read_file",
+                  "arguments": {
+                    "path": "shared/harness/fast_eval.py"
+                  },
+                  "error": false
+                },
+                {
+                  "name": "read_file",
+                  "arguments": {
+                    "path": "shared/harness/validate_checkpoint.py"
+                  },
+                  "error": false
+                }
+              ]
+            },
+            {
+              "kind": "tool",
+              "layer": "main",
+              "turn": 5,
+              "title": "read_file + search · 7 calls",
+              "detail": "A/owl/main.py; B/owl/main.py; B/owl_opt.py; B/run.sh; shared/harness/grade.py; A/owl/lib/prune_all.py; A/owl/lib/prune_all.py",
+              "tools": [
+                {
+                  "name": "read_file",
+                  "arguments": {
+                    "path": "A/owl/main.py",
+                    "start": 201
+                  },
+                  "error": false
+                },
+                {
+                  "name": "read_file",
+                  "arguments": {
+                    "path": "B/owl/main.py",
+                    "start": 201
+                  },
+                  "error": false
+                },
+                {
+                  "name": "read_file",
+                  "arguments": {
+                    "path": "B/owl_opt.py",
+                    "start": 1
+                  },
+                  "error": false
+                },
+                {
+                  "name": "read_file",
+                  "arguments": {
+                    "path": "B/run.sh"
+                  },
+                  "error": false
+                },
+                {
+                  "name": "read_file",
+                  "arguments": {
+                    "path": "shared/harness/grade.py"
+                  },
+                  "error": false
+                },
+                {
+                  "name": "read_file",
+                  "arguments": {
+                    "path": "A/owl/lib/prune_all.py",
+                    "start": 201
+                  },
+                  "error": false
+                },
+                {
+                  "name": "search",
+                  "arguments": {
+                    "path": "A/owl/lib/prune_all.py",
+                    "limit": 20
+                  },
+                  "error": false
+                }
+              ]
+            },
+            {
+              "kind": "tool",
+              "layer": "main",
+              "turn": 6,
+              "title": "read_file · 11 calls",
+              "detail": "A/owl/lib/prune_all.py; A/owl/lib/prune_all.py; A/owl/lib/prune_all.py; A/owl/lib/prune_all.py; A/owl/lib/prune_all.py; A/owl/lib/prune_all.py; A/owl/main.py; B/owl/main.py; B/owl_opt.py; shared/harness/grade.py; shared/harness/fast_eval.py",
+              "tools": [
+                {
+                  "name": "read_file",
+                  "arguments": {
+                    "path": "A/owl/lib/prune_all.py",
+                    "start": 401
+                  },
+                  "error": false
+                },
+                {
+                  "name": "read_file",
+                  "arguments": {
+                    "path": "A/owl/lib/prune_all.py",
+                    "start": 601
+                  },
+                  "error": false
+                },
+                {
+                  "name": "read_file",
+                  "arguments": {
+                    "path": "A/owl/lib/prune_all.py",
+                    "start": 801
+                  },
+                  "error": false
+                },
+                {
+                  "name": "read_file",
+                  "arguments": {
+                    "path": "A/owl/lib/prune_all.py",
+                    "start": 1001
+                  },
+                  "error": false
+                },
+                {
+                  "name": "read_file",
+                  "arguments": {
+                    "path": "A/owl/lib/prune_all.py",
+                    "start": 1201
+                  },
+                  "error": false
+                },
+                {
+                  "name": "read_file",
+                  "arguments": {
+                    "path": "A/owl/lib/prune_all.py",
+                    "start": 1401
+                  },
+                  "error": false
+                },
+                {
+                  "name": "read_file",
+                  "arguments": {
+                    "path": "A/owl/main.py",
+                    "start": 401
+                  },
+                  "error": false
+                },
+                {
+                  "name": "read_file",
+                  "arguments": {
+                    "path": "B/owl/main.py",
+                    "start": 401
+                  },
+                  "error": false
+                },
+                {
+                  "name": "read_file",
+                  "arguments": {
+                    "path": "B/owl_opt.py",
+                    "start": 201
+                  },
+                  "error": false
+                },
+                {
+                  "name": "read_file",
+                  "arguments": {
+                    "path": "shared/harness/grade.py",
+                    "start": 201
+                  },
+                  "error": false
+                },
+                {
+                  "name": "read_file",
+                  "arguments": {
+                    "path": "shared/harness/fast_eval.py",
+                    "start": 201
+                  },
+                  "error": false
+                }
+              ]
+            },
+            {
+              "kind": "tool",
+              "layer": "main",
+              "turn": 7,
+              "title": "read_file · 6 calls",
+              "detail": "A/rsi_method/method.py; B/rsi_method/method.py; B/owl/main.py; B/owl/lib/prune_all.py; shared/input-assets/models/dense/config.json; shared/harness/save_checkpoint.py",
+              "tools": [
+                {
+                  "name": "read_file",
+                  "arguments": {
+                    "path": "A/rsi_method/method.py"
+                  },
+                  "error": false
+                },
+                {
+                  "name": "read_file",
+                  "arguments": {
+                    "path": "B/rsi_method/method.py"
+                  },
+                  "error": false
+                },
+                {
+                  "name": "read_file",
+                  "arguments": {
+                    "path": "B/owl/main.py",
+                    "start": 1
+                  },
+                  "error": false
+                },
+                {
+                  "name": "read_file",
+                  "arguments": {
+                    "path": "B/owl/lib/prune_all.py",
+                    "start": 1
+                  },
+                  "error": false
+                },
+                {
+                  "name": "read_file",
+                  "arguments": {
+                    "path": "shared/input-assets/models/dense/config.json"
+                  },
+                  "error": false
+                },
+                {
+                  "name": "read_file",
+                  "arguments": {
+                    "path": "shared/harness/save_checkpoint.py"
+                  },
+                  "error": false
+                }
+              ]
+            },
+            {
+              "kind": "answer",
+              "layer": "main",
+              "turn": 8,
+              "title": "Accepted model answer: B",
+              "detail": "Final selected answer from the merged trace index. This is a model prediction; the reference label is not shown.",
+              "tools": []
+            }
+          ]
+        },
+        {
+          "model": "gemini-4-argon",
+          "repeat": 2,
+          "orientation": "AB",
+          "mode": "agent",
+          "status": "valid",
+          "scoring_included": true,
+          "accepted_turn": 11,
+          "answer": "B",
+          "layers": [
+            {
+              "id": "main",
+              "label": "Initial run",
+              "resume_turn": 1,
+              "raw_status": "failed_final",
+              "selected": false,
+              "model_turns_attempted": 1,
+              "last_model_turn": 1,
+              "tool_interaction_rounds": 0,
+              "tool_calls_attempted": 0
+            },
+            {
+              "id": "recovery-1",
+              "label": "Recovery 1",
+              "resume_turn": 1,
+              "raw_status": "valid",
+              "selected": true,
+              "model_turns_attempted": 11,
+              "last_model_turn": 11,
+              "tool_interaction_rounds": 10,
+              "tool_calls_attempted": 30
+            }
+          ],
+          "events": [
+            {
+              "kind": "attempt",
+              "layer": "main",
+              "turn": 1,
+              "title": "Run-layer status",
+              "detail": "This layer required recovery or post-run parsing; see the merged selection below.",
+              "tools": []
+            },
+            {
+              "kind": "tool",
+              "layer": "recovery-1",
+              "turn": 1,
+              "title": "list_files + read_file · 2 calls",
+              "detail": "shared/method-contract.md",
+              "tools": [
+                {
+                  "name": "list_files",
+                  "arguments": {
+                    "limit": 100,
+                    "offset": 0
+                  },
+                  "error": false
+                },
+                {
+                  "name": "read_file",
+                  "arguments": {
+                    "path": "shared/method-contract.md",
+                    "start": 1,
+                    "end": 200
+                  },
+                  "error": false
+                }
+              ]
+            },
+            {
+              "kind": "tool",
+              "layer": "recovery-1",
+              "turn": 2,
+              "title": "read_file · 4 calls",
+              "detail": "A/effective-environment.json; B/effective-environment.json; A/rsi_method/reconstruct.py; B/rsi_method/reconstruct.py",
+              "tools": [
+                {
+                  "name": "read_file",
+                  "arguments": {
+                    "path": "A/effective-environment.json",
+                    "start": 1,
+                    "end": 400
+                  },
+                  "error": false
+                },
+                {
+                  "name": "read_file",
+                  "arguments": {
+                    "path": "B/effective-environment.json",
+                    "start": 1,
+                    "end": 400
+                  },
+                  "error": false
+                },
+                {
+                  "name": "read_file",
+                  "arguments": {
+                    "path": "A/rsi_method/reconstruct.py",
+                    "start": 1,
+                    "end": 400
+                  },
+                  "error": false
+                },
+                {
+                  "name": "read_file",
+                  "arguments": {
+                    "path": "B/rsi_method/reconstruct.py",
+                    "start": 1,
+                    "end": 400
+                  },
+                  "error": false
+                }
+              ]
+            },
+            {
+              "kind": "tool",
+              "layer": "recovery-1",
+              "turn": 3,
+              "title": "read_file · 4 calls",
+              "detail": "A/rsi_method/sitecustomize.py; A/prune.py; A/owl_opt.py; shared/data-summary.json",
+              "tools": [
+                {
+                  "name": "read_file",
+                  "arguments": {
+                    "path": "A/rsi_method/sitecustomize.py",
+                    "start": 1,
+                    "end": 400
+                  },
+                  "error": false
+                },
+                {
+                  "name": "read_file",
+                  "arguments": {
+                    "path": "A/prune.py",
+                    "start": 1,
+                    "end": 400
+                  },
+                  "error": false
+                },
+                {
+                  "name": "read_file",
+                  "arguments": {
+                    "path": "A/owl_opt.py",
+                    "start": 1,
+                    "end": 400
+                  },
+                  "error": false
+                },
+                {
+                  "name": "read_file",
+                  "arguments": {
+                    "path": "shared/data-summary.json",
+                    "start": 1,
+                    "end": 400
+                  },
+                  "error": false
+                }
+              ]
+            },
+            {
+              "kind": "tool",
+              "layer": "recovery-1",
+              "turn": 4,
+              "title": "read_file · 4 calls",
+              "detail": "A/run.sh; B/run.sh; A/owl/main.py; shared/harness/validate_checkpoint.py",
+              "tools": [
+                {
+                  "name": "read_file",
+                  "arguments": {
+                    "path": "A/run.sh",
+                    "start": 1,
+                    "end": 400
+                  },
+                  "error": false
+                },
+                {
+                  "name": "read_file",
+                  "arguments": {
+                    "path": "B/run.sh",
+                    "start": 1,
+                    "end": 400
+                  },
+                  "error": false
+                },
+                {
+                  "name": "read_file",
+                  "arguments": {
+                    "path": "A/owl/main.py",
+                    "start": 1,
+                    "end": 400
+                  },
+                  "error": false
+                },
+                {
+                  "name": "read_file",
+                  "arguments": {
+                    "path": "shared/harness/validate_checkpoint.py",
+                    "start": 1,
+                    "end": 400
+                  },
+                  "error": false
+                }
+              ]
+            },
+            {
+              "kind": "tool",
+              "layer": "recovery-1",
+              "turn": 5,
+              "title": "read_file · 2 calls",
+              "detail": "shared/harness/fast_eval.py; shared/harness/grade.py",
+              "tools": [
+                {
+                  "name": "read_file",
+                  "arguments": {
+                    "path": "shared/harness/fast_eval.py",
+                    "start": 1,
+                    "end": 400
+                  },
+                  "error": false
+                },
+                {
+                  "name": "read_file",
+                  "arguments": {
+                    "path": "shared/harness/grade.py",
+                    "start": 1,
+                    "end": 400
+                  },
+                  "error": false
+                }
+              ]
+            },
+            {
+              "kind": "tool",
+              "layer": "recovery-1",
+              "turn": 6,
+              "title": "read_file · 4 calls",
+              "detail": "A/rsi_method/method.py; B/rsi_method/method.py; A/rsi_method/hook.py; B/rsi_method/hook.py",
+              "tools": [
+                {
+                  "name": "read_file",
+                  "arguments": {
+                    "path": "A/rsi_method/method.py",
+                    "start": 1,
+                    "end": 400
+                  },
+                  "error": false
+                },
+                {
+                  "name": "read_file",
+                  "arguments": {
+                    "path": "B/rsi_method/method.py",
+                    "start": 1,
+                    "end": 400
+                  },
+                  "error": false
+                },
+                {
+                  "name": "read_file",
+                  "arguments": {
+                    "path": "A/rsi_method/hook.py",
+                    "start": 1,
+                    "end": 400
+                  },
+                  "error": false
+                },
+                {
+                  "name": "read_file",
+                  "arguments": {
+                    "path": "B/rsi_method/hook.py",
+                    "start": 1,
+                    "end": 400
+                  },
+                  "error": false
+                }
+              ]
+            },
+            {
+              "kind": "tool",
+              "layer": "recovery-1",
+              "turn": 7,
+              "title": "read_file · 3 calls",
+              "detail": "A/owl/lib/prune_all.py; shared/input-assets/models/dense/config.json; shared/environment/assets.lock.yaml",
+              "tools": [
+                {
+                  "name": "read_file",
+                  "arguments": {
+                    "path": "A/owl/lib/prune_all.py",
+                    "start": 1,
+                    "end": 400
+                  },
+                  "error": false
+                },
+                {
+                  "name": "read_file",
+                  "arguments": {
+                    "path": "shared/input-assets/models/dense/config.json",
+                    "start": 1,
+                    "end": 150
+                  },
+                  "error": false
+                },
+                {
+                  "name": "read_file",
+                  "arguments": {
+                    "path": "shared/environment/assets.lock.yaml",
+                    "start": 1,
+                    "end": 150
+                  },
+                  "error": false
+                }
+              ]
+            },
+            {
+              "kind": "tool",
+              "layer": "recovery-1",
+              "turn": 8,
+              "title": "read_file · 3 calls",
+              "detail": "A/owl/lib/prune_all.py; A/owl/lib/layerwrapper.py; A/owl/main.py",
+              "tools": [
+                {
+                  "name": "read_file",
+                  "arguments": {
+                    "path": "A/owl/lib/prune_all.py",
+                    "start": 401,
+                    "end": 800
+                  },
+                  "error": false
+                },
+                {
+                  "name": "read_file",
+                  "arguments": {
+                    "path": "A/owl/lib/layerwrapper.py",
+                    "start": 1,
+                    "end": 100
+                  },
+                  "error": false
+                },
+                {
+                  "name": "read_file",
+                  "arguments": {
+                    "path": "A/owl/main.py",
+                    "start": 380,
+                    "end": 450
+                  },
+                  "error": false
+                }
+              ]
+            },
+            {
+              "kind": "tool",
+              "layer": "recovery-1",
+              "turn": 9,
+              "title": "read_file · 1 call",
+              "detail": "A/owl/lib/prune_all.py",
+              "tools": [
+                {
+                  "name": "read_file",
+                  "arguments": {
+                    "path": "A/owl/lib/prune_all.py",
+                    "start": 801,
+                    "end": 1200
+                  },
+                  "error": false
+                }
+              ]
+            },
+            {
+              "kind": "tool",
+              "layer": "recovery-1",
+              "turn": 10,
+              "title": "read_file · 3 calls",
+              "detail": "B/rsi_method/sitecustomize.py; B/prune.py; B/owl_opt.py",
+              "tools": [
+                {
+                  "name": "read_file",
+                  "arguments": {
+                    "path": "B/rsi_method/sitecustomize.py",
+                    "start": 1,
+                    "end": 400
+                  },
+                  "error": false
+                },
+                {
+                  "name": "read_file",
+                  "arguments": {
+                    "path": "B/prune.py",
+                    "start": 1,
+                    "end": 400
+                  },
+                  "error": false
+                },
+                {
+                  "name": "read_file",
+                  "arguments": {
+                    "path": "B/owl_opt.py",
+                    "start": 1,
+                    "end": 400
+                  },
+                  "error": false
+                }
+              ]
+            },
+            {
+              "kind": "answer",
+              "layer": "recovery-1",
+              "turn": 11,
+              "title": "Accepted model answer: B",
+              "detail": "Final selected answer from the merged trace index. This is a model prediction; the reference label is not shown.",
+              "tools": []
+            }
+          ]
+        },
+        {
+          "model": "claude-sonnet-5-5",
+          "repeat": 2,
+          "orientation": "AB",
+          "mode": "agent",
+          "status": "failed_final",
+          "scoring_included": false,
+          "accepted_turn": null,
+          "answer": null,
+          "layers": [
+            {
+              "id": "main",
+              "label": "Initial run",
+              "resume_turn": 1,
+              "raw_status": "failed_final",
+              "selected": false,
+              "model_turns_attempted": 5,
+              "last_model_turn": 5,
+              "tool_interaction_rounds": 4,
+              "tool_calls_attempted": 6
+            },
+            {
+              "id": "recovery-1",
+              "label": "Recovery 1",
+              "resume_turn": 5,
+              "raw_status": "failed_final",
+              "selected": false,
+              "model_turns_attempted": 1,
+              "last_model_turn": 5,
+              "tool_interaction_rounds": 0,
+              "tool_calls_attempted": 0
+            },
+            {
+              "id": "recovery-2",
+              "label": "Recovery 2",
+              "resume_turn": 5,
+              "raw_status": "failed_final",
+              "selected": false,
+              "model_turns_attempted": 1,
+              "last_model_turn": 5,
+              "tool_interaction_rounds": 0,
+              "tool_calls_attempted": 0
+            }
+          ],
+          "events": [
+            {
+              "kind": "tool",
+              "layer": "main",
+              "turn": 1,
+              "title": "list_files · 1 call",
+              "detail": "Inspect the manifest-listed public files.",
+              "tools": [
+                {
+                  "name": "list_files",
+                  "arguments": {
+                    "limit": 100
+                  },
+                  "error": false
+                }
+              ]
+            },
+            {
+              "kind": "tool",
+              "layer": "main",
+              "turn": 2,
+              "title": "read_file · 2 calls",
+              "detail": "A/rsi_method/reconstruct.py; shared/method-contract.md",
+              "tools": [
+                {
+                  "name": "read_file",
+                  "arguments": {
+                    "path": "A/rsi_method/reconstruct.py"
+                  },
+                  "error": false
+                },
+                {
+                  "name": "read_file",
+                  "arguments": {
+                    "path": "shared/method-contract.md"
+                  },
+                  "error": false
+                }
+              ]
+            },
+            {
+              "kind": "tool",
+              "layer": "main",
+              "turn": 3,
+              "title": "read_file + search · 2 calls",
+              "detail": "A/rsi_method/reconstruct.py; B/rsi_method/reconstruct.py",
+              "tools": [
+                {
+                  "name": "read_file",
+                  "arguments": {
+                    "path": "A/rsi_method/reconstruct.py",
+                    "start": 200
+                  },
+                  "error": false
+                },
+                {
+                  "name": "search",
+                  "arguments": {
+                    "path": "B/rsi_method/reconstruct.py"
+                  },
+                  "error": false
+                }
+              ]
+            },
+            {
+              "kind": "tool",
+              "layer": "main",
+              "turn": 4,
+              "title": "read_file · 1 call",
+              "detail": "B/rsi_method/reconstruct.py",
+              "tools": [
+                {
+                  "name": "read_file",
+                  "arguments": {
+                    "path": "B/rsi_method/reconstruct.py",
+                    "start": 52,
+                    "end": 80
+                  },
+                  "error": false
+                }
+              ]
+            },
+            {
+              "kind": "refusal",
+              "layer": "main",
+              "turn": 5,
+              "title": "Provider refusal",
+              "detail": "HTTP 200 with stop_reason=refusal; empty answer. This attempt is not scored.",
+              "tools": []
+            },
+            {
+              "kind": "refusal",
+              "layer": "recovery-1",
+              "turn": 5,
+              "title": "Provider refusal",
+              "detail": "HTTP 200 with stop_reason=refusal; empty answer. This attempt is not scored.",
+              "tools": []
+            },
+            {
+              "kind": "refusal",
+              "layer": "recovery-2",
+              "turn": 5,
+              "title": "Provider refusal",
+              "detail": "HTTP 200 with stop_reason=refusal; empty answer. This attempt is not scored.",
+              "tools": []
+            }
+          ]
+        },
+        {
+          "model": "gpt-6.1-sol",
+          "repeat": 3,
+          "orientation": "AB",
+          "mode": "agent",
+          "status": "valid",
+          "scoring_included": true,
+          "accepted_turn": 9,
+          "answer": "B",
+          "layers": [
+            {
+              "id": "main",
+              "label": "Initial run",
+              "resume_turn": 1,
+              "raw_status": "valid",
+              "selected": true,
+              "model_turns_attempted": 9,
+              "last_model_turn": 9,
+              "tool_interaction_rounds": 8,
+              "tool_calls_attempted": 42
+            }
+          ],
+          "events": [
+            {
+              "kind": "tool",
+              "layer": "main",
+              "turn": 1,
+              "title": "list_files · 1 call",
+              "detail": "Inspect the manifest-listed public files.",
+              "tools": [
+                {
+                  "name": "list_files",
+                  "arguments": {
+                    "limit": 150
+                  },
+                  "error": false
+                }
+              ]
+            },
+            {
+              "kind": "tool",
+              "layer": "main",
+              "turn": 2,
+              "title": "read_file · 5 calls",
+              "detail": "shared/method-contract.md; A/rsi_method/reconstruct.py; B/rsi_method/reconstruct.py; A/effective-environment.json; B/effective-environment.json",
+              "tools": [
+                {
+                  "name": "read_file",
+                  "arguments": {
+                    "path": "shared/method-contract.md"
+                  },
+                  "error": false
+                },
+                {
+                  "name": "read_file",
+                  "arguments": {
+                    "path": "A/rsi_method/reconstruct.py"
+                  },
+                  "error": false
+                },
+                {
+                  "name": "read_file",
+                  "arguments": {
+                    "path": "B/rsi_method/reconstruct.py"
+                  },
+                  "error": false
+                },
+                {
+                  "name": "read_file",
+                  "arguments": {
+                    "path": "A/effective-environment.json"
+                  },
+                  "error": false
+                },
+                {
+                  "name": "read_file",
+                  "arguments": {
+                    "path": "B/effective-environment.json"
+                  },
+                  "error": false
+                }
+              ]
+            },
+            {
+              "kind": "tool",
+              "layer": "main",
+              "turn": 3,
+              "title": "read_file · 6 calls",
+              "detail": "A/rsi_method/reconstruct.py; B/rsi_method/reconstruct.py; A/rsi_method/sitecustomize.py; B/rsi_method/sitecustomize.py; A/run.sh; B/run.sh",
+              "tools": [
+                {
+                  "name": "read_file",
+                  "arguments": {
+                    "path": "A/rsi_method/reconstruct.py",
+                    "start": 201
+                  },
+                  "error": false
+                },
+                {
+                  "name": "read_file",
+                  "arguments": {
+                    "path": "B/rsi_method/reconstruct.py",
+                    "start": 201
+                  },
+                  "error": false
+                },
+                {
+                  "name": "read_file",
+                  "arguments": {
+                    "path": "A/rsi_method/sitecustomize.py"
+                  },
+                  "error": false
+                },
+                {
+                  "name": "read_file",
+                  "arguments": {
+                    "path": "B/rsi_method/sitecustomize.py"
+                  },
+                  "error": false
+                },
+                {
+                  "name": "read_file",
+                  "arguments": {
+                    "path": "A/run.sh"
+                  },
+                  "error": false
+                },
+                {
+                  "name": "read_file",
+                  "arguments": {
+                    "path": "B/run.sh"
+                  },
+                  "error": false
+                }
+              ]
+            },
+            {
+              "kind": "tool",
+              "layer": "main",
+              "turn": 4,
+              "title": "read_file · 6 calls",
+              "detail": "A/owl_opt.py; A/prune.py; A/owl/main.py; shared/data-summary.json; shared/harness/fast_eval.py; shared/harness/validate_checkpoint.py",
+              "tools": [
+                {
+                  "name": "read_file",
+                  "arguments": {
+                    "path": "A/owl_opt.py"
+                  },
+                  "error": false
+                },
+                {
+                  "name": "read_file",
+                  "arguments": {
+                    "path": "A/prune.py"
+                  },
+                  "error": false
+                },
+                {
+                  "name": "read_file",
+                  "arguments": {
+                    "path": "A/owl/main.py"
+                  },
+                  "error": false
+                },
+                {
+                  "name": "read_file",
+                  "arguments": {
+                    "path": "shared/data-summary.json"
+                  },
+                  "error": false
+                },
+                {
+                  "name": "read_file",
+                  "arguments": {
+                    "path": "shared/harness/fast_eval.py"
+                  },
+                  "error": false
+                },
+                {
+                  "name": "read_file",
+                  "arguments": {
+                    "path": "shared/harness/validate_checkpoint.py"
+                  },
+                  "error": false
+                }
+              ]
+            },
+            {
+              "kind": "tool",
+              "layer": "main",
+              "turn": 5,
+              "title": "read_file + search · 7 calls",
+              "detail": "A/owl_opt.py; B/owl_opt.py; A/prune.py; B/prune.py; A/owl/main.py; shared/harness/grade.py; A/owl/lib/prune_all.py",
+              "tools": [
+                {
+                  "name": "read_file",
+                  "arguments": {
+                    "path": "A/owl_opt.py",
+                    "start": 201
+                  },
+                  "error": false
+                },
+                {
+                  "name": "read_file",
+                  "arguments": {
+                    "path": "B/owl_opt.py"
+                  },
+                  "error": false
+                },
+                {
+                  "name": "read_file",
+                  "arguments": {
+                    "path": "A/prune.py",
+                    "start": 201
+                  },
+                  "error": false
+                },
+                {
+                  "name": "read_file",
+                  "arguments": {
+                    "path": "B/prune.py"
+                  },
+                  "error": false
+                },
+                {
+                  "name": "read_file",
+                  "arguments": {
+                    "path": "A/owl/main.py",
+                    "start": 201
+                  },
+                  "error": false
+                },
+                {
+                  "name": "read_file",
+                  "arguments": {
+                    "path": "shared/harness/grade.py"
+                  },
+                  "error": false
+                },
+                {
+                  "name": "search",
+                  "arguments": {
+                    "path": "A/owl/lib/prune_all.py",
+                    "limit": 100
+                  },
+                  "error": true
+                }
+              ]
+            },
+            {
+              "kind": "tool",
+              "layer": "main",
+              "turn": 6,
+              "title": "read_file · 8 calls",
+              "detail": "A/owl/lib/prune_all.py; B/owl/lib/prune_all.py; B/owl_opt.py; B/prune.py; A/owl/main.py; B/owl/main.py; shared/harness/grade.py; shared/harness/fast_eval.py",
+              "tools": [
+                {
+                  "name": "read_file",
+                  "arguments": {
+                    "path": "A/owl/lib/prune_all.py",
+                    "start": 1,
+                    "end": 200
+                  },
+                  "error": false
+                },
+                {
+                  "name": "read_file",
+                  "arguments": {
+                    "path": "B/owl/lib/prune_all.py",
+                    "start": 1,
+                    "end": 200
+                  },
+                  "error": false
+                },
+                {
+                  "name": "read_file",
+                  "arguments": {
+                    "path": "B/owl_opt.py",
+                    "start": 201
+                  },
+                  "error": false
+                },
+                {
+                  "name": "read_file",
+                  "arguments": {
+                    "path": "B/prune.py",
+                    "start": 201
+                  },
+                  "error": false
+                },
+                {
+                  "name": "read_file",
+                  "arguments": {
+                    "path": "A/owl/main.py",
+                    "start": 401
+                  },
+                  "error": false
+                },
+                {
+                  "name": "read_file",
+                  "arguments": {
+                    "path": "B/owl/main.py",
+                    "start": 1
+                  },
+                  "error": false
+                },
+                {
+                  "name": "read_file",
+                  "arguments": {
+                    "path": "shared/harness/grade.py",
+                    "start": 201
+                  },
+                  "error": false
+                },
+                {
+                  "name": "read_file",
+                  "arguments": {
+                    "path": "shared/harness/fast_eval.py",
+                    "start": 201
+                  },
+                  "error": false
+                }
+              ]
+            },
+            {
+              "kind": "tool",
+              "layer": "main",
+              "turn": 7,
+              "title": "search · 1 call",
+              "detail": "A/owl/lib/prune_all.py",
+              "tools": [
+                {
+                  "name": "search",
+                  "arguments": {
+                    "path": "A/owl/lib/prune_all.py",
+                    "limit": 50
+                  },
+                  "error": false
+                }
+              ]
+            },
+            {
+              "kind": "tool",
+              "layer": "main",
+              "turn": 8,
+              "title": "read_file · 8 calls",
+              "detail": "B/owl/main.py; B/owl/main.py; A/owl/lib/prune_all.py; A/owl/lib/prune_all.py; B/owl/lib/prune_all.py; A/rsi_method/method.py; B/rsi_method/method.py; shared/input-assets/models/dense/config.json",
+              "tools": [
+                {
+                  "name": "read_file",
+                  "arguments": {
+                    "path": "B/owl/main.py",
+                    "start": 201
+                  },
+                  "error": false
+                },
+                {
+                  "name": "read_file",
+                  "arguments": {
+                    "path": "B/owl/main.py",
+                    "start": 401
+                  },
+                  "error": false
+                },
+                {
+                  "name": "read_file",
+                  "arguments": {
+                    "path": "A/owl/lib/prune_all.py",
+                    "start": 853,
+                    "end": 1052
+                  },
+                  "error": false
+                },
+                {
+                  "name": "read_file",
+                  "arguments": {
+                    "path": "A/owl/lib/prune_all.py",
+                    "start": 1053,
+                    "end": 1115
+                  },
+                  "error": false
+                },
+                {
+                  "name": "read_file",
+                  "arguments": {
+                    "path": "B/owl/lib/prune_all.py",
+                    "start": 196,
+                    "end": 203
+                  },
+                  "error": false
+                },
+                {
+                  "name": "read_file",
+                  "arguments": {
+                    "path": "A/rsi_method/method.py"
+                  },
+                  "error": false
+                },
+                {
+                  "name": "read_file",
+                  "arguments": {
+                    "path": "B/rsi_method/method.py"
+                  },
+                  "error": false
+                },
+                {
+                  "name": "read_file",
+                  "arguments": {
+                    "path": "shared/input-assets/models/dense/config.json"
+                  },
+                  "error": false
+                }
+              ]
+            },
+            {
+              "kind": "answer",
+              "layer": "main",
+              "turn": 9,
+              "title": "Accepted model answer: B",
+              "detail": "Final selected answer from the merged trace index. This is a model prediction; the reference label is not shown.",
+              "tools": []
+            }
+          ]
+        },
+        {
+          "model": "gemini-4-argon",
+          "repeat": 3,
+          "orientation": "AB",
+          "mode": "agent",
+          "status": "valid",
+          "scoring_included": true,
+          "accepted_turn": 7,
+          "answer": "B",
+          "layers": [
+            {
+              "id": "main",
+              "label": "Initial run",
+              "resume_turn": 1,
+              "raw_status": "failed_final",
+              "selected": false,
+              "model_turns_attempted": 1,
+              "last_model_turn": 1,
+              "tool_interaction_rounds": 0,
+              "tool_calls_attempted": 0
+            },
+            {
+              "id": "recovery-1",
+              "label": "Recovery 1",
+              "resume_turn": 1,
+              "raw_status": "valid",
+              "selected": true,
+              "model_turns_attempted": 7,
+              "last_model_turn": 7,
+              "tool_interaction_rounds": 6,
+              "tool_calls_attempted": 31
+            }
+          ],
+          "events": [
+            {
+              "kind": "attempt",
+              "layer": "main",
+              "turn": 1,
+              "title": "Run-layer status",
+              "detail": "This layer required recovery or post-run parsing; see the merged selection below.",
+              "tools": []
+            },
+            {
+              "kind": "tool",
+              "layer": "recovery-1",
+              "turn": 1,
+              "title": "read_file + list_files · 4 calls",
+              "detail": "shared/method-contract.md; A/rsi_method/reconstruct.py; B/rsi_method/reconstruct.py",
+              "tools": [
+                {
+                  "name": "read_file",
+                  "arguments": {
+                    "path": "shared/method-contract.md"
+                  },
+                  "error": false
+                },
+                {
+                  "name": "list_files",
+                  "arguments": {
+                    "limit": 100,
+                    "offset": 0
+                  },
+                  "error": false
+                },
+                {
+                  "name": "read_file",
+                  "arguments": {
+                    "path": "A/rsi_method/reconstruct.py"
+                  },
+                  "error": false
+                },
+                {
+                  "name": "read_file",
+                  "arguments": {
+                    "path": "B/rsi_method/reconstruct.py"
+                  },
+                  "error": false
+                }
+              ]
+            },
+            {
+              "kind": "tool",
+              "layer": "recovery-1",
+              "turn": 2,
+              "title": "read_file · 6 calls",
+              "detail": "A/rsi_method/reconstruct.py; B/rsi_method/reconstruct.py; A/effective-environment.json; B/effective-environment.json; A/rsi_method/sitecustomize.py; B/rsi_method/sitecustomize.py",
+              "tools": [
+                {
+                  "name": "read_file",
+                  "arguments": {
+                    "path": "A/rsi_method/reconstruct.py",
+                    "start": 201
+                  },
+                  "error": false
+                },
+                {
+                  "name": "read_file",
+                  "arguments": {
+                    "path": "B/rsi_method/reconstruct.py",
+                    "start": 201
+                  },
+                  "error": false
+                },
+                {
+                  "name": "read_file",
+                  "arguments": {
+                    "path": "A/effective-environment.json"
+                  },
+                  "error": false
+                },
+                {
+                  "name": "read_file",
+                  "arguments": {
+                    "path": "B/effective-environment.json"
+                  },
+                  "error": false
+                },
+                {
+                  "name": "read_file",
+                  "arguments": {
+                    "path": "A/rsi_method/sitecustomize.py"
+                  },
+                  "error": false
+                },
+                {
+                  "name": "read_file",
+                  "arguments": {
+                    "path": "B/rsi_method/sitecustomize.py"
+                  },
+                  "error": false
+                }
+              ]
+            },
+            {
+              "kind": "tool",
+              "layer": "recovery-1",
+              "turn": 3,
+              "title": "read_file · 6 calls",
+              "detail": "A/run.sh; A/prune.py; A/owl_opt.py; shared/data-summary.json; A/rsi_method/method.py; B/rsi_method/method.py",
+              "tools": [
+                {
+                  "name": "read_file",
+                  "arguments": {
+                    "path": "A/run.sh"
+                  },
+                  "error": false
+                },
+                {
+                  "name": "read_file",
+                  "arguments": {
+                    "path": "A/prune.py"
+                  },
+                  "error": false
+                },
+                {
+                  "name": "read_file",
+                  "arguments": {
+                    "path": "A/owl_opt.py"
+                  },
+                  "error": false
+                },
+                {
+                  "name": "read_file",
+                  "arguments": {
+                    "path": "shared/data-summary.json"
+                  },
+                  "error": false
+                },
+                {
+                  "name": "read_file",
+                  "arguments": {
+                    "path": "A/rsi_method/method.py"
+                  },
+                  "error": false
+                },
+                {
+                  "name": "read_file",
+                  "arguments": {
+                    "path": "B/rsi_method/method.py"
+                  },
+                  "error": false
+                }
+              ]
+            },
+            {
+              "kind": "tool",
+              "layer": "recovery-1",
+              "turn": 4,
+              "title": "read_file · 6 calls",
+              "detail": "A/rsi_method/hook.py; B/rsi_method/hook.py; A/rsi_method/helpers.py; B/rsi_method/helpers.py; shared/input-assets/models/dense/config.json; shared/harness/fast_eval.py",
+              "tools": [
+                {
+                  "name": "read_file",
+                  "arguments": {
+                    "path": "A/rsi_method/hook.py"
+                  },
+                  "error": false
+                },
+                {
+                  "name": "read_file",
+                  "arguments": {
+                    "path": "B/rsi_method/hook.py"
+                  },
+                  "error": false
+                },
+                {
+                  "name": "read_file",
+                  "arguments": {
+                    "path": "A/rsi_method/helpers.py"
+                  },
+                  "error": false
+                },
+                {
+                  "name": "read_file",
+                  "arguments": {
+                    "path": "B/rsi_method/helpers.py"
+                  },
+                  "error": false
+                },
+                {
+                  "name": "read_file",
+                  "arguments": {
+                    "path": "shared/input-assets/models/dense/config.json"
+                  },
+                  "error": false
+                },
+                {
+                  "name": "read_file",
+                  "arguments": {
+                    "path": "shared/harness/fast_eval.py"
+                  },
+                  "error": false
+                }
+              ]
+            },
+            {
+              "kind": "tool",
+              "layer": "recovery-1",
+              "turn": 5,
+              "title": "read_file · 5 calls",
+              "detail": "A/owl/lib/prune_all.py; A/owl/lib/prune_all.py; A/owl/lib/prune_all.py; A/owl/main.py; A/owl/main.py",
+              "tools": [
+                {
+                  "name": "read_file",
+                  "arguments": {
+                    "path": "A/owl/lib/prune_all.py",
+                    "start": 1
+                  },
+                  "error": false
+                },
+                {
+                  "name": "read_file",
+                  "arguments": {
+                    "path": "A/owl/lib/prune_all.py",
+                    "start": 201
+                  },
+                  "error": false
+                },
+                {
+                  "name": "read_file",
+                  "arguments": {
+                    "path": "A/owl/lib/prune_all.py",
+                    "start": 401
+                  },
+                  "error": false
+                },
+                {
+                  "name": "read_file",
+                  "arguments": {
+                    "path": "A/owl/main.py",
+                    "start": 1
+                  },
+                  "error": false
+                },
+                {
+                  "name": "read_file",
+                  "arguments": {
+                    "path": "A/owl/main.py",
+                    "start": 201
+                  },
+                  "error": false
+                }
+              ]
+            },
+            {
+              "kind": "tool",
+              "layer": "recovery-1",
+              "turn": 6,
+              "title": "read_file · 4 calls",
+              "detail": "A/owl_opt.py; shared/calibration-examples.json; shared/harness/grade.py; A/owl/lib/layerwrapper.py",
+              "tools": [
+                {
+                  "name": "read_file",
+                  "arguments": {
+                    "path": "A/owl_opt.py",
+                    "start": 201
+                  },
+                  "error": false
+                },
+                {
+                  "name": "read_file",
+                  "arguments": {
+                    "path": "shared/calibration-examples.json",
+                    "start": 1
+                  },
+                  "error": false
+                },
+                {
+                  "name": "read_file",
+                  "arguments": {
+                    "path": "shared/harness/grade.py",
+                    "start": 1
+                  },
+                  "error": false
+                },
+                {
+                  "name": "read_file",
+                  "arguments": {
+                    "path": "A/owl/lib/layerwrapper.py"
+                  },
+                  "error": false
+                }
+              ]
+            },
+            {
+              "kind": "answer",
+              "layer": "recovery-1",
+              "turn": 7,
+              "title": "Accepted model answer: B",
+              "detail": "Final selected answer from the merged trace index. This is a model prediction; the reference label is not shown.",
+              "tools": []
+            }
+          ]
+        },
+        {
+          "model": "claude-sonnet-5-5",
+          "repeat": 3,
+          "orientation": "AB",
+          "mode": "agent",
+          "status": "valid",
+          "scoring_included": true,
+          "accepted_turn": 7,
+          "answer": "B",
+          "layers": [
+            {
+              "id": "main",
+              "label": "Initial run",
+              "resume_turn": 1,
+              "raw_status": "valid",
+              "selected": true,
+              "model_turns_attempted": 7,
+              "last_model_turn": 7,
+              "tool_interaction_rounds": 5,
+              "tool_calls_attempted": 9
+            }
+          ],
+          "events": [
+            {
+              "kind": "tool",
+              "layer": "main",
+              "turn": 1,
+              "title": "list_files · 1 call",
+              "detail": "Inspect the manifest-listed public files.",
+              "tools": [
+                {
+                  "name": "list_files",
+                  "arguments": {
+                    "limit": 100
+                  },
+                  "error": false
+                }
+              ]
+            },
+            {
+              "kind": "tool",
+              "layer": "main",
+              "turn": 2,
+              "title": "read_file · 4 calls",
+              "detail": "A/rsi_method/reconstruct.py; shared/method-contract.md; A/effective-environment.json; B/effective-environment.json",
+              "tools": [
+                {
+                  "name": "read_file",
+                  "arguments": {
+                    "path": "A/rsi_method/reconstruct.py"
+                  },
+                  "error": false
+                },
+                {
+                  "name": "read_file",
+                  "arguments": {
+                    "path": "shared/method-contract.md"
+                  },
+                  "error": false
+                },
+                {
+                  "name": "read_file",
+                  "arguments": {
+                    "path": "A/effective-environment.json"
+                  },
+                  "error": false
+                },
+                {
+                  "name": "read_file",
+                  "arguments": {
+                    "path": "B/effective-environment.json"
+                  },
+                  "error": false
+                }
+              ]
+            },
+            {
+              "kind": "tool",
+              "layer": "main",
+              "turn": 3,
+              "title": "read_file · 2 calls",
+              "detail": "A/rsi_method/reconstruct.py; B/rsi_method/reconstruct.py",
+              "tools": [
+                {
+                  "name": "read_file",
+                  "arguments": {
+                    "path": "A/rsi_method/reconstruct.py",
+                    "start": 200
+                  },
+                  "error": false
+                },
+                {
+                  "name": "read_file",
+                  "arguments": {
+                    "path": "B/rsi_method/reconstruct.py",
+                    "start": 1,
+                    "end": 80
+                  },
+                  "error": false
+                }
+              ]
+            },
+            {
+              "kind": "tool",
+              "layer": "main",
+              "turn": 4,
+              "title": "search · 1 call",
+              "detail": "B/rsi_method/method.py",
+              "tools": [
+                {
+                  "name": "search",
+                  "arguments": {
+                    "path": "B/rsi_method/method.py"
+                  },
+                  "error": false
+                }
+              ]
+            },
+            {
+              "kind": "tool",
+              "layer": "main",
+              "turn": 5,
+              "title": "read_file · 1 call",
+              "detail": "shared/data-summary.json",
+              "tools": [
+                {
+                  "name": "read_file",
+                  "arguments": {
+                    "path": "shared/data-summary.json"
+                  },
+                  "error": false
+                }
+              ]
+            },
+            {
+              "kind": "answer",
+              "layer": "main",
+              "turn": 7,
+              "title": "Accepted model answer: B",
+              "detail": "Final selected answer from the merged trace index. This is a model prediction; the reference label is not shown.",
+              "tools": []
+            }
+          ]
+        }
+      ],
+      "provenance": {
+        "input_sha256": "1cf91b2d8bf40cac696ef34177cbb3624a9adcbd4bb18eff5c9dd697b9635b58",
+        "source_version": "golden_pairs_2",
+        "extraction_date": "2026-11-11",
+        "source_files_verified_against_manifest": true
+      },
+      "display_title": "How much repair should survive pruning?",
+      "task_summary": "Two implementations prune OPT-6.7B to 70% sparsity with OWL + Wanda, then repair surviving weights toward their calibration-mean targets. Compare their final WikiText2 validation perplexity under the same local L20X budget.",
+      "decision_rule": "Lower validation perplexity wins, subject to a loadable exported model and decoder Linear-weight sparsity of 0.699–0.701. Time is a constraint, not a tie-breaker. A tie requires approximately equal expected quality.",
+      "conditions": [
+        "OPT-6.7B · 70% sparsity",
+        "128 × 2,048-token calibration sequences",
+        "1,080-second construction budget",
+        "One NVIDIA L20X"
+      ],
+      "candidates": {
+        "A": "OWL + Wanda pruning with repair interpolation coefficient 0.4 and final multiplier cap 1.5. The cap is inactive after the earlier ratio bounds in this recipe.",
+        "B": "OWL + Wanda pruning with repair interpolation coefficient 0.1 and final multiplier cap 1.15. The cap is inactive after the earlier ratio bounds in this recipe."
+      },
+      "insight": "The comparison depends on repair strength and its sequential effect on later layers, rather than the method name alone.",
+      "limitations": [
+        "Summaries and authored source summaries are curated from the frozen public input; they are not the full judge prompt.",
+        "Claude repeat 2 ended in refusal in the initial run and two retries. Only repeats 1 and 3 enter this model–pair score (avg@2). This exception does not apply to other model–pair combinations.",
+        "The displayed answers are model predictions, not released reference labels."
+      ]
+    },
+    {
+      "id": "KBV3N-083",
+      "pair_id": "KBV3N-083",
+      "title": "Diagonal matrix multiplication",
+      "bench": "KernelBench",
+      "mode": "reasoning",
+      "file_count": 7,
+      "input_bytes": 9876,
+      "evidence": [
+        {
+          "label": "A · authored source summary",
+          "source": "A/solution.py",
+          "line_start": 10,
+          "line_end": 16,
+          "lines": "10–16",
+          "text": "The CUDA kernel maps the x thread coordinate to the matrix row and the y coordinate to the column. An in-bounds element is multiplied by the diagonal value for its row.",
+          "sha256": "371750d9410bb5e5828fc13e62b5f9d7a82a7e2f460586a8b7eeff1ca9d7d795",
+          "kind": "authored_summary",
+          "hash_scope": "complete_source_file"
+        },
+        {
+          "label": "B · authored source summary",
+          "source": "B/solution.py",
+          "line_start": 10,
+          "line_end": 18,
+          "lines": "10–18",
+          "text": "The CUDA kernel flattens the matrix into a one-dimensional grid-stride loop. Each flat index determines a row and column, and the element is multiplied by the diagonal value for that row.",
+          "sha256": "7516c111d6806c0c95317e6e5704b105bf04005e211f67a95105a24fd53eb5bf",
+          "kind": "authored_summary",
+          "hash_scope": "complete_source_file"
+        },
+        {
+          "label": "B · authored source summary",
+          "source": "B/solution.py",
+          "line_start": 24,
+          "line_end": 32,
+          "lines": "24–32",
+          "text": "The wrapper allocates and zeroes the output, launches blocks of 256 threads across the flattened matrix, then explicitly synchronizes the CUDA device before returning.",
+          "sha256": "7516c111d6806c0c95317e6e5704b105bf04005e211f67a95105a24fd53eb5bf",
+          "kind": "authored_summary",
+          "hash_scope": "complete_source_file"
+        }
+      ],
+      "traces": [
+        {
+          "model": "gpt-6.1-sol",
+          "repeat": 1,
+          "orientation": "AB",
+          "mode": "reasoning",
+          "status": "valid",
+          "scoring_included": true,
+          "accepted_turn": 1,
+          "answer": "B",
+          "layers": [
+            {
+              "id": "main",
+              "label": "Initial run",
+              "resume_turn": 1,
+              "raw_status": "valid",
+              "selected": true,
+              "model_turns_attempted": 1,
+              "last_model_turn": 1,
+              "tool_interaction_rounds": 0,
+              "tool_calls_attempted": 0
+            }
+          ],
+          "events": [
+            {
+              "kind": "input",
+              "layer": "main",
+              "turn": 0,
+              "title": "Complete input supplied inline",
+              "detail": "All 7 public files were supplied in the prompt with file boundaries and line numbers. No tool inspection is used in Reasoning mode.",
+              "tools": []
+            },
+            {
+              "kind": "answer",
+              "layer": "main",
+              "turn": 1,
+              "title": "Accepted model answer: B",
+              "detail": "Final selected answer from the merged trace index. This is a model prediction; the reference label is not shown.",
+              "tools": []
+            }
+          ]
+        },
+        {
+          "model": "gemini-4-argon",
+          "repeat": 1,
+          "orientation": "AB",
+          "mode": "reasoning",
+          "status": "valid",
+          "scoring_included": true,
+          "accepted_turn": 1,
+          "answer": "B",
+          "layers": [
+            {
+              "id": "main",
+              "label": "Initial run",
+              "resume_turn": 1,
+              "raw_status": "valid",
+              "selected": true,
+              "model_turns_attempted": 1,
+              "last_model_turn": 1,
+              "tool_interaction_rounds": 0,
+              "tool_calls_attempted": 0
+            }
+          ],
+          "events": [
+            {
+              "kind": "input",
+              "layer": "main",
+              "turn": 0,
+              "title": "Complete input supplied inline",
+              "detail": "All 7 public files were supplied in the prompt with file boundaries and line numbers. No tool inspection is used in Reasoning mode.",
+              "tools": []
+            },
+            {
+              "kind": "answer",
+              "layer": "main",
+              "turn": 1,
+              "title": "Accepted model answer: B",
+              "detail": "Final selected answer from the merged trace index. This is a model prediction; the reference label is not shown.",
+              "tools": []
+            }
+          ]
+        },
+        {
+          "model": "claude-sonnet-5-5",
+          "repeat": 1,
+          "orientation": "AB",
+          "mode": "reasoning",
+          "status": "valid",
+          "scoring_included": true,
+          "accepted_turn": 2,
+          "answer": "B",
+          "layers": [
+            {
+              "id": "main",
+              "label": "Initial run",
+              "resume_turn": 1,
+              "raw_status": "valid",
+              "selected": true,
+              "model_turns_attempted": 2,
+              "last_model_turn": 2,
+              "tool_interaction_rounds": 0,
+              "tool_calls_attempted": 0
+            }
+          ],
+          "events": [
+            {
+              "kind": "input",
+              "layer": "main",
+              "turn": 0,
+              "title": "Complete input supplied inline",
+              "detail": "All 7 public files were supplied in the prompt with file boundaries and line numbers. No tool inspection is used in Reasoning mode.",
+              "tools": []
+            },
+            {
+              "kind": "answer",
+              "layer": "main",
+              "turn": 2,
+              "title": "Accepted model answer: B",
+              "detail": "Final selected answer from the merged trace index. This is a model prediction; the reference label is not shown.",
+              "tools": []
+            }
+          ]
+        },
+        {
+          "model": "gpt-6.1-sol",
+          "repeat": 2,
+          "orientation": "AB",
+          "mode": "reasoning",
+          "status": "valid",
+          "scoring_included": true,
+          "accepted_turn": 1,
+          "answer": "B",
+          "layers": [
+            {
+              "id": "main",
+              "label": "Initial run",
+              "resume_turn": 1,
+              "raw_status": "valid",
+              "selected": true,
+              "model_turns_attempted": 1,
+              "last_model_turn": 1,
+              "tool_interaction_rounds": 0,
+              "tool_calls_attempted": 0
+            }
+          ],
+          "events": [
+            {
+              "kind": "input",
+              "layer": "main",
+              "turn": 0,
+              "title": "Complete input supplied inline",
+              "detail": "All 7 public files were supplied in the prompt with file boundaries and line numbers. No tool inspection is used in Reasoning mode.",
+              "tools": []
+            },
+            {
+              "kind": "answer",
+              "layer": "main",
+              "turn": 1,
+              "title": "Accepted model answer: B",
+              "detail": "Final selected answer from the merged trace index. This is a model prediction; the reference label is not shown.",
+              "tools": []
+            }
+          ]
+        },
+        {
+          "model": "gemini-4-argon",
+          "repeat": 2,
+          "orientation": "AB",
+          "mode": "reasoning",
+          "status": "valid",
+          "scoring_included": true,
+          "accepted_turn": 1,
+          "answer": "B",
+          "layers": [
+            {
+              "id": "main",
+              "label": "Initial run",
+              "resume_turn": 1,
+              "raw_status": "valid",
+              "selected": true,
+              "model_turns_attempted": 1,
+              "last_model_turn": 1,
+              "tool_interaction_rounds": 0,
+              "tool_calls_attempted": 0
+            }
+          ],
+          "events": [
+            {
+              "kind": "input",
+              "layer": "main",
+              "turn": 0,
+              "title": "Complete input supplied inline",
+              "detail": "All 7 public files were supplied in the prompt with file boundaries and line numbers. No tool inspection is used in Reasoning mode.",
+              "tools": []
+            },
+            {
+              "kind": "answer",
+              "layer": "main",
+              "turn": 1,
+              "title": "Accepted model answer: B",
+              "detail": "Final selected answer from the merged trace index. This is a model prediction; the reference label is not shown.",
+              "tools": []
+            }
+          ]
+        },
+        {
+          "model": "claude-sonnet-5-5",
+          "repeat": 2,
+          "orientation": "AB",
+          "mode": "reasoning",
+          "status": "valid",
+          "scoring_included": true,
+          "accepted_turn": 2,
+          "answer": "B",
+          "layers": [
+            {
+              "id": "main",
+              "label": "Initial run",
+              "resume_turn": 1,
+              "raw_status": "valid",
+              "selected": true,
+              "model_turns_attempted": 2,
+              "last_model_turn": 2,
+              "tool_interaction_rounds": 0,
+              "tool_calls_attempted": 0
+            }
+          ],
+          "events": [
+            {
+              "kind": "input",
+              "layer": "main",
+              "turn": 0,
+              "title": "Complete input supplied inline",
+              "detail": "All 7 public files were supplied in the prompt with file boundaries and line numbers. No tool inspection is used in Reasoning mode.",
+              "tools": []
+            },
+            {
+              "kind": "answer",
+              "layer": "main",
+              "turn": 2,
+              "title": "Accepted model answer: B",
+              "detail": "Final selected answer from the merged trace index. This is a model prediction; the reference label is not shown.",
+              "tools": []
+            }
+          ]
+        },
+        {
+          "model": "gpt-6.1-sol",
+          "repeat": 3,
+          "orientation": "AB",
+          "mode": "reasoning",
+          "status": "valid",
+          "scoring_included": true,
+          "accepted_turn": 1,
+          "answer": "B",
+          "layers": [
+            {
+              "id": "main",
+              "label": "Initial run",
+              "resume_turn": 1,
+              "raw_status": "valid",
+              "selected": true,
+              "model_turns_attempted": 1,
+              "last_model_turn": 1,
+              "tool_interaction_rounds": 0,
+              "tool_calls_attempted": 0
+            }
+          ],
+          "events": [
+            {
+              "kind": "input",
+              "layer": "main",
+              "turn": 0,
+              "title": "Complete input supplied inline",
+              "detail": "All 7 public files were supplied in the prompt with file boundaries and line numbers. No tool inspection is used in Reasoning mode.",
+              "tools": []
+            },
+            {
+              "kind": "answer",
+              "layer": "main",
+              "turn": 1,
+              "title": "Accepted model answer: B",
+              "detail": "Final selected answer from the merged trace index. This is a model prediction; the reference label is not shown.",
+              "tools": []
+            }
+          ]
+        },
+        {
+          "model": "gemini-4-argon",
+          "repeat": 3,
+          "orientation": "AB",
+          "mode": "reasoning",
+          "status": "valid",
+          "scoring_included": true,
+          "accepted_turn": 1,
+          "answer": "B",
+          "layers": [
+            {
+              "id": "main",
+              "label": "Initial run",
+              "resume_turn": 1,
+              "raw_status": "valid",
+              "selected": true,
+              "model_turns_attempted": 1,
+              "last_model_turn": 1,
+              "tool_interaction_rounds": 0,
+              "tool_calls_attempted": 0
+            }
+          ],
+          "events": [
+            {
+              "kind": "input",
+              "layer": "main",
+              "turn": 0,
+              "title": "Complete input supplied inline",
+              "detail": "All 7 public files were supplied in the prompt with file boundaries and line numbers. No tool inspection is used in Reasoning mode.",
+              "tools": []
+            },
+            {
+              "kind": "answer",
+              "layer": "main",
+              "turn": 1,
+              "title": "Accepted model answer: B",
+              "detail": "Final selected answer from the merged trace index. This is a model prediction; the reference label is not shown.",
+              "tools": []
+            }
+          ]
+        },
+        {
+          "model": "claude-sonnet-5-5",
+          "repeat": 3,
+          "orientation": "AB",
+          "mode": "reasoning",
+          "status": "valid",
+          "scoring_included": true,
+          "accepted_turn": 2,
+          "answer": "B",
+          "layers": [
+            {
+              "id": "main",
+              "label": "Initial run",
+              "resume_turn": 1,
+              "raw_status": "valid",
+              "selected": true,
+              "model_turns_attempted": 2,
+              "last_model_turn": 2,
+              "tool_interaction_rounds": 0,
+              "tool_calls_attempted": 0
+            }
+          ],
+          "events": [
+            {
+              "kind": "input",
+              "layer": "main",
+              "turn": 0,
+              "title": "Complete input supplied inline",
+              "detail": "All 7 public files were supplied in the prompt with file boundaries and line numbers. No tool inspection is used in Reasoning mode.",
+              "tools": []
+            },
+            {
+              "kind": "answer",
+              "layer": "main",
+              "turn": 2,
+              "title": "Accepted model answer: B",
+              "detail": "Final selected answer from the merged trace index. This is a model prediction; the reference label is not shown.",
+              "tools": []
+            }
+          ]
+        }
+      ],
+      "provenance": {
+        "input_sha256": "dfa5339a5e7dfd70a81db41188bf49e429cc33c68e36ae540f08abd69fbb4d75",
+        "source_version": "golden_pairs_2",
+        "extraction_date": "2026-11-11",
+        "source_files_verified_against_manifest": true
+      },
+      "display_title": "A faster diagonal matrix multiplication?",
+      "task_summary": "Compare complete CUDA implementations of diag(A) × B for a float32 vector of length 4,096 and a 4,096 × 4,096 matrix on NVIDIA L40S.",
+      "decision_rule": "Reference correctness comes first. Among valid implementations, compare complete forward runtime, including allocation, zeroing and wrapper synchronization. Tie means no meaningful runtime advantage.",
+      "conditions": [
+        "Float32 · 4,096 × 4,096",
+        "NVIDIA L40S",
+        "Five randomized correctness trials",
+        "Complete forward runtime"
+      ],
+      "candidates": {
+        "A": "A two-dimensional 16 × 16 thread block with separate row and column indices.",
+        "B": "A flat 256-thread block with a grid-stride loop and an explicit cudaDeviceSynchronize call."
+      },
+      "insight": "Memory access patterns and wrapper overhead both belong to the comparison; inspecting the kernel body alone is insufficient.",
+      "limitations": [
+        "The source summaries are partial; the evaluated Reasoning input included all seven public files in full.",
+        "This is the ordering in a recorded common-task comparison, not a universal claim across GPUs.",
+        "Model predictions are displayed without reference labels or correctness indicators."
+      ]
+    },
+    {
+      "id": "NG15-P001",
+      "pair_id": "NG15-P001",
+      "title": "Fixed-budget optimizer choice",
+      "bench": "nanoGPT",
+      "mode": "reasoning",
+      "file_count": 6,
+      "input_bytes": 40579,
+      "evidence": [
+        {
+          "label": "A · authored source summary",
+          "source": "A/train_gpt_simple.py",
+          "line_start": 301,
+          "line_end": 307,
+          "lines": "301–307",
+          "text": "AdamW handles the embedding, output projection and parameters with fewer than two dimensions, with learning rates 0.7, 0.004 and 0.015. Muon handles matrix parameters in the transformer blocks at learning rate 0.025.",
+          "sha256": "9a7765f01291dbe257c8704e75d031017cee1139e52ff2673de5c2ddddb73b57",
+          "kind": "authored_summary",
+          "hash_scope": "complete_source_file"
+        },
+        {
+          "label": "B · authored source summary",
+          "source": "B/train_gpt_simple.py",
+          "line_start": 337,
+          "line_end": 343,
+          "lines": "337–343",
+          "text": "NadamW handles the embedding, output projection and parameters with fewer than two dimensions, with learning rates 0.7, 0.004 and 0.015. Muon handles matrix parameters in the transformer blocks at learning rate 0.025.",
+          "sha256": "3875c2744561f6a26c2c46955061a3df34caa9341da549f48279e921666f589d",
+          "kind": "authored_summary",
+          "hash_scope": "complete_source_file"
+        }
+      ],
+      "traces": [
+        {
+          "model": "gpt-6.1-sol",
+          "repeat": 1,
+          "orientation": "AB",
+          "mode": "reasoning",
+          "status": "valid",
+          "scoring_included": true,
+          "accepted_turn": 1,
+          "answer": "B",
+          "layers": [
+            {
+              "id": "main",
+              "label": "Initial run",
+              "resume_turn": 1,
+              "raw_status": "valid",
+              "selected": true,
+              "model_turns_attempted": 1,
+              "last_model_turn": 1,
+              "tool_interaction_rounds": 0,
+              "tool_calls_attempted": 0
+            }
+          ],
+          "events": [
+            {
+              "kind": "input",
+              "layer": "main",
+              "turn": 0,
+              "title": "Complete input supplied inline",
+              "detail": "All 6 public files were supplied in the prompt with file boundaries and line numbers. No tool inspection is used in Reasoning mode.",
+              "tools": []
+            },
+            {
+              "kind": "answer",
+              "layer": "main",
+              "turn": 1,
+              "title": "Accepted model answer: B",
+              "detail": "Final selected answer from the merged trace index. This is a model prediction; the reference label is not shown.",
+              "tools": []
+            }
+          ]
+        },
+        {
+          "model": "gemini-4-argon",
+          "repeat": 1,
+          "orientation": "AB",
+          "mode": "reasoning",
+          "status": "valid",
+          "scoring_included": true,
+          "accepted_turn": 1,
+          "answer": "A",
+          "layers": [
+            {
+              "id": "main",
+              "label": "Initial run",
+              "resume_turn": 1,
+              "raw_status": "valid",
+              "selected": true,
+              "model_turns_attempted": 1,
+              "last_model_turn": 1,
+              "tool_interaction_rounds": 0,
+              "tool_calls_attempted": 0
+            }
+          ],
+          "events": [
+            {
+              "kind": "input",
+              "layer": "main",
+              "turn": 0,
+              "title": "Complete input supplied inline",
+              "detail": "All 6 public files were supplied in the prompt with file boundaries and line numbers. No tool inspection is used in Reasoning mode.",
+              "tools": []
+            },
+            {
+              "kind": "answer",
+              "layer": "main",
+              "turn": 1,
+              "title": "Accepted model answer: A",
+              "detail": "Final selected answer from the merged trace index. This is a model prediction; the reference label is not shown.",
+              "tools": []
+            }
+          ]
+        },
+        {
+          "model": "claude-sonnet-5-5",
+          "repeat": 1,
+          "orientation": "AB",
+          "mode": "reasoning",
+          "status": "valid",
+          "scoring_included": true,
+          "accepted_turn": 1,
+          "answer": "tie",
+          "layers": [
+            {
+              "id": "main",
+              "label": "Initial run",
+              "resume_turn": 1,
+              "raw_status": "valid",
+              "selected": true,
+              "model_turns_attempted": 1,
+              "last_model_turn": 1,
+              "tool_interaction_rounds": 0,
+              "tool_calls_attempted": 0
+            }
+          ],
+          "events": [
+            {
+              "kind": "input",
+              "layer": "main",
+              "turn": 0,
+              "title": "Complete input supplied inline",
+              "detail": "All 6 public files were supplied in the prompt with file boundaries and line numbers. No tool inspection is used in Reasoning mode.",
+              "tools": []
+            },
+            {
+              "kind": "answer",
+              "layer": "main",
+              "turn": 1,
+              "title": "Accepted model answer: tie",
+              "detail": "Final selected answer from the merged trace index. This is a model prediction; the reference label is not shown.",
+              "tools": []
+            }
+          ]
+        },
+        {
+          "model": "gpt-6.1-sol",
+          "repeat": 2,
+          "orientation": "AB",
+          "mode": "reasoning",
+          "status": "valid",
+          "scoring_included": true,
+          "accepted_turn": 1,
+          "answer": "B",
+          "layers": [
+            {
+              "id": "main",
+              "label": "Initial run",
+              "resume_turn": 1,
+              "raw_status": "valid",
+              "selected": true,
+              "model_turns_attempted": 1,
+              "last_model_turn": 1,
+              "tool_interaction_rounds": 0,
+              "tool_calls_attempted": 0
+            }
+          ],
+          "events": [
+            {
+              "kind": "input",
+              "layer": "main",
+              "turn": 0,
+              "title": "Complete input supplied inline",
+              "detail": "All 6 public files were supplied in the prompt with file boundaries and line numbers. No tool inspection is used in Reasoning mode.",
+              "tools": []
+            },
+            {
+              "kind": "answer",
+              "layer": "main",
+              "turn": 1,
+              "title": "Accepted model answer: B",
+              "detail": "Final selected answer from the merged trace index. This is a model prediction; the reference label is not shown.",
+              "tools": []
+            }
+          ]
+        },
+        {
+          "model": "gemini-4-argon",
+          "repeat": 2,
+          "orientation": "AB",
+          "mode": "reasoning",
+          "status": "valid",
+          "scoring_included": true,
+          "accepted_turn": 1,
+          "answer": "A",
+          "layers": [
+            {
+              "id": "main",
+              "label": "Initial run",
+              "resume_turn": 1,
+              "raw_status": "valid",
+              "selected": true,
+              "model_turns_attempted": 1,
+              "last_model_turn": 1,
+              "tool_interaction_rounds": 0,
+              "tool_calls_attempted": 0
+            }
+          ],
+          "events": [
+            {
+              "kind": "input",
+              "layer": "main",
+              "turn": 0,
+              "title": "Complete input supplied inline",
+              "detail": "All 6 public files were supplied in the prompt with file boundaries and line numbers. No tool inspection is used in Reasoning mode.",
+              "tools": []
+            },
+            {
+              "kind": "answer",
+              "layer": "main",
+              "turn": 1,
+              "title": "Accepted model answer: A",
+              "detail": "Final selected answer from the merged trace index. This is a model prediction; the reference label is not shown.",
+              "tools": []
+            }
+          ]
+        },
+        {
+          "model": "claude-sonnet-5-5",
+          "repeat": 2,
+          "orientation": "AB",
+          "mode": "reasoning",
+          "status": "valid",
+          "scoring_included": true,
+          "accepted_turn": 1,
+          "answer": "tie",
+          "layers": [
+            {
+              "id": "main",
+              "label": "Initial run",
+              "resume_turn": 1,
+              "raw_status": "valid",
+              "selected": true,
+              "model_turns_attempted": 1,
+              "last_model_turn": 1,
+              "tool_interaction_rounds": 0,
+              "tool_calls_attempted": 0
+            }
+          ],
+          "events": [
+            {
+              "kind": "input",
+              "layer": "main",
+              "turn": 0,
+              "title": "Complete input supplied inline",
+              "detail": "All 6 public files were supplied in the prompt with file boundaries and line numbers. No tool inspection is used in Reasoning mode.",
+              "tools": []
+            },
+            {
+              "kind": "answer",
+              "layer": "main",
+              "turn": 1,
+              "title": "Accepted model answer: tie",
+              "detail": "Final selected answer from the merged trace index. This is a model prediction; the reference label is not shown.",
+              "tools": []
+            }
+          ]
+        },
+        {
+          "model": "gpt-6.1-sol",
+          "repeat": 3,
+          "orientation": "AB",
+          "mode": "reasoning",
+          "status": "valid",
+          "scoring_included": true,
+          "accepted_turn": 1,
+          "answer": "B",
+          "layers": [
+            {
+              "id": "main",
+              "label": "Initial run",
+              "resume_turn": 1,
+              "raw_status": "valid",
+              "selected": true,
+              "model_turns_attempted": 1,
+              "last_model_turn": 1,
+              "tool_interaction_rounds": 0,
+              "tool_calls_attempted": 0
+            }
+          ],
+          "events": [
+            {
+              "kind": "input",
+              "layer": "main",
+              "turn": 0,
+              "title": "Complete input supplied inline",
+              "detail": "All 6 public files were supplied in the prompt with file boundaries and line numbers. No tool inspection is used in Reasoning mode.",
+              "tools": []
+            },
+            {
+              "kind": "answer",
+              "layer": "main",
+              "turn": 1,
+              "title": "Accepted model answer: B",
+              "detail": "Final selected answer from the merged trace index. This is a model prediction; the reference label is not shown.",
+              "tools": []
+            }
+          ]
+        },
+        {
+          "model": "gemini-4-argon",
+          "repeat": 3,
+          "orientation": "AB",
+          "mode": "reasoning",
+          "status": "valid",
+          "scoring_included": true,
+          "accepted_turn": 1,
+          "answer": "A",
+          "layers": [
+            {
+              "id": "main",
+              "label": "Initial run",
+              "resume_turn": 1,
+              "raw_status": "valid",
+              "selected": true,
+              "model_turns_attempted": 1,
+              "last_model_turn": 1,
+              "tool_interaction_rounds": 0,
+              "tool_calls_attempted": 0
+            }
+          ],
+          "events": [
+            {
+              "kind": "input",
+              "layer": "main",
+              "turn": 0,
+              "title": "Complete input supplied inline",
+              "detail": "All 6 public files were supplied in the prompt with file boundaries and line numbers. No tool inspection is used in Reasoning mode.",
+              "tools": []
+            },
+            {
+              "kind": "answer",
+              "layer": "main",
+              "turn": 1,
+              "title": "Accepted model answer: A",
+              "detail": "Final selected answer from the merged trace index. This is a model prediction; the reference label is not shown.",
+              "tools": []
+            }
+          ]
+        },
+        {
+          "model": "claude-sonnet-5-5",
+          "repeat": 3,
+          "orientation": "AB",
+          "mode": "reasoning",
+          "status": "valid",
+          "scoring_included": true,
+          "accepted_turn": 2,
+          "answer": "tie",
+          "layers": [
+            {
+              "id": "main",
+              "label": "Initial run",
+              "resume_turn": 1,
+              "raw_status": "valid",
+              "selected": true,
+              "model_turns_attempted": 2,
+              "last_model_turn": 2,
+              "tool_interaction_rounds": 0,
+              "tool_calls_attempted": 0
+            }
+          ],
+          "events": [
+            {
+              "kind": "input",
+              "layer": "main",
+              "turn": 0,
+              "title": "Complete input supplied inline",
+              "detail": "All 6 public files were supplied in the prompt with file boundaries and line numbers. No tool inspection is used in Reasoning mode.",
+              "tools": []
+            },
+            {
+              "kind": "answer",
+              "layer": "main",
+              "turn": 2,
+              "title": "Accepted model answer: tie",
+              "detail": "Final selected answer from the merged trace index. This is a model prediction; the reference label is not shown.",
+              "tools": []
+            }
+          ]
+        }
+      ],
+      "provenance": {
+        "input_sha256": "936d12747b61538838ce72d1f457e9e8b6f8260aa4251e37da792019ce92f3c4",
+        "source_version": "golden_pairs_2",
+        "extraction_date": "2026-11-11",
+        "source_files_verified_against_manifest": true
+      },
+      "display_title": "AdamW or NadamW at a fixed budget?",
+      "task_summary": "Two freshly initialized GPT implementations train on the same GPT2-tokenized FineWeb stream for exactly 3,225 optimizer updates, then use the same 10,485,760-token validation slice.",
+      "decision_rule": "Compare final live-model per-token validation cross-entropy (lower is better) at the prescribed seed and horizon. Runtime and memory do not break a quality tie.",
+      "conditions": [
+        "3,225 optimizer updates",
+        "524,288 tokens per batch",
+        "Sequence length 1,024",
+        "Single seed 12648430"
+      ],
+      "candidates": {
+        "A": "AdamW for the embedding, output projection and one-dimensional parameters; Muon for block matrices.",
+        "B": "NadamW replaces AdamW for those parameter groups; block matrices still use Muon."
+      },
+      "insight": "A fixed-update comparison asks about final model quality. It does not ask which recipe reaches a threshold fastest.",
+      "limitations": [
+        "Editorial summaries are not a substitute for the six complete public files supplied in the Reasoning prompt.",
+        "The target is the prescribed single-seed, finite-horizon observation; no eight-seed or general optimizer superiority is claimed.",
+        "Model predictions are displayed without reference labels or correctness indicators."
+      ]
+    }
+  ]
+}

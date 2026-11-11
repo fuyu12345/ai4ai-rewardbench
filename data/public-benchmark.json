@@ -1,0 +1,1720 @@
+{
+  "schema_version": "1.0",
+  "release_version": "0.1.0",
+  "dataset_version": "golden_pairs_2",
+  "collection_date": "2026-11-10",
+  "snapshot_date": "2026-11-11",
+  "pair_count": 135,
+  "bench_count": 17,
+  "model_count": 9,
+  "modes": {
+    "agent": 105,
+    "reasoning": 30
+  },
+  "planned_cells": 3645,
+  "valid_cells": 3644,
+  "label_distribution": {
+    "A": 78,
+    "B": 55,
+    "tie": 2
+  },
+  "baselines": [
+    {
+      "id": "uniform-three",
+      "name": "Uniform A / B / tie",
+      "accuracy": 0.3333333333333333
+    },
+    {
+      "id": "uniform-ab",
+      "name": "Uniform A / B",
+      "accuracy": 0.4925925925925926
+    },
+    {
+      "id": "always-a",
+      "name": "Always A",
+      "accuracy": 0.5777777777777777
+    }
+  ],
+  "mode_baselines": {
+    "all": {
+      "uniform_three": 0.3333333333333333,
+      "random_ab": 0.4925925925925926,
+      "always_a": 0.5777777777777777,
+      "gold_distribution": {
+        "A": 78,
+        "B": 55,
+        "tie": 2
+      },
+      "pair_count": 135
+    },
+    "agent": {
+      "uniform_three": 0.3333333333333333,
+      "random_ab": 0.49523809523809526,
+      "always_a": 0.5523809523809524,
+      "gold_distribution": {
+        "A": 58,
+        "B": 46,
+        "tie": 1
+      },
+      "pair_count": 105
+    },
+    "reasoning": {
+      "uniform_three": 0.3333333333333333,
+      "random_ab": 0.48333333333333334,
+      "always_a": 0.6666666666666666,
+      "gold_distribution": {
+        "A": 20,
+        "B": 9,
+        "tie": 1
+      },
+      "pair_count": 30
+    }
+  },
+  "scoring_policy": {
+    "denominator_pairs": 135,
+    "aggregation": "Mean over pairs of mean correctness across included repetitions",
+    "all_other_model_pair_cells": "avg@3",
+    "exception": {
+      "model": "claude-sonnet-5-5",
+      "pair_id": "AAB15-P016",
+      "included_repeats": [
+        1,
+        3
+      ],
+      "excluded_repeat": 2,
+      "reason": "Repeated empty refusal",
+      "avg_at_2": 1.0
+    },
+    "usage": "All attempts, including failed requests, refusals, and recovery runs"
+  },
+  "protocol": {
+    "run_dates": [
+      "2026-11-10",
+      "2026-11-11"
+    ],
+    "provider": "DMX proxy",
+    "orientation": "Fixed AB",
+    "sampling": "Provider defaults; no fixed random seed",
+    "repeats": 3,
+    "agent_planned_cells_per_model": 315,
+    "agent_tools": [
+      "list_files",
+      "read_file",
+      "search",
+      "inspect_data",
+      "read_array",
+      "read_table"
+    ],
+    "agent_access": "Read-only, pair manifest allowlist; no code execution, network, or organizer labels",
+    "reasoning_input": "All public pair materials are inlined in the prompt"
+  },
+  "benches": [
+    {
+      "bench": "FastKernels",
+      "pairs": 29,
+      "share": 0.21481481481481482,
+      "agent": 29,
+      "reasoning": 0
+    },
+    {
+      "bench": "FlashInfer-Bench",
+      "pairs": 19,
+      "share": 0.14074074074074075,
+      "agent": 19,
+      "reasoning": 0
+    },
+    {
+      "bench": "AABench",
+      "pairs": 15,
+      "share": 0.1111111111111111,
+      "agent": 15,
+      "reasoning": 0
+    },
+    {
+      "bench": "RSI-Exam",
+      "pairs": 10,
+      "share": 0.07407407407407407,
+      "agent": 9,
+      "reasoning": 1
+    },
+    {
+      "bench": "DeepRSI",
+      "pairs": 8,
+      "share": 0.05925925925925926,
+      "agent": 8,
+      "reasoning": 0
+    },
+    {
+      "bench": "nanoGPT",
+      "pairs": 8,
+      "share": 0.05925925925925926,
+      "agent": 0,
+      "reasoning": 8
+    },
+    {
+      "bench": "MLAgentBench",
+      "pairs": 8,
+      "share": 0.05925925925925926,
+      "agent": 1,
+      "reasoning": 7
+    },
+    {
+      "bench": "MLGym",
+      "pairs": 7,
+      "share": 0.05185185185185185,
+      "agent": 4,
+      "reasoning": 3
+    },
+    {
+      "bench": "KernelBench",
+      "pairs": 6,
+      "share": 0.044444444444444446,
+      "agent": 0,
+      "reasoning": 6
+    },
+    {
+      "bench": "MLE-Bench",
+      "pairs": 6,
+      "share": 0.044444444444444446,
+      "agent": 6,
+      "reasoning": 0
+    },
+    {
+      "bench": "PostTrainBench",
+      "pairs": 4,
+      "share": 0.02962962962962963,
+      "agent": 4,
+      "reasoning": 0
+    },
+    {
+      "bench": "AIRS-Bench",
+      "pairs": 4,
+      "share": 0.02962962962962963,
+      "agent": 0,
+      "reasoning": 4
+    },
+    {
+      "bench": "TritonBench",
+      "pairs": 3,
+      "share": 0.022222222222222223,
+      "agent": 3,
+      "reasoning": 0
+    },
+    {
+      "bench": "Terminal-Bench Science",
+      "pairs": 3,
+      "share": 0.022222222222222223,
+      "agent": 3,
+      "reasoning": 0
+    },
+    {
+      "bench": "NatureBench",
+      "pairs": 2,
+      "share": 0.014814814814814815,
+      "agent": 1,
+      "reasoning": 1
+    },
+    {
+      "bench": "RSIBench Harness",
+      "pairs": 2,
+      "share": 0.014814814814814815,
+      "agent": 2,
+      "reasoning": 0
+    },
+    {
+      "bench": "MLSBench",
+      "pairs": 1,
+      "share": 0.007407407407407408,
+      "agent": 1,
+      "reasoning": 0
+    }
+  ],
+  "leaderboard": [
+    {
+      "model": "gemini-4-argon",
+      "question_equal_weight_accuracy": 0.4148148148148148,
+      "exact_fraction": "56/135",
+      "valid": 405,
+      "correct": 168,
+      "planned": 405,
+      "pair_count": 135,
+      "agent_accuracy": 0.35873015873015873,
+      "reasoning_accuracy": 0.6111111111111112,
+      "per_bench": {
+        "DeepRSI": 0.2916666666666667,
+        "FastKernels": 0.11494252873563218,
+        "FlashInfer-Bench": 0.543859649122807,
+        "TritonBench": 0.0,
+        "AABench": 0.3333333333333333,
+        "MLGym": 0.5238095238095238,
+        "MLSBench": 0.3333333333333333,
+        "nanoGPT": 0.7916666666666666,
+        "KernelBench": 0.16666666666666666,
+        "PostTrainBench": 0.9166666666666666,
+        "MLAgentBench": 0.5416666666666666,
+        "MLE-Bench": 0.5,
+        "NatureBench": 0.6666666666666666,
+        "Terminal-Bench Science": 0.4444444444444444,
+        "RSI-Exam": 0.5333333333333333,
+        "AIRS-Bench": 0.75,
+        "RSIBench Harness": 0.8333333333333334
+      },
+      "input_tokens_known": 131967936,
+      "output_tokens_known": 679748,
+      "cached_input_tokens_known": 93557149,
+      "cache_creation_input_tokens_known": 0,
+      "agent_model_turns": 2369,
+      "agent_tool_rounds": 1934,
+      "agent_tool_calls": 6531,
+      "agent_mean_model_turns_per_planned_cell": 7.520634920634921,
+      "api_request_attempts": 2648,
+      "reported_cost_cny": 464.87410199999977,
+      "rank": 1
+    },
+    {
+      "model": "gpt-6.1-sol",
+      "question_equal_weight_accuracy": 0.3530864197530864,
+      "exact_fraction": "143/405",
+      "valid": 405,
+      "correct": 143,
+      "planned": 405,
+      "pair_count": 135,
+      "agent_accuracy": 0.33015873015873015,
+      "reasoning_accuracy": 0.43333333333333335,
+      "per_bench": {
+        "DeepRSI": 0.125,
+        "FastKernels": 0.13793103448275862,
+        "FlashInfer-Bench": 0.543859649122807,
+        "TritonBench": 0.0,
+        "AABench": 0.4,
+        "MLGym": 0.5238095238095238,
+        "MLSBench": 0.0,
+        "nanoGPT": 0.5833333333333334,
+        "KernelBench": 0.16666666666666666,
+        "PostTrainBench": 0.6666666666666666,
+        "MLAgentBench": 0.4583333333333333,
+        "MLE-Bench": 0.16666666666666666,
+        "NatureBench": 0.0,
+        "Terminal-Bench Science": 0.3333333333333333,
+        "RSI-Exam": 0.6666666666666666,
+        "AIRS-Bench": 0.25,
+        "RSIBench Harness": 0.5
+      },
+      "input_tokens_known": 84646460,
+      "output_tokens_known": 702200,
+      "cached_input_tokens_known": 34058689,
+      "cache_creation_input_tokens_known": 50580475,
+      "agent_model_turns": 2342,
+      "agent_tool_rounds": 1850,
+      "agent_tool_calls": 7258,
+      "agent_mean_model_turns_per_planned_cell": 7.434920634920635,
+      "api_request_attempts": 2432,
+      "reported_cost_cny": 699.1867240000006,
+      "rank": 2
+    },
+    {
+      "model": "hy4",
+      "question_equal_weight_accuracy": 0.34814814814814815,
+      "exact_fraction": "47/135",
+      "valid": 405,
+      "correct": 141,
+      "planned": 405,
+      "pair_count": 135,
+      "agent_accuracy": 0.3396825396825397,
+      "reasoning_accuracy": 0.37777777777777777,
+      "per_bench": {
+        "DeepRSI": 0.20833333333333334,
+        "FastKernels": 0.22988505747126436,
+        "FlashInfer-Bench": 0.38596491228070173,
+        "TritonBench": 0.0,
+        "AABench": 0.5333333333333333,
+        "MLGym": 0.23809523809523808,
+        "MLSBench": 0.0,
+        "nanoGPT": 0.25,
+        "KernelBench": 0.3888888888888889,
+        "PostTrainBench": 0.6666666666666666,
+        "MLAgentBench": 0.375,
+        "MLE-Bench": 0.05555555555555555,
+        "NatureBench": 0.16666666666666666,
+        "Terminal-Bench Science": 0.4444444444444444,
+        "RSI-Exam": 0.5333333333333333,
+        "AIRS-Bench": 0.6666666666666666,
+        "RSIBench Harness": 0.8333333333333334
+      },
+      "input_tokens_known": 726620717,
+      "output_tokens_known": 13282912,
+      "cached_input_tokens_known": 677334848,
+      "cache_creation_input_tokens_known": 0,
+      "agent_model_turns": 8777,
+      "agent_tool_rounds": 8304,
+      "agent_tool_calls": 20042,
+      "agent_mean_model_turns_per_planned_cell": 27.863492063492064,
+      "api_request_attempts": 9885,
+      "reported_cost_cny": 369.0050260000002,
+      "rank": 3
+    },
+    {
+      "model": "claude-sonnet-5-5",
+      "question_equal_weight_accuracy": 0.34814814814814815,
+      "exact_fraction": "47/135",
+      "valid": 404,
+      "correct": 140,
+      "planned": 405,
+      "pair_count": 135,
+      "agent_accuracy": 0.31746031746031744,
+      "reasoning_accuracy": 0.45555555555555555,
+      "per_bench": {
+        "DeepRSI": 0.16666666666666666,
+        "FastKernels": 0.1724137931034483,
+        "FlashInfer-Bench": 0.45614035087719296,
+        "TritonBench": 0.0,
+        "AABench": 0.28888888888888886,
+        "MLGym": 0.5238095238095238,
+        "MLSBench": 0.0,
+        "nanoGPT": 0.375,
+        "KernelBench": 0.3888888888888889,
+        "PostTrainBench": 0.5,
+        "MLAgentBench": 0.5,
+        "MLE-Bench": 0.3333333333333333,
+        "NatureBench": 0.3333333333333333,
+        "Terminal-Bench Science": 0.6666666666666666,
+        "RSI-Exam": 0.6,
+        "AIRS-Bench": 0.5,
+        "RSIBench Harness": 0.0
+      },
+      "input_tokens_known": 63818060,
+      "output_tokens_known": 2010057,
+      "cached_input_tokens_known": 52323425,
+      "cache_creation_input_tokens_known": 9745530,
+      "agent_model_turns": 2318,
+      "agent_tool_rounds": 1707,
+      "agent_tool_calls": 3178,
+      "agent_mean_model_turns_per_planned_cell": 7.358730158730158,
+      "api_request_attempts": 2466,
+      "reported_cost_cny": 292.13709399999954,
+      "rank": 3
+    },
+    {
+      "model": "deepseek-v4.1-flash",
+      "question_equal_weight_accuracy": 0.3037037037037037,
+      "exact_fraction": "41/135",
+      "valid": 405,
+      "correct": 123,
+      "planned": 405,
+      "pair_count": 135,
+      "agent_accuracy": 0.2920634920634921,
+      "reasoning_accuracy": 0.34444444444444444,
+      "per_bench": {
+        "DeepRSI": 0.25,
+        "FastKernels": 0.21839080459770116,
+        "FlashInfer-Bench": 0.43859649122807015,
+        "TritonBench": 0.0,
+        "AABench": 0.4,
+        "MLGym": 0.42857142857142855,
+        "MLSBench": 0.3333333333333333,
+        "nanoGPT": 0.2916666666666667,
+        "KernelBench": 0.3333333333333333,
+        "PostTrainBench": 0.5,
+        "MLAgentBench": 0.25,
+        "MLE-Bench": 0.16666666666666666,
+        "NatureBench": 0.0,
+        "Terminal-Bench Science": 0.2222222222222222,
+        "RSI-Exam": 0.3,
+        "AIRS-Bench": 0.4166666666666667,
+        "RSIBench Harness": 0.16666666666666666
+      },
+      "input_tokens_known": 349967765,
+      "output_tokens_known": 11692258,
+      "cached_input_tokens_known": 300052096,
+      "cache_creation_input_tokens_known": 0,
+      "agent_model_turns": 5421,
+      "agent_tool_rounds": 4893,
+      "agent_tool_calls": 10037,
+      "agent_mean_model_turns_per_planned_cell": 17.20952380952381,
+      "api_request_attempts": 5521,
+      "reported_cost_cny": 81.12175399999998,
+      "rank": 5
+    },
+    {
+      "model": "glm-5.3-flash",
+      "question_equal_weight_accuracy": 0.28641975308641976,
+      "exact_fraction": "116/405",
+      "valid": 405,
+      "correct": 116,
+      "planned": 405,
+      "pair_count": 135,
+      "agent_accuracy": 0.28253968253968254,
+      "reasoning_accuracy": 0.3,
+      "per_bench": {
+        "DeepRSI": 0.2916666666666667,
+        "FastKernels": 0.1724137931034483,
+        "FlashInfer-Bench": 0.5087719298245614,
+        "TritonBench": 0.0,
+        "AABench": 0.3111111111111111,
+        "MLGym": 0.2857142857142857,
+        "MLSBench": 0.3333333333333333,
+        "nanoGPT": 0.375,
+        "KernelBench": 0.2222222222222222,
+        "PostTrainBench": 0.4166666666666667,
+        "MLAgentBench": 0.2916666666666667,
+        "MLE-Bench": 0.2222222222222222,
+        "NatureBench": 0.0,
+        "Terminal-Bench Science": 0.4444444444444444,
+        "RSI-Exam": 0.23333333333333334,
+        "AIRS-Bench": 0.3333333333333333,
+        "RSIBench Harness": 0.0
+      },
+      "input_tokens_known": 318043568,
+      "output_tokens_known": 15053374,
+      "cached_input_tokens_known": 231749888,
+      "cache_creation_input_tokens_known": 0,
+      "agent_model_turns": 5631,
+      "agent_tool_rounds": 4988,
+      "agent_tool_calls": 8931,
+      "agent_mean_model_turns_per_planned_cell": 17.876190476190477,
+      "api_request_attempts": 5745,
+      "reported_cost_cny": 129.94461199999952,
+      "rank": 6
+    },
+    {
+      "model": "qwen3.8-flash",
+      "question_equal_weight_accuracy": 0.2691358024691358,
+      "exact_fraction": "109/405",
+      "valid": 405,
+      "correct": 109,
+      "planned": 405,
+      "pair_count": 135,
+      "agent_accuracy": 0.2571428571428571,
+      "reasoning_accuracy": 0.3111111111111111,
+      "per_bench": {
+        "DeepRSI": 0.5,
+        "FastKernels": 0.20689655172413793,
+        "FlashInfer-Bench": 0.3333333333333333,
+        "TritonBench": 0.0,
+        "AABench": 0.37777777777777777,
+        "MLGym": 0.23809523809523808,
+        "MLSBench": 0.0,
+        "nanoGPT": 0.3333333333333333,
+        "KernelBench": 0.2222222222222222,
+        "PostTrainBench": 0.5833333333333334,
+        "MLAgentBench": 0.2916666666666667,
+        "MLE-Bench": 0.1111111111111111,
+        "NatureBench": 0.0,
+        "Terminal-Bench Science": 0.0,
+        "RSI-Exam": 0.16666666666666666,
+        "AIRS-Bench": 0.3333333333333333,
+        "RSIBench Harness": 0.16666666666666666
+      },
+      "input_tokens_known": 303637421,
+      "output_tokens_known": 10149447,
+      "cached_input_tokens_known": 249252352,
+      "cache_creation_input_tokens_known": 0,
+      "agent_model_turns": 5740,
+      "agent_tool_rounds": 5148,
+      "agent_tool_calls": 8033,
+      "agent_mean_model_turns_per_planned_cell": 18.22222222222222,
+      "api_request_attempts": 5843,
+      "reported_cost_cny": 91.04500399999989,
+      "rank": 7
+    },
+    {
+      "model": "kimi-k3.1-pro",
+      "question_equal_weight_accuracy": 0.26666666666666666,
+      "exact_fraction": "4/15",
+      "valid": 405,
+      "correct": 108,
+      "planned": 405,
+      "pair_count": 135,
+      "agent_accuracy": 0.2857142857142857,
+      "reasoning_accuracy": 0.2,
+      "per_bench": {
+        "DeepRSI": 0.3333333333333333,
+        "FastKernels": 0.26436781609195403,
+        "FlashInfer-Bench": 0.45614035087719296,
+        "TritonBench": 0.0,
+        "AABench": 0.37777777777777777,
+        "MLGym": 0.19047619047619047,
+        "MLSBench": 0.0,
+        "nanoGPT": 0.2916666666666667,
+        "KernelBench": 0.2222222222222222,
+        "PostTrainBench": 0.4166666666666667,
+        "MLAgentBench": 0.16666666666666666,
+        "MLE-Bench": 0.2222222222222222,
+        "NatureBench": 0.0,
+        "Terminal-Bench Science": 0.1111111111111111,
+        "RSI-Exam": 0.1,
+        "AIRS-Bench": 0.16666666666666666,
+        "RSIBench Harness": 0.0
+      },
+      "input_tokens_known": 228531320,
+      "output_tokens_known": 8659903,
+      "cached_input_tokens_known": 180941415,
+      "cache_creation_input_tokens_known": 17019136,
+      "agent_model_turns": 5009,
+      "agent_tool_rounds": 4403,
+      "agent_tool_calls": 7694,
+      "agent_mean_model_turns_per_planned_cell": 15.901587301587302,
+      "api_request_attempts": 5225,
+      "reported_cost_cny": 1140.2299220000004,
+      "rank": 8
+    },
+    {
+      "model": "kimi-k2.6",
+      "question_equal_weight_accuracy": 0.2271604938271605,
+      "exact_fraction": "92/405",
+      "valid": 405,
+      "correct": 92,
+      "planned": 405,
+      "pair_count": 135,
+      "agent_accuracy": 0.20317460317460317,
+      "reasoning_accuracy": 0.3111111111111111,
+      "per_bench": {
+        "DeepRSI": 0.125,
+        "FastKernels": 0.21839080459770116,
+        "FlashInfer-Bench": 0.12280701754385964,
+        "TritonBench": 0.3333333333333333,
+        "AABench": 0.4444444444444444,
+        "MLGym": 0.47619047619047616,
+        "MLSBench": 0.0,
+        "nanoGPT": 0.5,
+        "KernelBench": 0.05555555555555555,
+        "PostTrainBench": 0.0,
+        "MLAgentBench": 0.08333333333333333,
+        "MLE-Bench": 0.2777777777777778,
+        "NatureBench": 0.0,
+        "Terminal-Bench Science": 0.0,
+        "RSI-Exam": 0.06666666666666667,
+        "AIRS-Bench": 0.6666666666666666,
+        "RSIBench Harness": 0.0
+      },
+      "input_tokens_known": 187575650,
+      "output_tokens_known": 4137827,
+      "cached_input_tokens_known": 168802048,
+      "cache_creation_input_tokens_known": 0,
+      "agent_model_turns": 4480,
+      "agent_tool_rounds": 3988,
+      "agent_tool_calls": 7179,
+      "agent_mean_model_turns_per_planned_cell": 14.222222222222221,
+      "api_request_attempts": 4570,
+      "reported_cost_cny": 331.3514760000001,
+      "rank": 9
+    }
+  ],
+  "pairs": [
+    {
+      "pair_id": "DRSI-chess-32NR3cf-a6KdPuC",
+      "title": "Chess LM Pretraining Recipe",
+      "bench": "DeepRSI",
+      "mode": "agent",
+      "release_status": "historical",
+      "input_cue_flag": false
+    },
+    {
+      "pair_id": "DRSI-chess-32NR3cf-o85kXzg",
+      "title": "Chess LM Pretraining Recipe",
+      "bench": "DeepRSI",
+      "mode": "agent",
+      "release_status": "historical",
+      "input_cue_flag": false
+    },
+    {
+      "pair_id": "DRSI-chess-32NR3cf-xnrWFzi",
+      "title": "Chess LM Pretraining Recipe",
+      "bench": "DeepRSI",
+      "mode": "agent",
+      "release_status": "historical",
+      "input_cue_flag": false
+    },
+    {
+      "pair_id": "DRSI-tree-T6xcqyV-rzvBsWz",
+      "title": "Noisy Game-Tree Pruning",
+      "bench": "DeepRSI",
+      "mode": "agent",
+      "release_status": "historical",
+      "input_cue_flag": true
+    },
+    {
+      "pair_id": "DRSI-tree-TZKDZCh-rzvBsWz",
+      "title": "Noisy Game-Tree Pruning",
+      "bench": "DeepRSI",
+      "mode": "agent",
+      "release_status": "historical",
+      "input_cue_flag": true
+    },
+    {
+      "pair_id": "DRSI-philly-J4LwWgw-iDmjMkD",
+      "title": "Philly Job Survival Prediction",
+      "bench": "DeepRSI",
+      "mode": "agent",
+      "release_status": "historical",
+      "input_cue_flag": false
+    },
+    {
+      "pair_id": "DRSI-philly-L4EkSxh-iDmjMkD",
+      "title": "Philly Job Survival Prediction",
+      "bench": "DeepRSI",
+      "mode": "agent",
+      "release_status": "historical",
+      "input_cue_flag": false
+    },
+    {
+      "pair_id": "DRSI-mamba-JzJ47n2-ofZBjWJ",
+      "title": "Ten-Minute MambaTM Training",
+      "bench": "DeepRSI",
+      "mode": "agent",
+      "release_status": "historical",
+      "input_cue_flag": false
+    },
+    {
+      "pair_id": "fk-main-L1-flux_pos_embed-7b6f3c6a580d",
+      "title": "L1:flux_pos_embed",
+      "bench": "FastKernels",
+      "mode": "agent",
+      "release_status": "historical",
+      "input_cue_flag": false
+    },
+    {
+      "pair_id": "fk-main-L1-mrope-64aa9cff66c5",
+      "title": "L1:mrope",
+      "bench": "FastKernels",
+      "mode": "agent",
+      "release_status": "historical",
+      "input_cue_flag": false
+    },
+    {
+      "pair_id": "fk-main-L1-vision_rotary_emb-20af8c80d355",
+      "title": "L1:vision_rotary_emb",
+      "bench": "FastKernels",
+      "mode": "agent",
+      "release_status": "historical",
+      "input_cue_flag": false
+    },
+    {
+      "pair_id": "fk-main-L1-moe_sum-59a55cf319fd",
+      "title": "L1:moe_sum",
+      "bench": "FastKernels",
+      "mode": "agent",
+      "release_status": "historical",
+      "input_cue_flag": false
+    },
+    {
+      "pair_id": "fk-main-L1-moe_sum-a55dbfce8fa9",
+      "title": "L1:moe_sum",
+      "bench": "FastKernels",
+      "mode": "agent",
+      "release_status": "historical",
+      "input_cue_flag": false
+    },
+    {
+      "pair_id": "fk-main-L1-layer_norm-10d53cdb074e",
+      "title": "L1:layer_norm",
+      "bench": "FastKernels",
+      "mode": "agent",
+      "release_status": "historical",
+      "input_cue_flag": false
+    },
+    {
+      "pair_id": "fk-main-L1-rms_norm_gated-af18ce647ba4",
+      "title": "L1:rms_norm_gated",
+      "bench": "FastKernels",
+      "mode": "agent",
+      "release_status": "historical",
+      "input_cue_flag": false
+    },
+    {
+      "pair_id": "fk-main-L1-rms_norm_gated-b226f011fe12",
+      "title": "L1:rms_norm_gated",
+      "bench": "FastKernels",
+      "mode": "agent",
+      "release_status": "historical",
+      "input_cue_flag": false
+    },
+    {
+      "pair_id": "fk-main-L1-log_sigmoid-80ff2cd9eec4",
+      "title": "L1:log_sigmoid",
+      "bench": "FastKernels",
+      "mode": "agent",
+      "release_status": "historical",
+      "input_cue_flag": false
+    },
+    {
+      "pair_id": "fk-main-L1-log_sigmoid-8ad860328d69",
+      "title": "L1:log_sigmoid",
+      "bench": "FastKernels",
+      "mode": "agent",
+      "release_status": "historical",
+      "input_cue_flag": false
+    },
+    {
+      "pair_id": "fk-main-L2-alphafold3_pair_block-d96a8bf28075",
+      "title": "L2:alphafold3_pair_block",
+      "bench": "FastKernels",
+      "mode": "agent",
+      "release_status": "historical",
+      "input_cue_flag": false
+    },
+    {
+      "pair_id": "fk-main-L2-alphafold3_swiglu-bd7f4822dfc0",
+      "title": "L2:alphafold3_swiglu",
+      "bench": "FastKernels",
+      "mode": "agent",
+      "release_status": "historical",
+      "input_cue_flag": false
+    },
+    {
+      "pair_id": "fk-main-L2-alphafold3_swiglu_transition-4c0dd27ca4dd",
+      "title": "L2:alphafold3_swiglu_transition",
+      "bench": "FastKernels",
+      "mode": "agent",
+      "release_status": "historical",
+      "input_cue_flag": false
+    },
+    {
+      "pair_id": "fk-main-L2-alphafold3_swiglu_transition-a3771858e0bd",
+      "title": "L2:alphafold3_swiglu_transition",
+      "bench": "FastKernels",
+      "mode": "agent",
+      "release_status": "historical",
+      "input_cue_flag": false
+    },
+    {
+      "pair_id": "fk-main-L2-clip_mlp-7a624c3e4954",
+      "title": "L2:clip_mlp",
+      "bench": "FastKernels",
+      "mode": "agent",
+      "release_status": "historical",
+      "input_cue_flag": false
+    },
+    {
+      "pair_id": "fk-main-L2-encoder_mlp-8c2793ac6d78",
+      "title": "L2:encoder_mlp",
+      "bench": "FastKernels",
+      "mode": "agent",
+      "release_status": "historical",
+      "input_cue_flag": false
+    },
+    {
+      "pair_id": "fk-main-L2-encoder_mlp-f2182c79a7e4",
+      "title": "L2:encoder_mlp",
+      "bench": "FastKernels",
+      "mode": "agent",
+      "release_status": "historical",
+      "input_cue_flag": false
+    },
+    {
+      "pair_id": "fk-v2-L2-gla_mlp-a13cbeca1d20",
+      "title": "L2:gla_mlp",
+      "bench": "FastKernels",
+      "mode": "agent",
+      "release_status": "historical",
+      "input_cue_flag": false
+    },
+    {
+      "pair_id": "fk-main-L2-vision_mlp-17726ce5233f",
+      "title": "L2:vision_mlp",
+      "bench": "FastKernels",
+      "mode": "agent",
+      "release_status": "historical",
+      "input_cue_flag": false
+    },
+    {
+      "pair_id": "fk-main-L2-vision_mlp-a9561c926ee1",
+      "title": "L2:vision_mlp",
+      "bench": "FastKernels",
+      "mode": "agent",
+      "release_status": "historical",
+      "input_cue_flag": false
+    },
+    {
+      "pair_id": "fk-main-L2-yolov10_attention-80a4a807e359",
+      "title": "L2:yolov10_attention",
+      "bench": "FastKernels",
+      "mode": "agent",
+      "release_status": "historical",
+      "input_cue_flag": false
+    },
+    {
+      "pair_id": "fk-v2-L2-yolov10_concat-ae3a4b48882c",
+      "title": "L2:yolov10_concat",
+      "bench": "FastKernels",
+      "mode": "agent",
+      "release_status": "historical",
+      "input_cue_flag": false
+    },
+    {
+      "pair_id": "fk-main-L2-yolov10_repvggdw-1b0a3b5f0879",
+      "title": "L2:yolov10_repvggdw",
+      "bench": "FastKernels",
+      "mode": "agent",
+      "release_status": "historical",
+      "input_cue_flag": false
+    },
+    {
+      "pair_id": "fk-main-L2-yolov10_repvggdw-36c197c8114c",
+      "title": "L2:yolov10_repvggdw",
+      "bench": "FastKernels",
+      "mode": "agent",
+      "release_status": "historical",
+      "input_cue_flag": false
+    },
+    {
+      "pair_id": "fk-main-L2-yolov10_sppf-4d968579def0",
+      "title": "L2:yolov10_sppf",
+      "bench": "FastKernels",
+      "mode": "agent",
+      "release_status": "historical",
+      "input_cue_flag": false
+    },
+    {
+      "pair_id": "fk-v2-L2-timestep_embedding-75a6d5637937",
+      "title": "L2:timestep_embedding",
+      "bench": "FastKernels",
+      "mode": "agent",
+      "release_status": "historical",
+      "input_cue_flag": false
+    },
+    {
+      "pair_id": "fk-main-L2-clip_attention-3fa7e97cadc8",
+      "title": "L2:clip_attention",
+      "bench": "FastKernels",
+      "mode": "agent",
+      "release_status": "historical",
+      "input_cue_flag": false
+    },
+    {
+      "pair_id": "fk-main-L3-alphafold3_diffusion_transformer-3e9cbc892988",
+      "title": "L3:alphafold3_diffusion_transformer",
+      "bench": "FastKernels",
+      "mode": "agent",
+      "release_status": "historical",
+      "input_cue_flag": false
+    },
+    {
+      "pair_id": "fk-main-L3-clip_encoder_layer-8c0b7c6e80f7",
+      "title": "L3:clip_encoder_layer",
+      "bench": "FastKernels",
+      "mode": "agent",
+      "release_status": "historical",
+      "input_cue_flag": false
+    },
+    {
+      "pair_id": "FI-3ca35a624b98e189",
+      "title": "GPU 算子实现比较",
+      "bench": "FlashInfer-Bench",
+      "mode": "agent",
+      "release_status": "historical",
+      "input_cue_flag": false
+    },
+    {
+      "pair_id": "FI-daae6828a79c7af7",
+      "title": "GPU 算子实现比较",
+      "bench": "FlashInfer-Bench",
+      "mode": "agent",
+      "release_status": "historical",
+      "input_cue_flag": false
+    },
+    {
+      "pair_id": "FI-126880ca9028f0cf",
+      "title": "GPU 算子实现比较",
+      "bench": "FlashInfer-Bench",
+      "mode": "agent",
+      "release_status": "historical",
+      "input_cue_flag": false
+    },
+    {
+      "pair_id": "FI-a0594a3e6aca4187",
+      "title": "GPU 算子实现比较",
+      "bench": "FlashInfer-Bench",
+      "mode": "agent",
+      "release_status": "historical",
+      "input_cue_flag": false
+    },
+    {
+      "pair_id": "FI-6300dae7f36ee86e",
+      "title": "GPU 算子实现比较",
+      "bench": "FlashInfer-Bench",
+      "mode": "agent",
+      "release_status": "historical",
+      "input_cue_flag": false
+    },
+    {
+      "pair_id": "FI-d227b44b1e3f2eea",
+      "title": "GPU 算子实现比较",
+      "bench": "FlashInfer-Bench",
+      "mode": "agent",
+      "release_status": "historical",
+      "input_cue_flag": false
+    },
+    {
+      "pair_id": "FI-c56f24116e336662",
+      "title": "GPU 算子实现比较",
+      "bench": "FlashInfer-Bench",
+      "mode": "agent",
+      "release_status": "historical",
+      "input_cue_flag": false
+    },
+    {
+      "pair_id": "FI-fe8ee61871a16b77",
+      "title": "GPU 算子实现比较",
+      "bench": "FlashInfer-Bench",
+      "mode": "agent",
+      "release_status": "historical",
+      "input_cue_flag": false
+    },
+    {
+      "pair_id": "FI-1ca80d2f7949b376",
+      "title": "GPU 算子实现比较",
+      "bench": "FlashInfer-Bench",
+      "mode": "agent",
+      "release_status": "historical",
+      "input_cue_flag": false
+    },
+    {
+      "pair_id": "FI-67f84c9721a2a545",
+      "title": "GPU 算子实现比较",
+      "bench": "FlashInfer-Bench",
+      "mode": "agent",
+      "release_status": "historical",
+      "input_cue_flag": false
+    },
+    {
+      "pair_id": "FI-6e1988ef1dc0bdfa",
+      "title": "GPU 算子实现比较",
+      "bench": "FlashInfer-Bench",
+      "mode": "agent",
+      "release_status": "historical",
+      "input_cue_flag": false
+    },
+    {
+      "pair_id": "FI-9baf0ab3e2c988fb",
+      "title": "GPU 算子实现比较",
+      "bench": "FlashInfer-Bench",
+      "mode": "agent",
+      "release_status": "historical",
+      "input_cue_flag": false
+    },
+    {
+      "pair_id": "FI-0a25723c7512153d",
+      "title": "GPU 算子实现比较",
+      "bench": "FlashInfer-Bench",
+      "mode": "agent",
+      "release_status": "historical",
+      "input_cue_flag": false
+    },
+    {
+      "pair_id": "FI-3bad998bcf474f50",
+      "title": "GPU 算子实现比较",
+      "bench": "FlashInfer-Bench",
+      "mode": "agent",
+      "release_status": "historical",
+      "input_cue_flag": false
+    },
+    {
+      "pair_id": "FI-4eac6137a9c09043",
+      "title": "GPU 算子实现比较",
+      "bench": "FlashInfer-Bench",
+      "mode": "agent",
+      "release_status": "historical",
+      "input_cue_flag": false
+    },
+    {
+      "pair_id": "FI-ca88c5561ef77d0e",
+      "title": "GPU 算子实现比较",
+      "bench": "FlashInfer-Bench",
+      "mode": "agent",
+      "release_status": "historical",
+      "input_cue_flag": false
+    },
+    {
+      "pair_id": "FI-e8e3f6965390a358",
+      "title": "GPU 算子实现比较",
+      "bench": "FlashInfer-Bench",
+      "mode": "agent",
+      "release_status": "historical",
+      "input_cue_flag": false
+    },
+    {
+      "pair_id": "FI-5963ec4c60e3c369",
+      "title": "GPU 算子实现比较",
+      "bench": "FlashInfer-Bench",
+      "mode": "agent",
+      "release_status": "historical",
+      "input_cue_flag": false
+    },
+    {
+      "pair_id": "FI-93ef30e4472b234d",
+      "title": "GPU 算子实现比较",
+      "bench": "FlashInfer-Bench",
+      "mode": "agent",
+      "release_status": "historical",
+      "input_cue_flag": false
+    },
+    {
+      "pair_id": "TB-f5e513b5ee017a81",
+      "title": "TB-f5e513b5ee017a81",
+      "bench": "TritonBench",
+      "mode": "agent",
+      "release_status": "historical",
+      "input_cue_flag": false
+    },
+    {
+      "pair_id": "TB-e2a85318bbf07849",
+      "title": "TB-e2a85318bbf07849",
+      "bench": "TritonBench",
+      "mode": "agent",
+      "release_status": "historical",
+      "input_cue_flag": false
+    },
+    {
+      "pair_id": "TB-45ae65b85bd6fbc6",
+      "title": "TB-45ae65b85bd6fbc6",
+      "bench": "TritonBench",
+      "mode": "agent",
+      "release_status": "historical",
+      "input_cue_flag": false
+    },
+    {
+      "pair_id": "AAB15-P002",
+      "title": "Training reward models with a potential length shortcut",
+      "bench": "AABench",
+      "mode": "agent",
+      "release_status": "historical",
+      "input_cue_flag": false
+    },
+    {
+      "pair_id": "AAB15-P004",
+      "title": "Preference alignment under a short optimization window",
+      "bench": "AABench",
+      "mode": "agent",
+      "release_status": "historical",
+      "input_cue_flag": false
+    },
+    {
+      "pair_id": "AAB15-P005",
+      "title": "Where should reference confidence guide unlearning?",
+      "bench": "AABench",
+      "mode": "agent",
+      "release_status": "historical",
+      "input_cue_flag": false
+    },
+    {
+      "pair_id": "AAB15-P007",
+      "title": "Preference objectives under a short training budget",
+      "bench": "AABench",
+      "mode": "agent",
+      "release_status": "historical",
+      "input_cue_flag": false
+    },
+    {
+      "pair_id": "AAB15-P008",
+      "title": "Reward credit and trajectory selection under a short diffusion-training budget",
+      "bench": "AABench",
+      "mode": "agent",
+      "release_status": "historical",
+      "input_cue_flag": false
+    },
+    {
+      "pair_id": "AAB15-P009",
+      "title": "Allocating supervision across corruption levels",
+      "bench": "AABench",
+      "mode": "agent",
+      "release_status": "historical",
+      "input_cue_flag": false
+    },
+    {
+      "pair_id": "AAB15-P010",
+      "title": "Depth versus breadth in weight-space search",
+      "bench": "AABench",
+      "mode": "agent",
+      "release_status": "historical",
+      "input_cue_flag": false
+    },
+    {
+      "pair_id": "AAB15-P011",
+      "title": "Prompt sampling and reward baselines for diffusion adaptation",
+      "bench": "AABench",
+      "mode": "agent",
+      "release_status": "historical",
+      "input_cue_flag": false
+    },
+    {
+      "pair_id": "AAB15-P012",
+      "title": "How strongly should calibration curvature influence pruning?",
+      "bench": "AABench",
+      "mode": "agent",
+      "release_status": "historical",
+      "input_cue_flag": false
+    },
+    {
+      "pair_id": "AAB15-P013",
+      "title": "Reward weighting under a short online diffusion-training budget",
+      "bench": "AABench",
+      "mode": "agent",
+      "release_status": "historical",
+      "input_cue_flag": false
+    },
+    {
+      "pair_id": "AAB15-P015",
+      "title": "Choosing a representation-space unlearning recipe",
+      "bench": "AABench",
+      "mode": "agent",
+      "release_status": "historical",
+      "input_cue_flag": false
+    },
+    {
+      "pair_id": "AAB15-P016",
+      "title": "How much calibration-mean repair should survive pruning?",
+      "bench": "AABench",
+      "mode": "agent",
+      "release_status": "historical",
+      "input_cue_flag": false
+    },
+    {
+      "pair_id": "AAB15-P018",
+      "title": "Confidence regularization for a short-budget reward model",
+      "bench": "AABench",
+      "mode": "agent",
+      "release_status": "historical",
+      "input_cue_flag": false
+    },
+    {
+      "pair_id": "AAB15-P019",
+      "title": "Denoising resolution versus short-budget learning throughput",
+      "bench": "AABench",
+      "mode": "agent",
+      "release_status": "historical",
+      "input_cue_flag": false
+    },
+    {
+      "pair_id": "AAB15-P020",
+      "title": "Where to assign learning credit in a short diffusion run",
+      "bench": "AABench",
+      "mode": "agent",
+      "release_status": "historical",
+      "input_cue_flag": false
+    },
+    {
+      "pair_id": "MLG15-P006",
+      "title": "Compare algorithm implementations",
+      "bench": "MLGym",
+      "mode": "reasoning",
+      "release_status": "historical",
+      "input_cue_flag": false
+    },
+    {
+      "pair_id": "MLG15-P011",
+      "title": "Compare algorithm implementations",
+      "bench": "MLGym",
+      "mode": "agent",
+      "release_status": "historical",
+      "input_cue_flag": false
+    },
+    {
+      "pair_id": "MLG15-P012",
+      "title": "Compare algorithm implementations",
+      "bench": "MLGym",
+      "mode": "agent",
+      "release_status": "historical",
+      "input_cue_flag": false
+    },
+    {
+      "pair_id": "MLG15-P014",
+      "title": "Compare algorithm implementations",
+      "bench": "MLGym",
+      "mode": "agent",
+      "release_status": "historical",
+      "input_cue_flag": false
+    },
+    {
+      "pair_id": "MLG15-P016",
+      "title": "Compare algorithm implementations",
+      "bench": "MLGym",
+      "mode": "reasoning",
+      "release_status": "historical",
+      "input_cue_flag": false
+    },
+    {
+      "pair_id": "MLG15-P019",
+      "title": "Compare algorithm implementations",
+      "bench": "MLGym",
+      "mode": "agent",
+      "release_status": "historical",
+      "input_cue_flag": false
+    },
+    {
+      "pair_id": "MLG15-P020",
+      "title": "Compare algorithm implementations",
+      "bench": "MLGym",
+      "mode": "reasoning",
+      "release_status": "historical",
+      "input_cue_flag": false
+    },
+    {
+      "pair_id": "MLS15-002",
+      "title": "Historical comparison of two offline RL recipes",
+      "bench": "MLSBench",
+      "mode": "agent",
+      "release_status": "historical",
+      "input_cue_flag": false
+    },
+    {
+      "pair_id": "NG15-P001",
+      "title": "Fixed-budget optimizer choice",
+      "bench": "nanoGPT",
+      "mode": "reasoning",
+      "release_status": "historical",
+      "input_cue_flag": false
+    },
+    {
+      "pair_id": "NG15-P007",
+      "title": "Matrix conditioning and coordinate agreement",
+      "bench": "nanoGPT",
+      "mode": "reasoning",
+      "release_status": "historical",
+      "input_cue_flag": false
+    },
+    {
+      "pair_id": "NG15-P012",
+      "title": "Optimizer recipes for vocabulary-facing matrices",
+      "bench": "nanoGPT",
+      "mode": "reasoning",
+      "release_status": "historical",
+      "input_cue_flag": false
+    },
+    {
+      "pair_id": "NG15-P013",
+      "title": "Momentum and matrix normalization",
+      "bench": "nanoGPT",
+      "mode": "reasoning",
+      "release_status": "historical",
+      "input_cue_flag": false
+    },
+    {
+      "pair_id": "NG15-P014",
+      "title": "Gradient processing under a fixed training budget",
+      "bench": "nanoGPT",
+      "mode": "reasoning",
+      "release_status": "historical",
+      "input_cue_flag": false
+    },
+    {
+      "pair_id": "NG15-P016",
+      "title": "Parameter estimates after finite-budget training",
+      "bench": "nanoGPT",
+      "mode": "reasoning",
+      "release_status": "historical",
+      "input_cue_flag": false
+    },
+    {
+      "pair_id": "NG15-P020",
+      "title": "Fixed-budget language-model optimization",
+      "bench": "nanoGPT",
+      "mode": "reasoning",
+      "release_status": "historical",
+      "input_cue_flag": false
+    },
+    {
+      "pair_id": "NG15-P021",
+      "title": "Fixed-budget language-model optimization",
+      "bench": "nanoGPT",
+      "mode": "reasoning",
+      "release_status": "historical",
+      "input_cue_flag": false
+    },
+    {
+      "pair_id": "KBV3N-057",
+      "title": "Two-dimensional average pooling",
+      "bench": "KernelBench",
+      "mode": "reasoning",
+      "release_status": "historical",
+      "input_cue_flag": false
+    },
+    {
+      "pair_id": "KBV3N-083",
+      "title": "Diagonal matrix multiplication",
+      "bench": "KernelBench",
+      "mode": "reasoning",
+      "release_status": "historical",
+      "input_cue_flag": false
+    },
+    {
+      "pair_id": "KBV3N-087",
+      "title": "AlexNet with fused pooling and dense layers",
+      "bench": "KernelBench",
+      "mode": "reasoning",
+      "release_status": "historical",
+      "input_cue_flag": false
+    },
+    {
+      "pair_id": "KBV3N-092",
+      "title": "Transposed convolution and residual activation",
+      "bench": "KernelBench",
+      "mode": "reasoning",
+      "release_status": "historical",
+      "input_cue_flag": false
+    },
+    {
+      "pair_id": "KBV3N-121",
+      "title": "Asymmetric 3D convolution with a wide output plane",
+      "bench": "KernelBench",
+      "mode": "reasoning",
+      "release_status": "historical",
+      "input_cue_flag": false
+    },
+    {
+      "pair_id": "KBV3N-125",
+      "title": "Matrix-vector multiplication with two row reductions",
+      "bench": "KernelBench",
+      "mode": "reasoning",
+      "release_status": "historical",
+      "input_cue_flag": false
+    },
+    {
+      "pair_id": "PTB-P097",
+      "title": "Compare two post-training recipes",
+      "bench": "PostTrainBench",
+      "mode": "agent",
+      "release_status": "historical",
+      "input_cue_flag": false
+    },
+    {
+      "pair_id": "PTB-P103",
+      "title": "比较两份 GPQA 后训练路线",
+      "bench": "PostTrainBench",
+      "mode": "agent",
+      "release_status": "historical",
+      "input_cue_flag": false
+    },
+    {
+      "pair_id": "PTB-P110",
+      "title": "比较两条后训练与导出流程",
+      "bench": "PostTrainBench",
+      "mode": "agent",
+      "release_status": "historical",
+      "input_cue_flag": false
+    },
+    {
+      "pair_id": "PTB-P112",
+      "title": "比较两条科学问答后训练路线",
+      "bench": "PostTrainBench",
+      "mode": "agent",
+      "release_status": "historical",
+      "input_cue_flag": false
+    },
+    {
+      "pair_id": "mlagentbench-v3-20261107-006",
+      "title": "mlagentbench-v3-20261107-006",
+      "bench": "MLAgentBench",
+      "mode": "reasoning",
+      "release_status": "historical",
+      "input_cue_flag": false
+    },
+    {
+      "pair_id": "mlagentbench-v3-20261107-020",
+      "title": "mlagentbench-v3-20261107-020",
+      "bench": "MLAgentBench",
+      "mode": "agent",
+      "release_status": "historical",
+      "input_cue_flag": false
+    },
+    {
+      "pair_id": "mlagentbench-v3-20261107-024",
+      "title": "mlagentbench-v3-20261107-024",
+      "bench": "MLAgentBench",
+      "mode": "reasoning",
+      "release_status": "historical",
+      "input_cue_flag": false
+    },
+    {
+      "pair_id": "mlagentbench-v3-20261107-029",
+      "title": "mlagentbench-v3-20261107-029",
+      "bench": "MLAgentBench",
+      "mode": "reasoning",
+      "release_status": "historical",
+      "input_cue_flag": false
+    },
+    {
+      "pair_id": "mlagentbench-v3-20261107-043",
+      "title": "mlagentbench-v3-20261107-043",
+      "bench": "MLAgentBench",
+      "mode": "reasoning",
+      "release_status": "historical",
+      "input_cue_flag": false
+    },
+    {
+      "pair_id": "mlagentbench-v3-20261107-060",
+      "title": "mlagentbench-v3-20261107-060",
+      "bench": "MLAgentBench",
+      "mode": "reasoning",
+      "release_status": "diagnostic",
+      "input_cue_flag": false
+    },
+    {
+      "pair_id": "mlagentbench-v3-20261107-071",
+      "title": "mlagentbench-v3-20261107-071",
+      "bench": "MLAgentBench",
+      "mode": "reasoning",
+      "release_status": "historical",
+      "input_cue_flag": false
+    },
+    {
+      "pair_id": "mlagentbench-v3-20261107-080",
+      "title": "mlagentbench-v3-20261107-080",
+      "bench": "MLAgentBench",
+      "mode": "reasoning",
+      "release_status": "historical",
+      "input_cue_flag": false
+    },
+    {
+      "pair_id": "mle5-031",
+      "title": "Predict censored slope safety factors",
+      "bench": "MLE-Bench",
+      "mode": "agent",
+      "release_status": "historical",
+      "input_cue_flag": false
+    },
+    {
+      "pair_id": "mle5-035",
+      "title": "Predict class-balanced stroke risk",
+      "bench": "MLE-Bench",
+      "mode": "agent",
+      "release_status": "historical",
+      "input_cue_flag": false
+    },
+    {
+      "pair_id": "mle5-045",
+      "title": "Identify paragraph language",
+      "bench": "MLE-Bench",
+      "mode": "agent",
+      "release_status": "historical",
+      "input_cue_flag": false
+    },
+    {
+      "pair_id": "mle5-047",
+      "title": "Predict passage reading ease",
+      "bench": "MLE-Bench",
+      "mode": "agent",
+      "release_status": "historical",
+      "input_cue_flag": false
+    },
+    {
+      "pair_id": "mle5-048",
+      "title": "Classify masked legal citation polarity",
+      "bench": "MLE-Bench",
+      "mode": "agent",
+      "release_status": "historical",
+      "input_cue_flag": false
+    },
+    {
+      "pair_id": "mle5-061",
+      "title": "Predict New York taxi fares",
+      "bench": "MLE-Bench",
+      "mode": "agent",
+      "release_status": "historical",
+      "input_cue_flag": false
+    },
+    {
+      "pair_id": "naturebench-s42256-022-00541-0-reconstruction-latent-transfer-v3",
+      "title": "Choose a drug-response transfer pipeline",
+      "bench": "NatureBench",
+      "mode": "reasoning",
+      "release_status": "historical",
+      "input_cue_flag": false
+    },
+    {
+      "pair_id": "naturebench-s42256-025-01002-0-graph-partner-validation-v3",
+      "title": "Predict peptide–MHC–TCR binding",
+      "bench": "NatureBench",
+      "mode": "agent",
+      "release_status": "historical",
+      "input_cue_flag": false
+    },
+    {
+      "pair_id": "tbsci6-leaky-01",
+      "title": "Select a fixed grating geometry",
+      "bench": "Terminal-Bench Science",
+      "mode": "agent",
+      "release_status": "historical",
+      "input_cue_flag": false
+    },
+    {
+      "pair_id": "tbsci6-reactor-01",
+      "title": "Compare two sampled-data reactor controllers",
+      "bench": "Terminal-Bench Science",
+      "mode": "agent",
+      "release_status": "historical",
+      "input_cue_flag": false
+    },
+    {
+      "pair_id": "tbsci6-spin-01",
+      "title": "Select a frozen spin-glass submission",
+      "bench": "Terminal-Bench Science",
+      "mode": "agent",
+      "release_status": "historical",
+      "input_cue_flag": false
+    },
+    {
+      "pair_id": "RSI-050",
+      "title": "多流门控FFT卷积：输入打包时每个程序处理256还是1024个元素",
+      "bench": "RSI-Exam",
+      "mode": "agent",
+      "release_status": "historical",
+      "input_cue_flag": false
+    },
+    {
+      "pair_id": "RSI-043",
+      "title": "玻璃切割：逐列比较摆放与多种排序加末板压缩",
+      "bench": "RSI-Exam",
+      "mode": "agent",
+      "release_status": "historical",
+      "input_cue_flag": false
+    },
+    {
+      "pair_id": "RSI-041",
+      "title": "2048搜索：完整随机分支的自适应深度，与更深的近似分支",
+      "bench": "RSI-Exam",
+      "mode": "agent",
+      "release_status": "historical",
+      "input_cue_flag": false
+    },
+    {
+      "pair_id": "RSI-049",
+      "title": "配电网反演：跨电表耦合与逐段物理灵敏度两条路线",
+      "bench": "RSI-Exam",
+      "mode": "agent",
+      "release_status": "historical",
+      "input_cue_flag": false
+    },
+    {
+      "pair_id": "RSI-056",
+      "title": "120次黑箱查询：更宽的大种群与更集中的小种群",
+      "bench": "RSI-Exam",
+      "mode": "reasoning",
+      "release_status": "historical",
+      "input_cue_flag": false
+    },
+    {
+      "pair_id": "RSI-036",
+      "title": "分页注意力解码：固定小计算块与扩大复用的自适应计算块",
+      "bench": "RSI-Exam",
+      "mode": "agent",
+      "release_status": "historical",
+      "input_cue_flag": false
+    },
+    {
+      "pair_id": "RSI-031",
+      "title": "单细胞开放染色质：单一邻域与多尺度邻域融合",
+      "bench": "RSI-Exam",
+      "mode": "agent",
+      "release_status": "historical",
+      "input_cue_flag": false
+    },
+    {
+      "pair_id": "RSI-054",
+      "title": "带噪短预算优化：前五名均匀加权还是对数递减加权",
+      "bench": "RSI-Exam",
+      "mode": "agent",
+      "release_status": "historical",
+      "input_cue_flag": false
+    },
+    {
+      "pair_id": "RSI-057",
+      "title": "玻璃切割搜索：保留行内评分组合，还是增加尾板重排",
+      "bench": "RSI-Exam",
+      "mode": "agent",
+      "release_status": "historical",
+      "input_cue_flag": false
+    },
+    {
+      "pair_id": "RSI-048",
+      "title": "视觉关系计数：全参数简短奖励训练，还是保守的语言LoRA与格式奖励",
+      "bench": "RSI-Exam",
+      "mode": "agent",
+      "release_status": "historical",
+      "input_cue_flag": false
+    },
+    {
+      "pair_id": "AIRS-005",
+      "title": "周发电量：维持最近水平，还是重复最近四周",
+      "bench": "AIRS-Bench",
+      "mode": "reasoning",
+      "release_status": "historical",
+      "input_cue_flag": false
+    },
+    {
+      "pair_id": "AIRS-010",
+      "title": "周太阳能发电：复制最后一周，还是采用预训练时序模型",
+      "bench": "AIRS-Bench",
+      "mode": "reasoning",
+      "release_status": "historical",
+      "input_cue_flag": false
+    },
+    {
+      "pair_id": "AIRS-013",
+      "title": "Winogrande：短监督训练还是预训练整句评分",
+      "bench": "AIRS-Bench",
+      "mode": "reasoning",
+      "release_status": "historical",
+      "input_cue_flag": false
+    },
+    {
+      "pair_id": "AIRS-014",
+      "title": "Yelp评论五分类：相同已处理样本数的早期路线比较",
+      "bench": "AIRS-Bench",
+      "mode": "reasoning",
+      "release_status": "historical",
+      "input_cue_flag": false
+    },
+    {
+      "pair_id": "RSH-006",
+      "title": "Agent过程控制：结束后验收与工作中提醒",
+      "bench": "RSIBench Harness",
+      "mode": "agent",
+      "release_status": "historical",
+      "input_cue_flag": false
+    },
+    {
+      "pair_id": "RSH-009",
+      "title": "持续长响应与分段续写的取舍",
+      "bench": "RSIBench Harness",
+      "mode": "agent",
+      "release_status": "historical",
+      "input_cue_flag": false
+    }
+  ],
+  "caveats": [
+    "This manually selected development collection includes historical observations; it is not an independently sampled hidden test set.",
+    "Scores are question-weighted. Claude / AAB15-P016 uses repeats 1 and 3 only (avg@2); all other model-pair cells use avg@3.",
+    "The fixed AB orientation and imbalanced labels limit conclusions about position bias. Always A scores 57.78%, above every evaluated model in this snapshot.",
+    "Provider model names are proxy aliases; the underlying checkpoints were not independently verified.",
+    "Two DeepRSI inputs contain self-reported performance comments and are flagged in the catalog.",
+    "32 pairs permit unresolved as abstention; it is neither a fourth gold label nor equivalent to tie.",
+    "Accepted answers were recovered with consistent, lossless parsing rules; malformed-output repair attempts remain in cumulative usage.",
+    "438 Gemini requests used a compatibility marker for missing thought signatures; missing server state was not recovered.",
+    "Recovery budgets varied, including additional hy4 budget. This is not a uniform compute-budget comparison.",
+    "Usage includes failed and recovery attempts. Cached input tokens are a subset of input tokens, not an additional total.",
+    "Reported costs are explicitly returned CNY charges, not a reconciled account bill; missing charges must not be treated as zero.",
+    "Candidate materials and full raw traces are not included in this website release; redistribution permissions require source-specific review."
+  ],
+  "provenance": {
+    "method": "Strict field allowlist; grouped accuracies recomputed from frozen valid responses using exact rational arithmetic",
+    "source_files": [
+      {
+        "name": "site-data.json",
+        "sha256": "f370a8dae9544d273fd26e54283a1c4a8d329f0a8ad3120c775d7e1b97bd0271"
+      },
+      {
+        "name": "question-weighted-summary.json",
+        "sha256": "25764bd0210b1d8264df030a78148dda6bb66d900a96cf41ec3b9bd5045b8aa0"
+      },
+      {
+        "name": "scoring-input.private.jsonl",
+        "sha256": "e89b058c269298c537d146c73a017a1b169a4240d2138b64898d09d7446a6910"
+      }
+    ],
+    "individual_labels_exported": false,
+    "raw_traces_exported": false,
+    "internal_paths_exported": false
+  },
+  "publication_status": "Public-safe metadata and aggregate results; no blanket redistribution license for underlying inputs or traces"
+}

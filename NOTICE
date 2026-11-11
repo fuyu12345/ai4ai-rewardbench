@@ -1,0 +1,26 @@
+AI4AI RewardBench v0.1 — Golden2
+Snapshot date: 2026-11-11
+
+This repository contains original website implementation, aggregate evaluation
+results, task metadata, and authored case summaries. Code and data licensing have
+not yet been selected. No open-source, dataset, or upstream-material license is
+granted by this NOTICE or by the presence of files in the repository.
+
+Source benchmark names and source-file references identify provenance. They do
+not imply affiliation, endorsement, or permission to redistribute upstream code,
+datasets, models, calibration samples, or other assets. Any separately released
+upstream materials remain subject to their applicable terms and attribution
+requirements.
+
+The curated case export contains authored source summaries and allowlisted
+observed interaction metadata. It does not include verbatim candidate source
+code, complete task packages, private reference labels, organizer evidence,
+credentials, or full raw model/provider trajectories. Source hashes establish
+identity, not a license grant.
+
+The visual language follows FRONTIS VI. No brand guideline files are bundled,
+and no rights in FRONTIS branding are conveyed.
+
+Results describe the frozen, manually selected Golden2 development collection.
+Refer to docs/protocol.md, data/README.md, and docs/case-provenance.md for score
+definitions, the single avg@2 exception, limitations, and provenance.
