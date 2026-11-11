@@ -21,10 +21,11 @@
     <section class="hero dark">
       <div class="wrap hero-main">
         <div class="hero-copy">
-          <div class="eyebrow"><i class="node"></i> AI FOR AI RESEARCH <span class="version">V0.1 / GOLDEN2</span></div>
+          <div class="eyebrow"><i class="node"></i> AI FOR AI RESEARCH <span class="version">V0.1</span></div>
           <h1>Better judgment.<br>Better research.</h1>
-          <p class="hero-lead">Which idea moves research forward?</p>
-          <p class="hero-description">A benchmark for judging algorithmic choices under real task constraints. Grounded in agent artifacts, executable outcomes, and expert evidence.</p>
+          <p class="hero-lead">How does AI judge AI research?</p>
+          <p class="hero-description">AI for AI (AI4AI) puts models to work on kernel optimization, ML engineering, scientific discovery, and training algorithms. Each task calls for choosing a promising approach under specific goals and resource constraints.</p>
+          <p class="hero-description">RewardBench tests models’ research preferences across these tasks using existing agent artifacts and evidence—without rerunning heavyweight training or GPU experiments.</p>
           <div class="hero-actions"><a href="#leaderboard" class="button primary">Explore the leaderboard <span>↗</span></a><a href="#explorer" class="text-link">Look inside a task <span>→</span></a></div>
         </div>
         <div class="decision-figure" aria-label="Two candidate approaches are compared using task context and evidence to produce a judgment of A, B or tie.">
@@ -42,15 +43,13 @@
 
     <section id="leaderboard" class="light section">
       <div class="wrap">
-        <div class="section-heading"><div><p class="eyebrow">01 / THE LEADERBOARD</p><h2>How well can AI judge?</h2></div><p>Nine models. One frozen collection.<br>Accuracy, with the context that matters.</p></div>
+        <div class="section-heading"><div><p class="eyebrow">01 / THE LEADERBOARD</p><h2>How well can AI judge?</h2></div></div>
         <div class="table-toolbar"><div class="segmented" role="group" aria-label="Leaderboard mode"><button class="active" data-board="all" aria-pressed="true">All tasks <span>135</span></button><button data-board="agent" aria-pressed="false">Agent <span>105</span></button><button data-board="reasoning" aria-pressed="false">Reasoning <span>30</span></button></div><button id="download-scores" class="text-link">Download CSV <span>↓</span></button></div>
         <p class="table-context" id="board-context">Question-weighted accuracy · 135 pairs · higher is better</p>
         <div class="table-scroll"><table class="leaderboard-table"><thead><tr><th scope="col">RANK</th><th scope="col">MODEL <span>exact API ID</span></th><th scope="col" class="score-heading"><button id="sort-score" aria-label="Sort accuracy ascending">ACCURACY <span>↓</span></button></th><th scope="col" class="numeric">INPUT TOKENS</th><th scope="col" class="numeric">OUTPUT TOKENS</th><th scope="col" class="numeric">AGENT TURNS <span>avg.</span></th></tr></thead><tbody id="leaderboard-body"></tbody></table></div>
         <p class="scoring-note"><span class="note-mark">*</span> Avg@3 per pair, then equal weight across pairs. Claude / AAB15-P016 uses avg@2 (repeats 1 & 3); repeat 2 remains a refusal. Token totals include failures and recovery; Agent turns divide by 315 planned Agent cells.</p>
+        <details class="resource-details"><summary><span class="resource-heading"><span class="tiny-label">RESOURCE ACCOUNTING</span><strong>Cumulative resource use</strong><span class="resource-preview">Tokens, interaction turns, tool calls, and cost</span></span><span class="resource-toggle" aria-hidden="true">+</span></summary><p>Full-run totals include failed attempts, format repairs, and recovery. Cache reads are already part of input tokens. Costs are provider-reported CNY, not reconciled billing; unavailable usage or cost is not treated as zero.</p><div class="table-scroll"><table class="leaderboard-table"><thead><tr><th>MODEL</th><th class="numeric">CACHED INPUT</th><th class="numeric">MODEL TURNS¹</th><th class="numeric">TOOL ROUNDS¹</th><th class="numeric">TOOL CALLS¹</th><th class="numeric">API ATTEMPTS</th><th class="numeric">KNOWN COST · CNY</th></tr></thead><tbody id="resource-body"></tbody></table></div><p>¹ Agent only. One model turn may issue multiple tool calls; transport retries count as API attempts. These quantities are not interchangeable.</p></details>
         <div class="baseline-row"><div><span class="tiny-label">CONTEXT, NOT A FOOTNOTE</span><p>Simple baselines matter.</p></div><div><strong id="baseline-uniform">33.33<span>%</span></strong><span>Uniform A / B / tie</span></div><div><strong id="baseline-ab">49.26<span>%</span></strong><span>Random A / B</span></div><div><strong id="baseline-fixed">57.78<span>%</span></strong><span>Always choose A</span></div></div>
-        <p class="quiet" id="baseline-note">All nine models score below the always-A baseline on this fixed-order development collection. Gold distribution: A 78 / B 55 / tie 2.</p>
-        <details class="resource-details"><summary>Explore cumulative resource use <span>+</span></summary><p>Full-run totals include failed attempts, format repairs, and recovery. Cache reads are already part of input tokens. Costs are provider-reported CNY, not reconciled billing; unavailable usage or cost is not treated as zero.</p><div class="table-scroll"><table class="leaderboard-table"><thead><tr><th>MODEL</th><th class="numeric">CACHED INPUT</th><th class="numeric">MODEL TURNS¹</th><th class="numeric">TOOL ROUNDS¹</th><th class="numeric">TOOL CALLS¹</th><th class="numeric">API ATTEMPTS</th><th class="numeric">KNOWN COST · CNY</th></tr></thead><tbody id="resource-body"></tbody></table></div><p>¹ Agent only. One model turn may issue multiple tool calls; transport retries count as API attempts. These quantities are not interchangeable.</p></details>
-        <div class="leaderboard-meta"><span>RUN · 10–11 NOV 2026</span><span>DMX PROXY · PROVIDER DEFAULT SAMPLING</span><span>3,644 / 3,645 VALID CELLS</span></div>
       </div>
     </section>
 
@@ -80,7 +79,7 @@
 
     <section class="next-section dark"><div class="wrap next-grid"><div><p class="eyebrow">THE NEXT RESEARCH QUESTION</p><h2>When the state changes,<br>should the preference?</h2></div><div><p>Next: test whether changing resources, task conditions, or research state produces repeatable preference reversals—and whether recognizing them improves expensive experiment selection.</p><span class="roadmap-label">RESEARCH DIRECTION · NOT A V0.1 RESULT</span><a class="button secondary" href="https://github.com/fuyu12345/ai4ai-rewardbench" target="_blank" rel="noreferrer">Explore the repository <span>↗</span></a></div></div></section>
   </main>
-  <footer class="dark"><div class="the-edge"></div><div class="wrap footer-main"><div><a href="#" class="footer-title">AI4AI RewardBench <span>↗</span></a><p>Evidence for better research decisions.</p></div><div class="footer-links"><a href="public-benchmark.json" download>Results & catalog ↓</a><a href="public-cases.json" download>Curated cases ↓</a><a href="https://github.com/fuyu12345/ai4ai-rewardbench" target="_blank" rel="noreferrer">Source code ↗</a></div></div><div class="wrap footer-bottom"><span>GOLDEN2 · V0.1 · NOVEMBER 2026</span><span>135 PAIRS / 17 BENCHMARKS / 2 MODES</span><span>VISUAL LANGUAGE / FRONTIS</span></div></footer>
+  <footer class="dark"><div class="the-edge"></div><div class="wrap footer-main"><div><a href="#" class="footer-title">AI4AI RewardBench <span>↗</span></a><p>Evidence for better research decisions.</p></div><div class="footer-links"><a href="public-benchmark.json" download>Results & catalog ↓</a><a href="public-cases.json" download>Curated cases ↓</a><a href="https://github.com/fuyu12345/ai4ai-rewardbench" target="_blank" rel="noreferrer">Source code ↗</a></div></div><div class="wrap footer-bottom"><span>V0.1 · NOVEMBER 2026</span><span>135 PAIRS / 17 BENCHMARKS / 2 MODES</span><span>VISUAL LANGUAGE / FRONTIS</span></div></footer>
   <div class="toast" id="toast" role="status"></div>
   <script>/* INLINE_DATA */</script>
   <script>/* INLINE_APP */</script>

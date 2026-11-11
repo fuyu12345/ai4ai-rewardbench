@@ -18,7 +18,7 @@
   }
   function renderLeaderboard() {
     const key = scoreKey();
-    $('#leaderboard-body').innerHTML = boardRows().map(row => `<tr><td>${String(row.displayRank).padStart(2,'0')}</td><td><span class="model-name">${escape(row.model)}${row.model.startsWith('claude') ? '<sup>*</sup>':''}</span><span class="model-provider">${escape(providers[row.model] || row.model)} · DMX</span></td><td class="score-cell"><div class="score-content"><div class="score-bar" aria-hidden="true"><i style="width:${row[key]*100}%"></i></div><span class="score-value">${percent(row[key])}<small>%</small></span></div></td><td class="numeric">${millions(row.input_tokens_known)}</td><td class="numeric">${millions(row.output_tokens_known)}</td><td class="numeric">${Number(row.agent_mean_model_turns_per_planned_cell).toFixed(1)}</td></tr>`).join('');
+    $('#leaderboard-body').innerHTML = boardRows().map(row => `<tr><td>${String(row.displayRank).padStart(2,'0')}</td><td><span class="model-name">${escape(row.model)}${row.model.startsWith('claude') ? '<sup>*</sup>':''}</span><span class="model-provider">${escape(providers[row.model] || row.model)}</span></td><td class="score-cell"><div class="score-content"><div class="score-bar" aria-hidden="true"><i style="width:${row[key]*100}%"></i></div><span class="score-value">${percent(row[key])}<small>%</small></span></div></td><td class="numeric">${millions(row.input_tokens_known)}</td><td class="numeric">${millions(row.output_tokens_known)}</td><td class="numeric">${Number(row.agent_mean_model_turns_per_planned_cell).toFixed(1)}</td></tr>`).join('');
     const n = state.mode === 'all' ? data.pair_count : data.modes[state.mode];
     $('#board-context').textContent = `Question-weighted accuracy · ${n} ${state.mode === 'all' ? '' : state.mode + ' '}pairs · higher is better · resource columns cover the full run`;
     $$('[data-board]').forEach(b => { const active = b.dataset.board === state.mode; b.classList.toggle('active',active); b.setAttribute('aria-pressed',String(active)); });
@@ -30,9 +30,6 @@
       $('#baseline-uniform').innerHTML = `${percent(baseline.uniform_three)}<span>%</span>`;
       $('#baseline-ab').innerHTML = `${percent(baseline.random_ab)}<span>%</span>`;
       $('#baseline-fixed').innerHTML = `${percent(baseline.always_a)}<span>%</span>`;
-      const labels = baseline.gold_distribution;
-      const below = data.leaderboard.filter(r => r[key] < baseline.always_a).length;
-      $('#baseline-note').textContent = `${below} of 9 models score below the always-A baseline on ${state.mode === 'all' ? 'this fixed-order development collection' : `the ${state.mode} subset`}. Gold distribution: A ${labels.A} / B ${labels.B} / tie ${labels.tie}.`;
     }
   }
   $$('[data-board]').forEach(b => b.addEventListener('click',()=>{state.mode=b.dataset.board;state.asc=false;renderLeaderboard();}));
