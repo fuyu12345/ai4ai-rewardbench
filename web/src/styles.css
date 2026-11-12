@@ -105,7 +105,6 @@ strong,b{font-weight:600}
 .leaderboard-table th:first-child,.leaderboard-table td:first-child{padding-left:16px}
 .leaderboard-table .numeric{text-align:right}
 .leaderboard-table .score-cell{width:30%;padding-right:36px}
-.leaderboard-table tr.top-ranked td{background:var(--surface)}
 .leaderboard-table tr:hover td{background:var(--surface)}
 .model-name{font-size:16px;font-weight:500}
 .model-provider{display:block;font-size:14px;color:var(--gray);opacity:.8;margin-top:2px}
