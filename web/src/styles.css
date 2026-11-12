@@ -216,18 +216,10 @@ strong,b{font-weight:600}
 .protocol-details summary span{font-size:18px;line-height:1;transition:transform .2s var(--ease)}
 .protocol-details details[open] summary span{transform:rotate(45deg)}
 .protocol-details details p{font-size:16px;color:var(--gray);line-height:1.9;padding-top:16px;max-width:95%}
-.next-section{padding:90px 0 100px}
-.next-grid{display:grid;grid-template-columns:1.4fr 1fr;gap:100px;align-items:center}
-.next-grid .eyebrow{font-size:14px;opacity:.6}
-.next-grid h2{font-size:clamp(32px,3.2vw,48px);line-height:1.15}
-.next-grid>div>p{font-size:16px;opacity:.7;line-height:1.9}
-.roadmap-label{display:block;font-size:14px;letter-spacing:.07em;opacity:.72;margin-top:18px}
-.next-grid .button{margin-top:28px}
 footer .footer-main{display:flex;justify-content:space-between;gap:30px;padding:48px 0}
 .footer-title{font-size:24px;font-weight:500;letter-spacing:-.04em;display:flex;gap:45px;align-items:center}
 .footer-main p{font-size:15px;opacity:.75;margin-top:12px}
 .footer-links{display:flex;gap:18px 28px;flex-wrap:wrap;font-size:14px;align-items:flex-start}
-.footer-bottom{display:flex;justify-content:space-between;flex-wrap:wrap;gap:14px 20px;border-top:1px solid var(--gray);padding:21px 0;font-size:14px;letter-spacing:.08em;opacity:.6}
 .toast{position:fixed;bottom:22px;right:24px;z-index:50;background:var(--surface);color:var(--black);font-size:16px;padding:12px 20px;transform:translateY(100px);transition:transform .3s var(--ease)}
 .toast.visible{transform:translateY(0)}
 .hero-copy{animation:enter .7s var(--ease) both}
@@ -247,7 +239,6 @@ to{opacity:1;transform:translateY(0)}
 .dataset-grid{gap:60px}
 .case-top{gap:35px}
 .protocol-grid{gap:60px}
-.next-grid{gap:60px}
 .score-bar{display:none}
 .leaderboard-table .score-cell{width:auto;padding-right:20px}
 }
@@ -284,8 +275,6 @@ to{opacity:1;transform:translateY(0)}
 .catalog-item{grid-template-columns:140px minmax(0,1fr) 130px 84px;gap:16px}
 .protocol-grid{gap:35px}
 .footer-links{gap:15px;flex-direction:column}
-.next-grid{gap:40px}
-.footer-bottom{font-size:14px}
 }
 @media(max-width:640px){.wrap{width:calc(100% - 40px)}
 .header{height:68px;padding:0 20px}
@@ -383,15 +372,9 @@ h2{font-size:33px;letter-spacing:-.05em}
 .metric-definition>p:last-child{max-width:none}
 .protocol-details details{padding:19px 0}
 .protocol-details summary{font-size:16px}
-.next-section{padding:60px 0}
-.next-grid{grid-template-columns:1fr;gap:28px}
-.next-grid h2{font-size:34px}
-.next-grid>div>p{font-size:16px}
 .footer-main{flex-direction:column;padding:35px 0!important;gap:26px!important}
 .footer-title{font-size:23px;gap:20px;flex-wrap:wrap}
 .footer-links{gap:18px;flex-direction:row;flex-wrap:wrap;font-size:14px}
-.footer-bottom{flex-wrap:wrap;font-size:14px;gap:10px}
-.footer-bottom>span:last-child{display:none}
 }
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}
 *,*:before,*:after{animation:none!important;transition:none!important}
@@ -428,7 +411,6 @@ h2{font-size:33px;letter-spacing:-.05em}
 @media(max-width:760px){.header nav{display:none}
 .section-heading{display:block}
 .section-heading>p{margin-top:20px;max-width:none}
-.next-grid{grid-template-columns:1fr;gap:32px}
 }
 @media(max-width:640px){.hero-actions{flex-direction:column;align-items:flex-start}
 .resource-details{padding:0 20px;margin:28px 0}
@@ -439,10 +421,9 @@ h2{font-size:33px;letter-spacing:-.05em}
 .resource-details>p{font-size:14px}
 .mode-definition{gap:18px}
 .mode-number{min-width:62px}
-.footer-bottom{font-size:14px}
 }
 /* Version context and substantive task / decision exploration. */
-.protocol-section{border-bottom:1px solid var(--surface)}
+.protocol-section{background:var(--surface);border-bottom:1px solid var(--surface)}
 .collection-status{display:grid;grid-template-columns:1fr 1.6fr;gap:48px;padding:24px 0;margin-bottom:35px;border-top:1px solid var(--gray);border-bottom:1px solid var(--white)}
 .release-marker{display:flex;align-items:center;gap:12px;font-size:14px;letter-spacing:.06em;align-self:start}
 .collection-status p{font-size:16px;line-height:1.75;color:var(--gray)}
