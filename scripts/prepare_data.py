@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Build the public Golden2 metadata snapshot from an authorized handoff.
+"""Build the frozen v0.1.0 Golden2 metadata snapshot from an authorized handoff.
 
 Uses only the Python standard library. Raw inputs stay outside the repository;
 individual labels, answers, paths, and correctness values are never exported.
@@ -200,7 +200,8 @@ def build(handoff):
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--handoff", required=True, type=Path, help="Authorized handoff directory outside this repository")
-    parser.add_argument("--output", type=Path, default=Path("data/public-benchmark.json"))
+    parser.add_argument("--output", type=Path, default=Path("data/snapshots/golden2-20261111.json"),
+                        help="Frozen original snapshot; use merge_results.py for the current leaderboard")
     args = parser.parse_args()
     result = build(args.handoff)
     args.output.parent.mkdir(parents=True, exist_ok=True)

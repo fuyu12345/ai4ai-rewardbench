@@ -1,18 +1,18 @@
 {
-  "schema_version": "1.0",
-  "release_version": "0.1.0",
+  "schema_version": "1.1",
+  "release_version": "0.1.1",
   "dataset_version": "golden_pairs_2",
   "collection_date": "2026-11-10",
-  "snapshot_date": "2026-11-11",
+  "snapshot_date": "2026-11-12",
   "pair_count": 135,
   "bench_count": 17,
-  "model_count": 9,
+  "model_count": 10,
   "modes": {
     "agent": 105,
     "reasoning": 30
   },
-  "planned_cells": 3645,
-  "valid_cells": 3644,
+  "planned_cells": 3510,
+  "valid_cells": 3509,
   "label_distribution": {
     "A": 78,
     "B": 55,
@@ -73,7 +73,6 @@
   "scoring_policy": {
     "denominator_pairs": 135,
     "aggregation": "Mean over pairs of mean correctness across included repetitions",
-    "all_other_model_pair_cells": "avg@3",
     "exception": {
       "model": "claude-sonnet-5-5",
       "pair_id": "AAB15-P016",
@@ -85,18 +84,19 @@
       "reason": "Repeated empty refusal",
       "avg_at_2": 1.0
     },
-    "usage": "All attempts, including failed requests, refusals, and recovery runs"
+    "usage": "All attempts, including failed requests, refusals, and recovery runs",
+    "repetitions": "Per-row: Sol xhigh and Terra default use rep1 only (avg@1); eight original rows use avg@3 except the documented Claude single-pair avg@2"
   },
   "protocol": {
     "run_dates": [
       "2026-11-10",
       "2026-11-11"
     ],
-    "provider": "DMX proxy",
+    "provider": "Mixed: DMX proxy for original rows; official OpenAI Responses for new Sol and Terra rows",
     "orientation": "Fixed AB",
-    "sampling": "Provider defaults; no fixed random seed",
-    "repeats": 3,
-    "agent_planned_cells_per_model": 315,
+    "sampling": "Provider defaults; Sol's new row explicitly sets reasoning effort xhigh",
+    "repeats": "Per-row evaluated_repeats",
+    "agent_planned_cells_per_model": "Per-row agent_planned_cells",
     "agent_tools": [
       "list_files",
       "read_file",
@@ -231,6 +231,95 @@
   ],
   "leaderboard": [
     {
+      "model": "gpt-6.1-sol",
+      "question_equal_weight_accuracy": 0.4444444444444444,
+      "exact_fraction": "4/9",
+      "valid": 135,
+      "correct": 60,
+      "planned": 135,
+      "pair_count": 135,
+      "agent_accuracy": 0.38095238095238093,
+      "reasoning_accuracy": 0.6666666666666666,
+      "per_bench": {
+        "DeepRSI": 0.125,
+        "FastKernels": 0.10344827586206896,
+        "FlashInfer-Bench": 0.6842105263157895,
+        "TritonBench": 0.0,
+        "AABench": 0.5333333333333333,
+        "MLGym": 0.7142857142857143,
+        "MLSBench": 0.0,
+        "nanoGPT": 0.875,
+        "KernelBench": 0.5,
+        "PostTrainBench": 0.75,
+        "MLAgentBench": 0.5,
+        "MLE-Bench": 0.16666666666666666,
+        "NatureBench": 0.5,
+        "Terminal-Bench Science": 0.3333333333333333,
+        "RSI-Exam": 0.7,
+        "AIRS-Bench": 0.5,
+        "RSIBench Harness": 0.5
+      },
+      "input_tokens_known": 40019290,
+      "output_tokens_known": 757267,
+      "cached_input_tokens_known": 27648695,
+      "cache_creation_input_tokens_known": 12368072,
+      "reasoning_tokens_known": 580876,
+      "api_request_attempts": 1109,
+      "agent_model_turns": 877,
+      "agent_tool_rounds": 706,
+      "agent_tool_calls": 3163,
+      "failed_transport_attempts": 268,
+      "possibly_billed_error_attempts": 6,
+      "agent_mean_model_turns_per_planned_cell": 8.352380952380953,
+      "agent_planned_cells": 105,
+      "evaluated_repeats": 1,
+      "included_repeats": [
+        1
+      ],
+      "config_label": "xhigh",
+      "evaluation_setting": "Official OpenAI Responses · xhigh · rep1",
+      "scoring_policy": "avg@1; repeat 1 only, no best-repeat selection",
+      "provider": "OpenAI official API",
+      "cohort_id": "sol-xhigh-rep1-20261111",
+      "source_repeats_available": 1,
+      "reported_cost_cny": null,
+      "estimated_cost_usd": 35.44951209999999,
+      "cost_status": "Historical usage-based USD estimate; no provider-reported CNY charge; not an account bill",
+      "usage_scope": "All original and recovery attempts for repeat 1 only",
+      "source_layers": [
+        {
+          "layer": "original",
+          "selected_repeat": 1,
+          "selected_jobs": 135,
+          "api_request_attempts": 816,
+          "agent_model_turns": 585,
+          "agent_tool_rounds": 480,
+          "agent_tool_calls": 2031,
+          "failed_transport_attempts": 267,
+          "possibly_billed_error_attempts": 6,
+          "record_manifest_sha256": "a865b9b458754b39f0a7fae51cdfcc3e219bcee7869f4b15a664258445df6348"
+        },
+        {
+          "layer": "recovery-network-v1",
+          "selected_repeat": 1,
+          "selected_jobs": 66,
+          "api_request_attempts": 293,
+          "agent_model_turns": 292,
+          "agent_tool_rounds": 226,
+          "agent_tool_calls": 1132,
+          "failed_transport_attempts": 1,
+          "possibly_billed_error_attempts": 0,
+          "record_manifest_sha256": "35103155a521c37429c823ba180f7ac8b38dffa166aa0db64fb37447bbe2ad07"
+        }
+      ],
+      "usage_response_records": 841,
+      "responses_without_usage": 0,
+      "returned_models": [
+        "gpt-6.1-sol"
+      ],
+      "rank": 1
+    },
+    {
       "model": "gemini-4-argon",
       "question_equal_weight_accuracy": 0.4148148148148148,
       "exact_fraction": "56/135",
@@ -269,47 +358,108 @@
       "agent_mean_model_turns_per_planned_cell": 7.520634920634921,
       "api_request_attempts": 2648,
       "reported_cost_cny": 464.87410199999977,
-      "rank": 1
+      "rank": 2,
+      "evaluated_repeats": 3,
+      "included_repeats": [
+        1,
+        2,
+        3
+      ],
+      "config_label": "default",
+      "evaluation_setting": "DMX proxy · provider defaults · 3 repeats",
+      "scoring_policy": "avg@3",
+      "provider": "DMX proxy",
+      "cohort_id": "golden2-frozen-20261111",
+      "agent_planned_cells": 315,
+      "usage_scope": "All original and recovery attempts for included model and all three planned repeats"
     },
     {
-      "model": "gpt-6.1-sol",
-      "question_equal_weight_accuracy": 0.3530864197530864,
-      "exact_fraction": "143/405",
-      "valid": 405,
-      "correct": 143,
-      "planned": 405,
+      "model": "gpt-6.1-terra",
+      "question_equal_weight_accuracy": 0.4148148148148148,
+      "exact_fraction": "56/135",
+      "valid": 135,
+      "correct": 56,
+      "planned": 135,
       "pair_count": 135,
-      "agent_accuracy": 0.33015873015873015,
-      "reasoning_accuracy": 0.43333333333333335,
+      "agent_accuracy": 0.3523809523809524,
+      "reasoning_accuracy": 0.6333333333333333,
       "per_bench": {
         "DeepRSI": 0.125,
-        "FastKernels": 0.13793103448275862,
-        "FlashInfer-Bench": 0.543859649122807,
+        "FastKernels": 0.10344827586206896,
+        "FlashInfer-Bench": 0.5789473684210527,
         "TritonBench": 0.0,
         "AABench": 0.4,
-        "MLGym": 0.5238095238095238,
+        "MLGym": 0.5714285714285714,
         "MLSBench": 0.0,
-        "nanoGPT": 0.5833333333333334,
-        "KernelBench": 0.16666666666666666,
-        "PostTrainBench": 0.6666666666666666,
-        "MLAgentBench": 0.4583333333333333,
-        "MLE-Bench": 0.16666666666666666,
-        "NatureBench": 0.0,
+        "nanoGPT": 0.875,
+        "KernelBench": 0.3333333333333333,
+        "PostTrainBench": 0.5,
+        "MLAgentBench": 0.625,
+        "MLE-Bench": 0.5,
+        "NatureBench": 0.5,
         "Terminal-Bench Science": 0.3333333333333333,
-        "RSI-Exam": 0.6666666666666666,
-        "AIRS-Bench": 0.25,
+        "RSI-Exam": 0.7,
+        "AIRS-Bench": 0.5,
         "RSIBench Harness": 0.5
       },
-      "input_tokens_known": 84646460,
-      "output_tokens_known": 702200,
-      "cached_input_tokens_known": 34058689,
-      "cache_creation_input_tokens_known": 50580475,
-      "agent_model_turns": 2342,
-      "agent_tool_rounds": 1850,
-      "agent_tool_calls": 7258,
-      "agent_mean_model_turns_per_planned_cell": 7.434920634920635,
-      "api_request_attempts": 2432,
-      "reported_cost_cny": 699.1867240000006,
+      "input_tokens_known": 16820122,
+      "output_tokens_known": 215519,
+      "cached_input_tokens_known": 11006446,
+      "cache_creation_input_tokens_known": 5811798,
+      "reasoning_tokens_known": 87644,
+      "api_request_attempts": 755,
+      "agent_model_turns": 701,
+      "agent_tool_rounds": 491,
+      "agent_tool_calls": 2325,
+      "failed_transport_attempts": 129,
+      "possibly_billed_error_attempts": 108,
+      "agent_mean_model_turns_per_planned_cell": 6.6761904761904765,
+      "agent_planned_cells": 105,
+      "evaluated_repeats": 1,
+      "included_repeats": [
+        1
+      ],
+      "config_label": "default",
+      "evaluation_setting": "Official OpenAI Responses · default · rep1",
+      "scoring_policy": "avg@1; repeat 1 only, no best-repeat selection",
+      "provider": "OpenAI official API",
+      "cohort_id": "terra-default-rep1-20261111",
+      "source_repeats_available": 3,
+      "reported_cost_cny": null,
+      "estimated_cost_usd": 7.669309949999994,
+      "cost_status": "Historical usage-based USD estimate; no provider-reported CNY charge; not an account bill",
+      "usage_scope": "All original and recovery attempts for repeat 1 only",
+      "source_layers": [
+        {
+          "layer": "original",
+          "selected_repeat": 1,
+          "selected_jobs": 135,
+          "api_request_attempts": 226,
+          "agent_model_turns": 196,
+          "agent_tool_rounds": 91,
+          "agent_tool_calls": 292,
+          "failed_transport_attempts": 108,
+          "possibly_billed_error_attempts": 108,
+          "record_manifest_sha256": "bf1bb4f166a81155f5b78562e563cb0baec50ceef8874e06d2f281afb739a81e"
+        },
+        {
+          "layer": "recovery-rate-limit-v1",
+          "selected_repeat": 1,
+          "selected_jobs": 108,
+          "api_request_attempts": 529,
+          "agent_model_turns": 505,
+          "agent_tool_rounds": 400,
+          "agent_tool_calls": 2033,
+          "failed_transport_attempts": 21,
+          "possibly_billed_error_attempts": 0,
+          "record_manifest_sha256": "0b6f70661929e6d13889508ad8096a97f54a9fc637f3f56b79007796e799fcf2"
+        }
+      ],
+      "usage_response_records": 626,
+      "responses_without_usage": 0,
+      "returned_models": [
+        "gpt-6.1-terra"
+      ],
       "rank": 2
     },
     {
@@ -351,7 +501,20 @@
       "agent_mean_model_turns_per_planned_cell": 27.863492063492064,
       "api_request_attempts": 9885,
       "reported_cost_cny": 369.0050260000002,
-      "rank": 3
+      "rank": 4,
+      "evaluated_repeats": 3,
+      "included_repeats": [
+        1,
+        2,
+        3
+      ],
+      "config_label": "default",
+      "evaluation_setting": "DMX proxy · provider defaults · 3 repeats",
+      "scoring_policy": "avg@3",
+      "provider": "DMX proxy",
+      "cohort_id": "golden2-frozen-20261111",
+      "agent_planned_cells": 315,
+      "usage_scope": "All original and recovery attempts for included model and all three planned repeats"
     },
     {
       "model": "claude-sonnet-5-5",
@@ -392,7 +555,20 @@
       "agent_mean_model_turns_per_planned_cell": 7.358730158730158,
       "api_request_attempts": 2466,
       "reported_cost_cny": 292.13709399999954,
-      "rank": 3
+      "rank": 4,
+      "evaluated_repeats": 3,
+      "included_repeats": [
+        1,
+        2,
+        3
+      ],
+      "config_label": "default",
+      "evaluation_setting": "DMX proxy · provider defaults · 3 repeats",
+      "scoring_policy": "avg@3; AAB15-P016 uses repeats 1 and 3 (avg@2)",
+      "provider": "DMX proxy",
+      "cohort_id": "golden2-frozen-20261111",
+      "agent_planned_cells": 315,
+      "usage_scope": "All original and recovery attempts for included model and all three planned repeats"
     },
     {
       "model": "deepseek-v4.1-flash",
@@ -433,7 +609,20 @@
       "agent_mean_model_turns_per_planned_cell": 17.20952380952381,
       "api_request_attempts": 5521,
       "reported_cost_cny": 81.12175399999998,
-      "rank": 5
+      "rank": 6,
+      "evaluated_repeats": 3,
+      "included_repeats": [
+        1,
+        2,
+        3
+      ],
+      "config_label": "default",
+      "evaluation_setting": "DMX proxy · provider defaults · 3 repeats",
+      "scoring_policy": "avg@3",
+      "provider": "DMX proxy",
+      "cohort_id": "golden2-frozen-20261111",
+      "agent_planned_cells": 315,
+      "usage_scope": "All original and recovery attempts for included model and all three planned repeats"
     },
     {
       "model": "glm-5.3-flash",
@@ -474,7 +663,20 @@
       "agent_mean_model_turns_per_planned_cell": 17.876190476190477,
       "api_request_attempts": 5745,
       "reported_cost_cny": 129.94461199999952,
-      "rank": 6
+      "rank": 7,
+      "evaluated_repeats": 3,
+      "included_repeats": [
+        1,
+        2,
+        3
+      ],
+      "config_label": "default",
+      "evaluation_setting": "DMX proxy · provider defaults · 3 repeats",
+      "scoring_policy": "avg@3",
+      "provider": "DMX proxy",
+      "cohort_id": "golden2-frozen-20261111",
+      "agent_planned_cells": 315,
+      "usage_scope": "All original and recovery attempts for included model and all three planned repeats"
     },
     {
       "model": "qwen3.8-flash",
@@ -515,7 +717,20 @@
       "agent_mean_model_turns_per_planned_cell": 18.22222222222222,
       "api_request_attempts": 5843,
       "reported_cost_cny": 91.04500399999989,
-      "rank": 7
+      "rank": 8,
+      "evaluated_repeats": 3,
+      "included_repeats": [
+        1,
+        2,
+        3
+      ],
+      "config_label": "default",
+      "evaluation_setting": "DMX proxy · provider defaults · 3 repeats",
+      "scoring_policy": "avg@3",
+      "provider": "DMX proxy",
+      "cohort_id": "golden2-frozen-20261111",
+      "agent_planned_cells": 315,
+      "usage_scope": "All original and recovery attempts for included model and all three planned repeats"
     },
     {
       "model": "kimi-k3.1-pro",
@@ -556,7 +771,20 @@
       "agent_mean_model_turns_per_planned_cell": 15.901587301587302,
       "api_request_attempts": 5225,
       "reported_cost_cny": 1140.2299220000004,
-      "rank": 8
+      "rank": 9,
+      "evaluated_repeats": 3,
+      "included_repeats": [
+        1,
+        2,
+        3
+      ],
+      "config_label": "default",
+      "evaluation_setting": "DMX proxy · provider defaults · 3 repeats",
+      "scoring_policy": "avg@3",
+      "provider": "DMX proxy",
+      "cohort_id": "golden2-frozen-20261111",
+      "agent_planned_cells": 315,
+      "usage_scope": "All original and recovery attempts for included model and all three planned repeats"
     },
     {
       "model": "kimi-k2.6",
@@ -597,7 +825,20 @@
       "agent_mean_model_turns_per_planned_cell": 14.222222222222221,
       "api_request_attempts": 4570,
       "reported_cost_cny": 331.3514760000001,
-      "rank": 9
+      "rank": 10,
+      "evaluated_repeats": 3,
+      "included_repeats": [
+        1,
+        2,
+        3
+      ],
+      "config_label": "default",
+      "evaluation_setting": "DMX proxy · provider defaults · 3 repeats",
+      "scoring_policy": "avg@3",
+      "provider": "DMX proxy",
+      "cohort_id": "golden2-frozen-20261111",
+      "agent_planned_cells": 315,
+      "usage_scope": "All original and recovery attempts for included model and all three planned repeats"
     }
   ],
   "pairs": [
@@ -1684,16 +1925,16 @@
   ],
   "caveats": [
     "This manually selected development collection includes historical observations; it is not an independently sampled hidden test set.",
-    "Scores are question-weighted. Claude / AAB15-P016 uses repeats 1 and 3 only (avg@2); all other model-pair cells use avg@3.",
+    "Repetition counts differ: Sol xhigh and Terra default use repeat 1 only; original rows use three repeats with the documented Claude single-pair avg@2 exception. These are not uniformly avg@3 results.",
     "The fixed AB orientation and imbalanced labels limit conclusions about position bias. Always A scores 57.78%, above every evaluated model in this snapshot.",
-    "Provider model names are proxy aliases; the underlying checkpoints were not independently verified.",
+    "Original model IDs are DMX proxy aliases; new Sol and Terra evaluations use the official OpenAI Responses API. Provider and effort differ across cohorts.",
     "Two DeepRSI inputs contain self-reported performance comments and are flagged in the catalog.",
     "32 pairs permit unresolved as abstention; it is neither a fourth gold label nor equivalent to tie.",
     "Accepted answers were recovered with consistent, lossless parsing rules; malformed-output repair attempts remain in cumulative usage.",
     "438 Gemini requests used a compatibility marker for missing thought signatures; missing server state was not recovered.",
     "Recovery budgets varied, including additional hy4 budget. This is not a uniform compute-budget comparison.",
     "Usage includes failed and recovery attempts. Cached input tokens are a subset of input tokens, not an additional total.",
-    "Reported costs are explicitly returned CNY charges, not a reconciled account bill; missing charges must not be treated as zero.",
+    "Original costs are provider-reported CNY. New Sol and Terra costs are historical usage-based USD estimates with missing-usage attempts unknown; currencies and charge types must not be added together.",
     "Candidate materials and full raw traces are not included in this website release; redistribution permissions require source-specific review."
   ],
   "provenance": {
@@ -1714,7 +1955,130 @@
     ],
     "individual_labels_exported": false,
     "raw_traces_exported": false,
-    "internal_paths_exported": false
+    "internal_paths_exported": false,
+    "additional_cohorts": [
+      {
+        "cohort_id": "sol-xhigh-rep1-20261111",
+        "source_run": "sol-xhigh-golden2-avg1-20261111",
+        "source_files": [
+          {
+            "name": "original/config.json",
+            "sha256": "492083d96cdd37d51703aba4b0e8e792d13f29cb4587a5e812b3d1914dc4fc58"
+          },
+          {
+            "name": "original/jobs.jsonl",
+            "sha256": "cf7ac42077362282fdce7538b15d3660a9a1643434120c6b862689e987476449"
+          },
+          {
+            "name": "original/events.jsonl",
+            "sha256": "ffd4e4af58a1f52eceacbe77e9f56f620148c508cab3f517fc23d58a2be2b0c2"
+          },
+          {
+            "name": "recovery-network-v1/config.json",
+            "sha256": "a0ef9c928af48734fc35beb1f14cf3a0db50c65d15dee7055b2214c47064bc02"
+          },
+          {
+            "name": "recovery-network-v1/jobs.jsonl",
+            "sha256": "f6d19bbc198622da238fbe89f218cea5efbc3e19d0ab8c57eebbe23c49a110fc"
+          },
+          {
+            "name": "recovery-network-v1/events.jsonl",
+            "sha256": "d1b1a0cac0dd9671e8c60cb886993f3b70288648884a03ea19bc5d8caba1e797"
+          },
+          {
+            "name": "combined/scored-results.private.json",
+            "sha256": "36a03978b4c858cbbfd14950f4b69f71e3084acac6a34aab7964a160497475b3"
+          },
+          {
+            "name": "combined/metrics.per_request.json",
+            "sha256": "acc014462f45b881c3610d55c5f50fc02f2ec3b48f1c8d1d8fc43ac59ae3a20f"
+          },
+          {
+            "name": "combined/billing_summary.json",
+            "sha256": "e24fddb90f86ff9cc859e7b3c0fecabca0dea3b20683811aa7db2935e62fa955"
+          }
+        ]
+      },
+      {
+        "cohort_id": "terra-default-rep1-20261111",
+        "source_run": "terra-golden2-20261111",
+        "source_files": [
+          {
+            "name": "original/config.json",
+            "sha256": "ac3292e1ec2a0e79975d6604f3446e09919c996c7ff87134c767c06642f60424"
+          },
+          {
+            "name": "original/jobs.jsonl",
+            "sha256": "9ead8d4a50e101ceb06bc1e5cd09d6222aed261405acbbc6b5e6c01665b1dde8"
+          },
+          {
+            "name": "original/events.jsonl",
+            "sha256": "58fa45f733121f3d5860d33d31d30a0f0544ec8f7065bd1362854e6ac00aacaf"
+          },
+          {
+            "name": "recovery-rate-limit-v1/config.json",
+            "sha256": "25d83b82700f77a163019b0e9062c330486487e3a91d0eb8801c8cc5ad781db2"
+          },
+          {
+            "name": "recovery-rate-limit-v1/jobs.jsonl",
+            "sha256": "3d4e8522a5e3d5151e7794cbb339b126bd17675ec10c9fa597f9b208c6ef6307"
+          },
+          {
+            "name": "recovery-rate-limit-v1/events.jsonl",
+            "sha256": "c31090bd28a27aa174fd43f8856ceaa5bae2281ab2dd10e47727a0cf895e0459"
+          },
+          {
+            "name": "combined/scored-results.private.json",
+            "sha256": "29ec6240928e9eac90d529869e95251a6220182274046208ed1f11787a0a2299"
+          },
+          {
+            "name": "combined/metrics.per_request.json",
+            "sha256": "3b4c521476b91c7a801ae9031633b01dda97742a921f6a50efa92dc4dbc18a35"
+          },
+          {
+            "name": "combined/billing_summary.json",
+            "sha256": "f3d2c4d5d04330169b3539f170ccca9720dd6a69878b0019669c1de64adc9373"
+          }
+        ]
+      }
+    ]
   },
-  "publication_status": "Public-safe metadata and aggregate results; no blanket redistribution license for underlying inputs or traces"
+  "publication_status": "Public-safe metadata and aggregate results; no blanket redistribution license for underlying inputs or traces",
+  "cell_count_scope": "Displayed leaderboard cohorts only: eight original three-repeat rows plus two repeat-1 rows",
+  "original_snapshot": {
+    "release_version": "0.1.0",
+    "snapshot_date": "2026-11-11",
+    "model_count": 9,
+    "planned_cells": 3645,
+    "valid_cells": 3644,
+    "path": "snapshots/golden2-20261111.json",
+    "note": "Frozen original nine-model snapshot retained; the old default Sol row is replaced, not relabeled as xhigh",
+    "sha256": "842185afe9346067aac85e99ea244208a4bb1898f6615d69ba449c716dd6ad3c"
+  },
+  "evaluation_cohorts": [
+    {
+      "id": "golden2-frozen-20261111",
+      "model_count": 8,
+      "evaluated_repeats": 3,
+      "planned_cells": 3240,
+      "valid_cells": 3239,
+      "provider": "DMX proxy"
+    },
+    {
+      "id": "sol-xhigh-rep1-20261111",
+      "model_count": 1,
+      "evaluated_repeats": 1,
+      "planned_cells": 135,
+      "valid_cells": 135,
+      "provider": "OpenAI official API"
+    },
+    {
+      "id": "terra-default-rep1-20261111",
+      "model_count": 1,
+      "evaluated_repeats": 1,
+      "planned_cells": 135,
+      "valid_cells": 135,
+      "provider": "OpenAI official API"
+    }
+  ]
 }

@@ -72,15 +72,18 @@ class CaseReleaseTests(unittest.TestCase):
                 self.assertNotRegex(item["text"], r"__global__|torch::Tensor|optimizer1\s*=|RESCALE_ALPHA\s*=|```")
         self.assertEqual(observed_sources, set(SOURCE_HASHES))
 
-    def test_twenty_seven_unique_trace_records_and_references(self):
+    def test_available_repeats_and_unique_trace_records(self):
         total = 0
         valid = 0
-        expected = {(model, repeat) for model in self.data["models"] for repeat in (1, 2, 3)}
-        self.assertEqual(len(expected), 9)
+        repeats = {"gpt-6.1-sol": [1], "gpt-6.1-terra": [1],
+                   "gemini-4-argon": [1, 2, 3], "claude-sonnet-5-5": [1, 2, 3]}
+        expected = {(model, repeat) for model, available in repeats.items() for repeat in available}
+        self.assertEqual(len(expected), 8)
         for case in self.cases.values():
             traces = case["traces"]
             total += len(traces)
-            self.assertEqual(len(traces), 9)
+            self.assertEqual(len(traces), 8)
+            self.assertEqual(case["available_repeats"], repeats)
             self.assertEqual({(t["model"], t["repeat"]) for t in traces}, expected)
             for trace in traces:
                 self.assertEqual(trace["mode"], case["mode"])
@@ -94,7 +97,9 @@ class CaseReleaseTests(unittest.TestCase):
                     self.assertGreaterEqual(event["turn"], 0)
                     for tool in event["tools"]:
                         self.assertIn(tool["name"], {"list_files", "read_file", "search", "inspect_data", "read_array", "read_table"})
-                        self.assertEqual(set(tool), {"name", "arguments", "error"})
+                        self.assertLessEqual(set(tool), {"name", "arguments", "error", "returned_range",
+                                                        "returned_file_count", "total_file_lines", "output_sha256"})
+                        self.assertTrue({"name", "arguments", "error"}.issubset(tool))
                         self.assertLessEqual(set(tool["arguments"]),
                                              {"path", "start", "end", "limit", "offset", "line_start", "line_end"})
                         if "path" in tool["arguments"]:
@@ -111,8 +116,64 @@ class CaseReleaseTests(unittest.TestCase):
                 if case["mode"] == "reasoning":
                     self.assertFalse(any(event["kind"] == "tool" for event in trace["events"]))
                     self.assertTrue(any(event["kind"] == "input" for event in trace["events"]))
-        self.assertEqual(total, 27)
-        self.assertEqual(valid, 26)
+        self.assertEqual(total, 24)
+        self.assertEqual(valid, 23)
+
+    def test_final_explanations_and_observations_are_attributed(self):
+        expected_new = {
+            ("AAB15-P016", "gpt-6.1-sol"): ("B", "630156ef2b2621f6439a8f3c5a64d61124db81ef6dac5cf9dfe87a891b8d2e37"),
+            ("AAB15-P016", "gpt-6.1-terra"): ("B", "20137b2d4d633614c7f4ace5e9512d38bfba30c2494c6277f07a445351b8050b"),
+            ("KBV3N-083", "gpt-6.1-sol"): ("B", "a598d76df1a005bf39e571b158a98dc062e0990734a3541dbc1d019c2ad8cd93"),
+            ("KBV3N-083", "gpt-6.1-terra"): ("B", "0c388f26d72a835be20f76ee900f4e02875dd2b357b244159bb46245e88b9751"),
+            ("NG15-P001", "gpt-6.1-sol"): ("A", "af0c3b1904254ae32e4756d43d65d8277d57579b475b6591f4b0842bd246e493"),
+            ("NG15-P001", "gpt-6.1-terra"): ("A", "61ecea4e82de29665245696a200de2d540c973b462a0322b1ad5d6ff5c833a2d"),
+        }
+        for case in self.cases.values():
+            self.assertEqual(case["traces"][0]["model"], "gpt-6.1-sol")
+            for trace in case["traces"]:
+                final = trace["final_response"]
+                self.assertEqual(final["kind"], "model_final_response")
+                self.assertEqual(trace["analysis_summary"]["kind"], "authored_summary")
+                layer_ids = {layer["id"] for layer in trace["layers"]}
+                if trace["status"] == "valid":
+                    self.assertEqual(final["availability"], "available")
+                    self.assertEqual(final["choice"], trace["answer"])
+                    self.assertGreater(len(final["reason"]), 60)
+                    self.assertIn(final["text_policy"], {"verbatim_fields", "private_identifiers_redacted"})
+                    self.assertTrue(final["evidence"])
+                    self.assertTrue(final["uncertainties"])
+                    self.assertIn(final["source"]["layer"], layer_ids)
+                    self.assertRegex(final["source"]["sha256"], r"^[0-9a-f]{64}$")
+                    self.assert_public_relative_path(final["source"]["file"])
+                    for citation in final["evidence"]:
+                        self.assertEqual(set(citation), {"file", "line_start", "line_end", "claim"})
+                        self.assert_public_relative_path(citation["file"])
+                    if (case["id"], trace["model"]) in expected_new:
+                        choice, digest = expected_new[(case["id"], trace["model"])]
+                        self.assertEqual((trace["answer"], final["source"]["sha256"]), (choice, digest))
+                        self.assertEqual(trace["repeat"], 1)
+                else:
+                    self.assertEqual(final["availability"], "refusal")
+                    self.assertIsNone(final["reason"])
+                    self.assertIsNone(final["source"])
+                for event in trace["events"]:
+                    analysis = event["analysis"]
+                    if event["kind"] == "answer":
+                        self.assertEqual(analysis["kind"], "model_final_reason")
+                        self.assertEqual(analysis["text"], final["reason"])
+                        self.assertIn("shown in the final explanation panel", event["detail"])
+                    if event["kind"] == "tool":
+                        self.assertEqual(analysis["kind"], "authored_observation")
+                        self.assertEqual(analysis["availability"], "tool_only")
+                        self.assertTrue(analysis["source_refs"])
+                        for citation in event["final_evidence_links"]:
+                            self.assertIn(citation, final["evidence"])
+                    if event["kind"] == "model_message":
+                        self.assertEqual(analysis["kind"], "model_message_excerpt")
+                        self.assertTrue(analysis["text"])
+                    for ref in analysis["source_refs"]:
+                        self.assertIn(ref["layer"], layer_ids)
+                        self.assertRegex(ref["sha256"], r"^[0-9a-f]{64}$")
 
     def test_claude_refusal_is_not_fabricated_or_scored(self):
         failures = [(case["id"], trace) for case in self.cases.values()
