@@ -1,18 +1,18 @@
 {
-  "schema_version": "1.1",
-  "release_version": "0.1.1",
+  "schema_version": "1.2",
+  "release_version": "0.1.2",
   "dataset_version": "golden_pairs_2",
   "collection_date": "2026-11-10",
   "snapshot_date": "2026-11-12",
   "pair_count": 135,
   "bench_count": 17,
-  "model_count": 10,
+  "model_count": 11,
   "modes": {
     "agent": 105,
     "reasoning": 30
   },
-  "planned_cells": 3510,
-  "valid_cells": 3509,
+  "planned_cells": 4455,
+  "valid_cells": 4454,
   "label_distribution": {
     "A": 78,
     "B": 55,
@@ -73,6 +73,7 @@
   "scoring_policy": {
     "denominator_pairs": 135,
     "aggregation": "Mean over pairs of mean correctness across included repetitions",
+    "all_other_model_pair_cells": "avg@3",
     "exception": {
       "model": "claude-sonnet-5-5",
       "pair_id": "AAB15-P016",
@@ -85,18 +86,19 @@
       "avg_at_2": 1.0
     },
     "usage": "All attempts, including failed requests, refusals, and recovery runs",
-    "repetitions": "Per-row: Sol xhigh and Terra default use rep1 only (avg@1); eight original rows use avg@3 except the documented Claude single-pair avg@2"
+    "repetitions": "Three delivery-index or frozen repetitions per model and pair; only Sonnet / AAB15-P016 retains its documented avg@2 exception"
   },
   "protocol": {
     "run_dates": [
       "2026-11-10",
-      "2026-11-11"
+      "2026-11-11",
+      "2026-11-12"
     ],
-    "provider": "Mixed: DMX proxy for original rows; official OpenAI Responses for new Sol and Terra rows",
+    "provider": "Requested-model configurations are unified across recorded delivery channels; source metadata retains returned model aliases",
     "orientation": "Fixed AB",
-    "sampling": "Provider defaults; Sol's new row explicitly sets reasoning effort xhigh",
-    "repeats": "Per-row evaluated_repeats",
-    "agent_planned_cells_per_model": "Per-row agent_planned_cells",
+    "sampling": "Sol xhigh; Opus high; other displayed settings use their recorded defaults",
+    "repeats": 3,
+    "agent_planned_cells_per_model": 315,
     "agent_tools": [
       "list_files",
       "read_file",
@@ -232,92 +234,423 @@
   "leaderboard": [
     {
       "model": "gpt-6.1-sol",
-      "question_equal_weight_accuracy": 0.4444444444444444,
-      "exact_fraction": "4/9",
-      "valid": 135,
-      "correct": 60,
-      "planned": 135,
+      "question_equal_weight_accuracy": 0.43950617283950616,
+      "exact_fraction": "178/405",
+      "valid": 405,
+      "correct": 178,
+      "planned": 405,
       "pair_count": 135,
-      "agent_accuracy": 0.38095238095238093,
-      "reasoning_accuracy": 0.6666666666666666,
+      "agent_accuracy": 0.4,
+      "reasoning_accuracy": 0.5777777777777777,
       "per_bench": {
-        "DeepRSI": 0.125,
+        "DeepRSI": 0.16666666666666666,
         "FastKernels": 0.10344827586206896,
-        "FlashInfer-Bench": 0.6842105263157895,
+        "FlashInfer-Bench": 0.7192982456140351,
         "TritonBench": 0.0,
         "AABench": 0.5333333333333333,
-        "MLGym": 0.7142857142857143,
+        "MLGym": 0.5238095238095238,
         "MLSBench": 0.0,
-        "nanoGPT": 0.875,
+        "nanoGPT": 0.75,
         "KernelBench": 0.5,
         "PostTrainBench": 0.75,
-        "MLAgentBench": 0.5,
+        "MLAgentBench": 0.4583333333333333,
         "MLE-Bench": 0.16666666666666666,
         "NatureBench": 0.5,
         "Terminal-Bench Science": 0.3333333333333333,
-        "RSI-Exam": 0.7,
+        "RSI-Exam": 0.7333333333333333,
+        "AIRS-Bench": 0.5,
+        "RSIBench Harness": 0.8333333333333334
+      },
+      "attempt_directories": 476,
+      "api_request_attempts": 3023,
+      "agent_model_turns": 2713,
+      "agent_tool_rounds": 2328,
+      "agent_tool_calls": 11035,
+      "failed_transport_attempts": 290,
+      "possibly_billed_error_attempts": 24,
+      "usage_response_records": 2733,
+      "attempts_without_usage": 290,
+      "responses_without_usage": 0,
+      "responses_without_cost": 841,
+      "attempts_without_reported_cost": 1131,
+      "responses_with_reported_cost": 1892,
+      "duplicate_response_records_removed": 0,
+      "input_tokens_known": 160349315,
+      "output_tokens_known": 2786935,
+      "cached_input_tokens_known": 76349497,
+      "cache_creation_input_tokens_known": 83992823,
+      "reasoning_tokens_known": 2199418,
+      "reported_cost_cny": 1061.143348,
+      "cost_status": "partial_explicit_cny",
+      "returned_models": [
+        "gpt-6.1-sol",
+        "gpt-6.1-sol-2"
+      ],
+      "returned_model_counts": {
+        "gpt-6.1-sol": 2721,
+        "gpt-6.1-sol-2": 12
+      },
+      "source_repeat_mapping": [
+        {
+          "repeat": 1,
+          "source_repeat": 1,
+          "cells": 135
+        },
+        {
+          "repeat": 2,
+          "source_repeat": 1,
+          "cells": 135
+        },
+        {
+          "repeat": 3,
+          "source_repeat": 2,
+          "cells": 135
+        }
+      ],
+      "source_layers": [
+        {
+          "layer": "source-01",
+          "attempt_directories": 135,
+          "config_sha256": "492083d96cdd37d51703aba4b0e8e792d13f29cb4587a5e812b3d1914dc4fc58",
+          "events_sha256": "ffd4e4af58a1f52eceacbe77e9f56f620148c508cab3f517fc23d58a2be2b0c2",
+          "api_request_attempts": 816,
+          "agent_model_turns": 585,
+          "usage_response_records": 549,
+          "attempts_without_reported_cost": 816,
+          "responses_without_cost": 549,
+          "failed_transport_attempts": 267,
+          "possibly_billed_error_attempts": 6,
+          "attempts_without_usage": 267,
+          "agent_tool_calls": 2031,
+          "agent_tool_rounds": 480
+        },
+        {
+          "layer": "source-02",
+          "attempt_directories": 66,
+          "config_sha256": "a0ef9c928af48734fc35beb1f14cf3a0db50c65d15dee7055b2214c47064bc02",
+          "events_sha256": "d1b1a0cac0dd9671e8c60cb886993f3b70288648884a03ea19bc5d8caba1e797",
+          "api_request_attempts": 293,
+          "agent_model_turns": 292,
+          "usage_response_records": 292,
+          "attempts_without_reported_cost": 293,
+          "responses_without_cost": 292,
+          "agent_tool_calls": 1132,
+          "agent_tool_rounds": 226,
+          "failed_transport_attempts": 1,
+          "possibly_billed_error_attempts": 0,
+          "attempts_without_usage": 1
+        },
+        {
+          "layer": "source-03",
+          "attempt_directories": 135,
+          "config_sha256": "031da22167b9d64f88d406ba588d8161300de2a88b7b720179d123acf5309f56",
+          "events_sha256": "1b01a699eba35f584c3c43511f8aa1a27e2e1d292e37cdd262b164f180268173",
+          "api_request_attempts": 945,
+          "agent_model_turns": 910,
+          "usage_response_records": 936,
+          "responses_with_reported_cost": 936,
+          "agent_tool_calls": 3892,
+          "agent_tool_rounds": 805,
+          "failed_transport_attempts": 9,
+          "possibly_billed_error_attempts": 5,
+          "attempts_without_usage": 9,
+          "attempts_without_reported_cost": 9
+        },
+        {
+          "layer": "source-04",
+          "attempt_directories": 2,
+          "config_sha256": "671aa236fe3f82918c5d0b5bdb6b9dd87dd04ee207b744826075ffeb9311e968",
+          "events_sha256": "5815b67de9dc01dfc58fe2989c5ecf4f7e3696e69c16886b14486839e2758bfc",
+          "api_request_attempts": 2,
+          "usage_response_records": 2,
+          "responses_with_reported_cost": 2,
+          "agent_model_turns": 1
+        },
+        {
+          "layer": "source-05",
+          "attempt_directories": 1,
+          "config_sha256": "671aa236fe3f82918c5d0b5bdb6b9dd87dd04ee207b744826075ffeb9311e968",
+          "events_sha256": "401e8a94715f4484d80432c318f66975312afa874a9b85eba255fd4a048741fb",
+          "api_request_attempts": 2,
+          "agent_model_turns": 2,
+          "usage_response_records": 2,
+          "responses_with_reported_cost": 2,
+          "agent_tool_calls": 1,
+          "agent_tool_rounds": 1
+        },
+        {
+          "layer": "source-06",
+          "attempt_directories": 1,
+          "config_sha256": "671aa236fe3f82918c5d0b5bdb6b9dd87dd04ee207b744826075ffeb9311e968",
+          "events_sha256": "f54c0c2ba302521f9b24c1abee80b282d49bddf07c288f135ad19239cbe22761",
+          "api_request_attempts": 6,
+          "agent_model_turns": 6,
+          "usage_response_records": 6,
+          "responses_with_reported_cost": 6,
+          "agent_tool_calls": 34,
+          "agent_tool_rounds": 5
+        },
+        {
+          "layer": "source-07",
+          "attempt_directories": 135,
+          "config_sha256": "17fda16d157b0481c75b287b5c7cf74004e4925b68e3c99ac78c9f387704662b",
+          "events_sha256": "6f9813cc152f5402b5b5ab263c522b31faf6f4f7ecadc9469e40512a6d259616",
+          "api_request_attempts": 955,
+          "agent_model_turns": 913,
+          "usage_response_records": 942,
+          "responses_with_reported_cost": 942,
+          "agent_tool_calls": 3931,
+          "agent_tool_rounds": 808,
+          "failed_transport_attempts": 13,
+          "possibly_billed_error_attempts": 13,
+          "attempts_without_usage": 13,
+          "attempts_without_reported_cost": 13
+        },
+        {
+          "layer": "source-08",
+          "attempt_directories": 1,
+          "config_sha256": "7ab64ccbd555cd610a3f35bfbee1420a6df835628f9ad642926db45cc5d40658",
+          "events_sha256": "13d53c3157527cfa8689ef77232a2117313f4bd43a1acfa0680a7de6c26f9dca",
+          "api_request_attempts": 4,
+          "agent_model_turns": 4,
+          "usage_response_records": 4,
+          "responses_with_reported_cost": 4,
+          "agent_tool_calls": 14,
+          "agent_tool_rounds": 3
+        }
+      ],
+      "usage_record_manifest_sha256": "37d851b034486ffc2cfcfc4622db66717f6aa356948bfeb5c286f62d9c36517f",
+      "agent_mean_model_turns_per_planned_cell": 8.612698412698412,
+      "agent_planned_cells": 315,
+      "evaluated_repeats": 3,
+      "included_repeats": [
+        1,
+        2,
+        3
+      ],
+      "config_label": "xhigh",
+      "evaluation_setting": "xhigh · 3 repeats · unified delivery",
+      "scoring_policy": "avg@3; all three delivery-index repetitions, equal weight per question",
+      "provider": "Official OpenAI API + DMX proxy",
+      "cohort_id": "three-models-avg3-delivery-20261112",
+      "repeat_results": [
+        {
+          "repeat": 1,
+          "valid": 135,
+          "correct": 60
+        },
+        {
+          "repeat": 2,
+          "valid": 135,
+          "correct": 56
+        },
+        {
+          "repeat": 3,
+          "valid": 135,
+          "correct": 62
+        }
+      ],
+      "usage_scope": "Every indexed original/recovery attempt for all three delivery repetitions, deduplicated by physical attempt and API response identity",
+      "cost_note": "Known explicit CNY subtotal only; missing charges remain unknown. No currency conversion or price estimate is included.",
+      "rank": 1
+    },
+    {
+      "model": "gpt-6.1-terra",
+      "question_equal_weight_accuracy": 0.4271604938271605,
+      "exact_fraction": "173/405",
+      "valid": 405,
+      "correct": 173,
+      "planned": 405,
+      "pair_count": 135,
+      "agent_accuracy": 0.3682539682539683,
+      "reasoning_accuracy": 0.6333333333333333,
+      "per_bench": {
+        "DeepRSI": 0.25,
+        "FastKernels": 0.09195402298850575,
+        "FlashInfer-Bench": 0.5789473684210527,
+        "TritonBench": 0.0,
+        "AABench": 0.4444444444444444,
+        "MLGym": 0.5714285714285714,
+        "MLSBench": 0.6666666666666666,
+        "nanoGPT": 0.875,
+        "KernelBench": 0.3333333333333333,
+        "PostTrainBench": 0.5833333333333334,
+        "MLAgentBench": 0.625,
+        "MLE-Bench": 0.3888888888888889,
+        "NatureBench": 0.5,
+        "Terminal-Bench Science": 0.5555555555555556,
+        "RSI-Exam": 0.6333333333333333,
         "AIRS-Bench": 0.5,
         "RSIBench Harness": 0.5
       },
-      "input_tokens_known": 40019290,
-      "output_tokens_known": 757267,
-      "cached_input_tokens_known": 27648695,
-      "cache_creation_input_tokens_known": 12368072,
-      "reasoning_tokens_known": 580876,
-      "api_request_attempts": 1109,
-      "agent_model_turns": 877,
-      "agent_tool_rounds": 706,
-      "agent_tool_calls": 3163,
-      "failed_transport_attempts": 268,
-      "possibly_billed_error_attempts": 6,
-      "agent_mean_model_turns_per_planned_cell": 8.352380952380953,
-      "agent_planned_cells": 105,
-      "evaluated_repeats": 1,
-      "included_repeats": [
-        1
+      "attempt_directories": 580,
+      "api_request_attempts": 2117,
+      "agent_model_turns": 1904,
+      "agent_tool_rounds": 1417,
+      "agent_tool_calls": 6780,
+      "failed_transport_attempts": 295,
+      "possibly_billed_error_attempts": 108,
+      "usage_response_records": 1822,
+      "attempts_without_usage": 295,
+      "responses_without_usage": 0,
+      "responses_without_cost": 626,
+      "attempts_without_reported_cost": 921,
+      "responses_with_reported_cost": 1196,
+      "duplicate_response_records_removed": 0,
+      "input_tokens_known": 46949632,
+      "output_tokens_known": 633300,
+      "cached_input_tokens_known": 30762938,
+      "cache_creation_input_tokens_known": 16182422,
+      "reasoning_tokens_known": 256802,
+      "reported_cost_cny": 81.011926,
+      "cost_status": "partial_explicit_cny",
+      "returned_models": [
+        "gpt-6.1-terra"
       ],
-      "config_label": "xhigh",
-      "evaluation_setting": "Official OpenAI Responses · xhigh · rep1",
-      "scoring_policy": "avg@1; repeat 1 only, no best-repeat selection",
-      "provider": "OpenAI official API",
-      "cohort_id": "sol-xhigh-rep1-20261111",
-      "source_repeats_available": 1,
-      "reported_cost_cny": null,
-      "estimated_cost_usd": 35.44951209999999,
-      "cost_status": "Historical usage-based USD estimate; no provider-reported CNY charge; not an account bill",
-      "usage_scope": "All original and recovery attempts for repeat 1 only",
-      "source_layers": [
+      "returned_model_counts": {
+        "gpt-6.1-terra": 1822
+      },
+      "source_repeat_mapping": [
         {
-          "layer": "original",
-          "selected_repeat": 1,
-          "selected_jobs": 135,
-          "api_request_attempts": 816,
-          "agent_model_turns": 585,
-          "agent_tool_rounds": 480,
-          "agent_tool_calls": 2031,
-          "failed_transport_attempts": 267,
-          "possibly_billed_error_attempts": 6,
-          "record_manifest_sha256": "a865b9b458754b39f0a7fae51cdfcc3e219bcee7869f4b15a664258445df6348"
+          "repeat": 1,
+          "source_repeat": 1,
+          "cells": 135
         },
         {
-          "layer": "recovery-network-v1",
-          "selected_repeat": 1,
-          "selected_jobs": 66,
-          "api_request_attempts": 293,
-          "agent_model_turns": 292,
-          "agent_tool_rounds": 226,
-          "agent_tool_calls": 1132,
-          "failed_transport_attempts": 1,
-          "possibly_billed_error_attempts": 0,
-          "record_manifest_sha256": "35103155a521c37429c823ba180f7ac8b38dffa166aa0db64fb37447bbe2ad07"
+          "repeat": 2,
+          "source_repeat": 1,
+          "cells": 135
+        },
+        {
+          "repeat": 3,
+          "source_repeat": 2,
+          "cells": 135
         }
       ],
-      "usage_response_records": 841,
-      "responses_without_usage": 0,
-      "returned_models": [
-        "gpt-6.1-sol"
+      "source_layers": [
+        {
+          "layer": "source-01",
+          "attempt_directories": 135,
+          "config_sha256": "ac3292e1ec2a0e79975d6604f3446e09919c996c7ff87134c767c06642f60424",
+          "events_sha256": "58fa45f733121f3d5860d33d31d30a0f0544ec8f7065bd1362854e6ac00aacaf",
+          "api_request_attempts": 226,
+          "agent_model_turns": 196,
+          "usage_response_records": 118,
+          "attempts_without_reported_cost": 226,
+          "responses_without_cost": 118,
+          "failed_transport_attempts": 108,
+          "possibly_billed_error_attempts": 108,
+          "attempts_without_usage": 108,
+          "agent_tool_calls": 292,
+          "agent_tool_rounds": 91
+        },
+        {
+          "layer": "source-02",
+          "attempt_directories": 108,
+          "config_sha256": "25d83b82700f77a163019b0e9062c330486487e3a91d0eb8801c8cc5ad781db2",
+          "events_sha256": "c31090bd28a27aa174fd43f8856ceaa5bae2281ab2dd10e47727a0cf895e0459",
+          "api_request_attempts": 529,
+          "agent_model_turns": 505,
+          "usage_response_records": 508,
+          "attempts_without_reported_cost": 529,
+          "responses_without_cost": 508,
+          "agent_tool_calls": 2033,
+          "agent_tool_rounds": 400,
+          "failed_transport_attempts": 21,
+          "possibly_billed_error_attempts": 0,
+          "attempts_without_usage": 21
+        },
+        {
+          "layer": "source-03",
+          "attempt_directories": 135,
+          "config_sha256": "031da22167b9d64f88d406ba588d8161300de2a88b7b720179d123acf5309f56",
+          "events_sha256": "1b01a699eba35f584c3c43511f8aa1a27e2e1d292e37cdd262b164f180268173",
+          "api_request_attempts": 493,
+          "agent_model_turns": 462,
+          "usage_response_records": 426,
+          "responses_with_reported_cost": 426,
+          "failed_transport_attempts": 67,
+          "possibly_billed_error_attempts": 0,
+          "attempts_without_usage": 67,
+          "attempts_without_reported_cost": 67,
+          "agent_tool_calls": 1664,
+          "agent_tool_rounds": 357
+        },
+        {
+          "layer": "source-04",
+          "attempt_directories": 66,
+          "config_sha256": "244b975a5eb12eef628234fb4fecbef346f27fea90da9ae0b89c400582a5fb84",
+          "events_sha256": "5b35e975ebfbd09b8554f65d825d141a5217a0a60a13fa6c11c88f43fa1c3c4f",
+          "api_request_attempts": 163,
+          "agent_model_turns": 163,
+          "usage_response_records": 163,
+          "responses_with_reported_cost": 163,
+          "agent_tool_calls": 514,
+          "agent_tool_rounds": 97
+        },
+        {
+          "layer": "source-05",
+          "attempt_directories": 135,
+          "config_sha256": "17fda16d157b0481c75b287b5c7cf74004e4925b68e3c99ac78c9f387704662b",
+          "events_sha256": "6f9813cc152f5402b5b5ab263c522b31faf6f4f7ecadc9469e40512a6d259616",
+          "api_request_attempts": 704,
+          "agent_model_turns": 576,
+          "usage_response_records": 605,
+          "responses_with_reported_cost": 605,
+          "failed_transport_attempts": 99,
+          "possibly_billed_error_attempts": 0,
+          "attempts_without_usage": 99,
+          "attempts_without_reported_cost": 99,
+          "agent_tool_calls": 2276,
+          "agent_tool_rounds": 471
+        },
+        {
+          "layer": "source-06",
+          "attempt_directories": 1,
+          "config_sha256": "7ab64ccbd555cd610a3f35bfbee1420a6df835628f9ad642926db45cc5d40658",
+          "events_sha256": "13d53c3157527cfa8689ef77232a2117313f4bd43a1acfa0680a7de6c26f9dca",
+          "api_request_attempts": 2,
+          "agent_model_turns": 2,
+          "usage_response_records": 2,
+          "responses_with_reported_cost": 2,
+          "agent_tool_calls": 1,
+          "agent_tool_rounds": 1
+        }
       ],
-      "rank": 1
+      "usage_record_manifest_sha256": "1cc457f9e3d849d89499257a30428afb6958673b2c65d881b616b967283d25bd",
+      "agent_mean_model_turns_per_planned_cell": 6.044444444444444,
+      "agent_planned_cells": 315,
+      "evaluated_repeats": 3,
+      "included_repeats": [
+        1,
+        2,
+        3
+      ],
+      "config_label": "default",
+      "evaluation_setting": "default · 3 repeats · unified delivery",
+      "scoring_policy": "avg@3; all three delivery-index repetitions, equal weight per question",
+      "provider": "Official OpenAI API + DMX proxy",
+      "cohort_id": "three-models-avg3-delivery-20261112",
+      "repeat_results": [
+        {
+          "repeat": 1,
+          "valid": 135,
+          "correct": 56
+        },
+        {
+          "repeat": 2,
+          "valid": 135,
+          "correct": 56
+        },
+        {
+          "repeat": 3,
+          "valid": 135,
+          "correct": 61
+        }
+      ],
+      "usage_scope": "Every indexed original/recovery attempt for all three delivery repetitions, deduplicated by physical attempt and API response identity",
+      "cost_note": "Known explicit CNY subtotal only; missing charges remain unknown. No currency conversion or price estimate is included.",
+      "rank": 2
     },
     {
       "model": "gemini-4-argon",
@@ -358,7 +691,7 @@
       "agent_mean_model_turns_per_planned_cell": 7.520634920634921,
       "api_request_attempts": 2648,
       "reported_cost_cny": 464.87410199999977,
-      "rank": 2,
+      "rank": 3,
       "evaluated_repeats": 3,
       "included_repeats": [
         1,
@@ -371,96 +704,149 @@
       "provider": "DMX proxy",
       "cohort_id": "golden2-frozen-20261111",
       "agent_planned_cells": 315,
-      "usage_scope": "All original and recovery attempts for included model and all three planned repeats"
+      "usage_scope": "All original and recovery attempts for all three planned repeats"
     },
     {
-      "model": "gpt-6.1-terra",
-      "question_equal_weight_accuracy": 0.4148148148148148,
-      "exact_fraction": "56/135",
-      "valid": 135,
-      "correct": 56,
-      "planned": 135,
+      "model": "claude-opus-5-5",
+      "question_equal_weight_accuracy": 0.4024691358024691,
+      "exact_fraction": "163/405",
+      "valid": 405,
+      "correct": 163,
+      "planned": 405,
       "pair_count": 135,
-      "agent_accuracy": 0.3523809523809524,
+      "agent_accuracy": 0.33650793650793653,
       "reasoning_accuracy": 0.6333333333333333,
       "per_bench": {
-        "DeepRSI": 0.125,
-        "FastKernels": 0.10344827586206896,
+        "DeepRSI": 0.16666666666666666,
+        "FastKernels": 0.11494252873563218,
         "FlashInfer-Bench": 0.5789473684210527,
-        "TritonBench": 0.0,
-        "AABench": 0.4,
+        "TritonBench": 0.1111111111111111,
+        "AABench": 0.28888888888888886,
         "MLGym": 0.5714285714285714,
         "MLSBench": 0.0,
-        "nanoGPT": 0.875,
-        "KernelBench": 0.3333333333333333,
-        "PostTrainBench": 0.5,
-        "MLAgentBench": 0.625,
-        "MLE-Bench": 0.5,
-        "NatureBench": 0.5,
-        "Terminal-Bench Science": 0.3333333333333333,
-        "RSI-Exam": 0.7,
-        "AIRS-Bench": 0.5,
+        "nanoGPT": 0.75,
+        "KernelBench": 0.5,
+        "PostTrainBench": 0.75,
+        "MLAgentBench": 0.5833333333333334,
+        "MLE-Bench": 0.2777777777777778,
+        "NatureBench": 0.3333333333333333,
+        "Terminal-Bench Science": 0.4444444444444444,
+        "RSI-Exam": 0.6,
+        "AIRS-Bench": 0.6666666666666666,
         "RSIBench Harness": 0.5
       },
-      "input_tokens_known": 16820122,
-      "output_tokens_known": 215519,
-      "cached_input_tokens_known": 11006446,
-      "cache_creation_input_tokens_known": 5811798,
-      "reasoning_tokens_known": 87644,
-      "api_request_attempts": 755,
-      "agent_model_turns": 701,
-      "agent_tool_rounds": 491,
-      "agent_tool_calls": 2325,
-      "failed_transport_attempts": 129,
-      "possibly_billed_error_attempts": 108,
-      "agent_mean_model_turns_per_planned_cell": 6.6761904761904765,
-      "agent_planned_cells": 105,
-      "evaluated_repeats": 1,
-      "included_repeats": [
-        1
+      "attempt_directories": 405,
+      "api_request_attempts": 2816,
+      "agent_model_turns": 2685,
+      "agent_tool_rounds": 2311,
+      "agent_tool_calls": 3962,
+      "failed_transport_attempts": 33,
+      "possibly_billed_error_attempts": 0,
+      "usage_response_records": 2783,
+      "attempts_without_usage": 33,
+      "responses_without_usage": 0,
+      "responses_without_cost": 0,
+      "attempts_without_reported_cost": 33,
+      "responses_with_reported_cost": 2783,
+      "duplicate_response_records_removed": 0,
+      "input_tokens_known": 89169442,
+      "output_tokens_known": 2077046,
+      "cached_input_tokens_known": 74376211,
+      "cache_creation_input_tokens_known": 14786725,
+      "reasoning_tokens_known": null,
+      "reported_cost_cny": 651.880408,
+      "cost_status": "partial_explicit_cny",
+      "returned_models": [
+        "claude-opus-5-5"
       ],
-      "config_label": "default",
-      "evaluation_setting": "Official OpenAI Responses · default · rep1",
-      "scoring_policy": "avg@1; repeat 1 only, no best-repeat selection",
-      "provider": "OpenAI official API",
-      "cohort_id": "terra-default-rep1-20261111",
-      "source_repeats_available": 3,
-      "reported_cost_cny": null,
-      "estimated_cost_usd": 7.669309949999994,
-      "cost_status": "Historical usage-based USD estimate; no provider-reported CNY charge; not an account bill",
-      "usage_scope": "All original and recovery attempts for repeat 1 only",
-      "source_layers": [
+      "returned_model_counts": {
+        "claude-opus-5-5": 2783
+      },
+      "source_repeat_mapping": [
         {
-          "layer": "original",
-          "selected_repeat": 1,
-          "selected_jobs": 135,
-          "api_request_attempts": 226,
-          "agent_model_turns": 196,
-          "agent_tool_rounds": 91,
-          "agent_tool_calls": 292,
-          "failed_transport_attempts": 108,
-          "possibly_billed_error_attempts": 108,
-          "record_manifest_sha256": "bf1bb4f166a81155f5b78562e563cb0baec50ceef8874e06d2f281afb739a81e"
+          "repeat": 1,
+          "source_repeat": 1,
+          "cells": 135
         },
         {
-          "layer": "recovery-rate-limit-v1",
-          "selected_repeat": 1,
-          "selected_jobs": 108,
-          "api_request_attempts": 529,
-          "agent_model_turns": 505,
-          "agent_tool_rounds": 400,
-          "agent_tool_calls": 2033,
-          "failed_transport_attempts": 21,
-          "possibly_billed_error_attempts": 0,
-          "record_manifest_sha256": "0b6f70661929e6d13889508ad8096a97f54a9fc637f3f56b79007796e799fcf2"
+          "repeat": 2,
+          "source_repeat": 2,
+          "cells": 135
+        },
+        {
+          "repeat": 3,
+          "source_repeat": 3,
+          "cells": 135
         }
       ],
-      "usage_response_records": 626,
-      "responses_without_usage": 0,
-      "returned_models": [
-        "gpt-6.1-terra"
+      "source_layers": [
+        {
+          "layer": "source-01",
+          "attempt_directories": 135,
+          "config_sha256": "031da22167b9d64f88d406ba588d8161300de2a88b7b720179d123acf5309f56",
+          "events_sha256": "1b01a699eba35f584c3c43511f8aa1a27e2e1d292e37cdd262b164f180268173",
+          "api_request_attempts": 926,
+          "agent_model_turns": 890,
+          "usage_response_records": 923,
+          "responses_with_reported_cost": 923,
+          "agent_tool_calls": 1303,
+          "agent_tool_rounds": 767,
+          "failed_transport_attempts": 3,
+          "possibly_billed_error_attempts": 0,
+          "attempts_without_usage": 3,
+          "attempts_without_reported_cost": 3
+        },
+        {
+          "layer": "source-02",
+          "attempt_directories": 270,
+          "config_sha256": "ec874cb81916378a37132e5883600f59d062b9789557265c6bfacd88f9619bb4",
+          "events_sha256": "db32113eede65660ab2e9dea8489e9a5b31dfeab0c2a323abcd81d269410f99a",
+          "api_request_attempts": 1890,
+          "agent_model_turns": 1795,
+          "usage_response_records": 1860,
+          "responses_with_reported_cost": 1860,
+          "failed_transport_attempts": 30,
+          "possibly_billed_error_attempts": 0,
+          "attempts_without_usage": 30,
+          "attempts_without_reported_cost": 30,
+          "agent_tool_calls": 2659,
+          "agent_tool_rounds": 1544
+        }
       ],
-      "rank": 2
+      "usage_record_manifest_sha256": "ad5288e8b95cd80f8f69bac4882f71e16478f79fd32d1d51240458da83905ab7",
+      "agent_mean_model_turns_per_planned_cell": 8.523809523809524,
+      "agent_planned_cells": 315,
+      "evaluated_repeats": 3,
+      "included_repeats": [
+        1,
+        2,
+        3
+      ],
+      "config_label": "high",
+      "evaluation_setting": "high · 3 repeats · unified delivery",
+      "scoring_policy": "avg@3; all three delivery-index repetitions, equal weight per question",
+      "provider": "DMX proxy",
+      "cohort_id": "three-models-avg3-delivery-20261112",
+      "repeat_results": [
+        {
+          "repeat": 1,
+          "valid": 135,
+          "correct": 57
+        },
+        {
+          "repeat": 2,
+          "valid": 135,
+          "correct": 52
+        },
+        {
+          "repeat": 3,
+          "valid": 135,
+          "correct": 54
+        }
+      ],
+      "usage_scope": "Every indexed original/recovery attempt for all three delivery repetitions, deduplicated by physical attempt and API response identity",
+      "cost_note": "Known explicit CNY subtotal only; missing charges remain unknown. No currency conversion or price estimate is included.",
+      "rank": 4
     },
     {
       "model": "hy4",
@@ -501,7 +887,7 @@
       "agent_mean_model_turns_per_planned_cell": 27.863492063492064,
       "api_request_attempts": 9885,
       "reported_cost_cny": 369.0050260000002,
-      "rank": 4,
+      "rank": 5,
       "evaluated_repeats": 3,
       "included_repeats": [
         1,
@@ -514,7 +900,7 @@
       "provider": "DMX proxy",
       "cohort_id": "golden2-frozen-20261111",
       "agent_planned_cells": 315,
-      "usage_scope": "All original and recovery attempts for included model and all three planned repeats"
+      "usage_scope": "All original and recovery attempts for all three planned repeats"
     },
     {
       "model": "claude-sonnet-5-5",
@@ -555,7 +941,7 @@
       "agent_mean_model_turns_per_planned_cell": 7.358730158730158,
       "api_request_attempts": 2466,
       "reported_cost_cny": 292.13709399999954,
-      "rank": 4,
+      "rank": 5,
       "evaluated_repeats": 3,
       "included_repeats": [
         1,
@@ -568,7 +954,7 @@
       "provider": "DMX proxy",
       "cohort_id": "golden2-frozen-20261111",
       "agent_planned_cells": 315,
-      "usage_scope": "All original and recovery attempts for included model and all three planned repeats"
+      "usage_scope": "All original and recovery attempts for all three planned repeats"
     },
     {
       "model": "deepseek-v4.1-flash",
@@ -609,7 +995,7 @@
       "agent_mean_model_turns_per_planned_cell": 17.20952380952381,
       "api_request_attempts": 5521,
       "reported_cost_cny": 81.12175399999998,
-      "rank": 6,
+      "rank": 7,
       "evaluated_repeats": 3,
       "included_repeats": [
         1,
@@ -622,7 +1008,7 @@
       "provider": "DMX proxy",
       "cohort_id": "golden2-frozen-20261111",
       "agent_planned_cells": 315,
-      "usage_scope": "All original and recovery attempts for included model and all three planned repeats"
+      "usage_scope": "All original and recovery attempts for all three planned repeats"
     },
     {
       "model": "glm-5.3-flash",
@@ -663,7 +1049,7 @@
       "agent_mean_model_turns_per_planned_cell": 17.876190476190477,
       "api_request_attempts": 5745,
       "reported_cost_cny": 129.94461199999952,
-      "rank": 7,
+      "rank": 8,
       "evaluated_repeats": 3,
       "included_repeats": [
         1,
@@ -676,7 +1062,7 @@
       "provider": "DMX proxy",
       "cohort_id": "golden2-frozen-20261111",
       "agent_planned_cells": 315,
-      "usage_scope": "All original and recovery attempts for included model and all three planned repeats"
+      "usage_scope": "All original and recovery attempts for all three planned repeats"
     },
     {
       "model": "qwen3.8-flash",
@@ -717,7 +1103,7 @@
       "agent_mean_model_turns_per_planned_cell": 18.22222222222222,
       "api_request_attempts": 5843,
       "reported_cost_cny": 91.04500399999989,
-      "rank": 8,
+      "rank": 9,
       "evaluated_repeats": 3,
       "included_repeats": [
         1,
@@ -730,7 +1116,7 @@
       "provider": "DMX proxy",
       "cohort_id": "golden2-frozen-20261111",
       "agent_planned_cells": 315,
-      "usage_scope": "All original and recovery attempts for included model and all three planned repeats"
+      "usage_scope": "All original and recovery attempts for all three planned repeats"
     },
     {
       "model": "kimi-k3.1-pro",
@@ -771,7 +1157,7 @@
       "agent_mean_model_turns_per_planned_cell": 15.901587301587302,
       "api_request_attempts": 5225,
       "reported_cost_cny": 1140.2299220000004,
-      "rank": 9,
+      "rank": 10,
       "evaluated_repeats": 3,
       "included_repeats": [
         1,
@@ -784,7 +1170,7 @@
       "provider": "DMX proxy",
       "cohort_id": "golden2-frozen-20261111",
       "agent_planned_cells": 315,
-      "usage_scope": "All original and recovery attempts for included model and all three planned repeats"
+      "usage_scope": "All original and recovery attempts for all three planned repeats"
     },
     {
       "model": "kimi-k2.6",
@@ -825,7 +1211,7 @@
       "agent_mean_model_turns_per_planned_cell": 14.222222222222221,
       "api_request_attempts": 4570,
       "reported_cost_cny": 331.3514760000001,
-      "rank": 10,
+      "rank": 11,
       "evaluated_repeats": 3,
       "included_repeats": [
         1,
@@ -838,7 +1224,7 @@
       "provider": "DMX proxy",
       "cohort_id": "golden2-frozen-20261111",
       "agent_planned_cells": 315,
-      "usage_scope": "All original and recovery attempts for included model and all three planned repeats"
+      "usage_scope": "All original and recovery attempts for all three planned repeats"
     }
   ],
   "pairs": [
@@ -1925,17 +2311,18 @@
   ],
   "caveats": [
     "This manually selected development collection includes historical observations; it is not an independently sampled hidden test set.",
-    "Repetition counts differ: Sol xhigh and Terra default use repeat 1 only; original rows use three repeats with the documented Claude single-pair avg@2 exception. These are not uniformly avg@3 results.",
+    "All displayed configurations use three question-weighted repetitions; the only exception is Claude Sonnet / AAB15-P016, which uses repeats 1 and 3 (avg@2).",
     "The fixed AB orientation and imbalanced labels limit conclusions about position bias. Always A scores 57.78%, above every evaluated model in this snapshot.",
-    "Original model IDs are DMX proxy aliases; new Sol and Terra evaluations use the official OpenAI Responses API. Provider and effort differ across cohorts.",
+    "Rows group requested model and effort across recorded channels. Returned model aliases are retained in source metadata; Sol includes 12 responses identified as gpt-6.1-sol-2.",
     "Two DeepRSI inputs contain self-reported performance comments and are flagged in the catalog.",
     "32 pairs permit unresolved as abstention; it is neither a fourth gold label nor equivalent to tie.",
     "Accepted answers were recovered with consistent, lossless parsing rules; malformed-output repair attempts remain in cumulative usage.",
     "438 Gemini requests used a compatibility marker for missing thought signatures; missing server state was not recovered.",
     "Recovery budgets varied, including additional hy4 budget. This is not a uniform compute-budget comparison.",
     "Usage includes failed and recovery attempts. Cached input tokens are a subset of input tokens, not an additional total.",
-    "Original costs are provider-reported CNY. New Sol and Terra costs are historical usage-based USD estimates with missing-usage attempts unknown; currencies and charge types must not be added together.",
-    "Candidate materials and full raw traces are not included in this website release; redistribution permissions require source-specific review."
+    "CNY figures are known provider-reported subtotals, not complete invoices. Some attempts lack usage or charges; no fees are estimated or converted, and missing values are not zero.",
+    "Candidate materials and full raw traces are not included in this website release; redistribution permissions require source-specific review.",
+    "The latest three-model delivery owns repeat numbering; original trajectory paths may carry different repeat numbers. Every preceding attempt in the selected chains contributes to cumulative usage."
   ],
   "provenance": {
     "method": "Strict field allowlist; grouped accuracies recomputed from frozen valid responses using exact rational arithmetic",
@@ -1956,95 +2343,40 @@
     "individual_labels_exported": false,
     "raw_traces_exported": false,
     "internal_paths_exported": false,
-    "additional_cohorts": [
-      {
-        "cohort_id": "sol-xhigh-rep1-20261111",
-        "source_run": "sol-xhigh-golden2-avg1-20261111",
-        "source_files": [
-          {
-            "name": "original/config.json",
-            "sha256": "492083d96cdd37d51703aba4b0e8e792d13f29cb4587a5e812b3d1914dc4fc58"
-          },
-          {
-            "name": "original/jobs.jsonl",
-            "sha256": "cf7ac42077362282fdce7538b15d3660a9a1643434120c6b862689e987476449"
-          },
-          {
-            "name": "original/events.jsonl",
-            "sha256": "ffd4e4af58a1f52eceacbe77e9f56f620148c508cab3f517fc23d58a2be2b0c2"
-          },
-          {
-            "name": "recovery-network-v1/config.json",
-            "sha256": "a0ef9c928af48734fc35beb1f14cf3a0db50c65d15dee7055b2214c47064bc02"
-          },
-          {
-            "name": "recovery-network-v1/jobs.jsonl",
-            "sha256": "f6d19bbc198622da238fbe89f218cea5efbc3e19d0ab8c57eebbe23c49a110fc"
-          },
-          {
-            "name": "recovery-network-v1/events.jsonl",
-            "sha256": "d1b1a0cac0dd9671e8c60cb886993f3b70288648884a03ea19bc5d8caba1e797"
-          },
-          {
-            "name": "combined/scored-results.private.json",
-            "sha256": "36a03978b4c858cbbfd14950f4b69f71e3084acac6a34aab7964a160497475b3"
-          },
-          {
-            "name": "combined/metrics.per_request.json",
-            "sha256": "acc014462f45b881c3610d55c5f50fc02f2ec3b48f1c8d1d8fc43ac59ae3a20f"
-          },
-          {
-            "name": "combined/billing_summary.json",
-            "sha256": "e24fddb90f86ff9cc859e7b3c0fecabca0dea3b20683811aa7db2935e62fa955"
-          }
-        ]
-      },
-      {
-        "cohort_id": "terra-default-rep1-20261111",
-        "source_run": "terra-golden2-20261111",
-        "source_files": [
-          {
-            "name": "original/config.json",
-            "sha256": "ac3292e1ec2a0e79975d6604f3446e09919c996c7ff87134c767c06642f60424"
-          },
-          {
-            "name": "original/jobs.jsonl",
-            "sha256": "9ead8d4a50e101ceb06bc1e5cd09d6222aed261405acbbc6b5e6c01665b1dde8"
-          },
-          {
-            "name": "original/events.jsonl",
-            "sha256": "58fa45f733121f3d5860d33d31d30a0f0544ec8f7065bd1362854e6ac00aacaf"
-          },
-          {
-            "name": "recovery-rate-limit-v1/config.json",
-            "sha256": "25d83b82700f77a163019b0e9062c330486487e3a91d0eb8801c8cc5ad781db2"
-          },
-          {
-            "name": "recovery-rate-limit-v1/jobs.jsonl",
-            "sha256": "3d4e8522a5e3d5151e7794cbb339b126bd17675ec10c9fa597f9b208c6ef6307"
-          },
-          {
-            "name": "recovery-rate-limit-v1/events.jsonl",
-            "sha256": "c31090bd28a27aa174fd43f8856ceaa5bae2281ab2dd10e47727a0cf895e0459"
-          },
-          {
-            "name": "combined/scored-results.private.json",
-            "sha256": "29ec6240928e9eac90d529869e95251a6220182274046208ed1f11787a0a2299"
-          },
-          {
-            "name": "combined/metrics.per_request.json",
-            "sha256": "3b4c521476b91c7a801ae9031633b01dda97742a921f6a50efa92dc4dbc18a35"
-          },
-          {
-            "name": "combined/billing_summary.json",
-            "sha256": "f3d2c4d5d04330169b3539f170ccca9720dd6a69878b0019669c1de64adc9373"
-          }
-        ]
-      }
-    ]
+    "delivery": {
+      "id": "three-models-avg3-delivery-20261112",
+      "source_files": [
+        {
+          "name": "all-results.json",
+          "sha256": "c6ec2ba650e94e1f17d6cdfd75129b72431596063d7a157b542b836c883a24ce"
+        },
+        {
+          "name": "summary.json",
+          "sha256": "9ebbec8a44abdbb67b64574fb3426321fbdad582d2e82c763631e834e09e228f"
+        },
+        {
+          "name": "trajectory-file-manifest.json",
+          "sha256": "ea2c1c121485f90c33ddc0b839192d1130160147570d0d97a1c3f827878e2ebe"
+        },
+        {
+          "name": "verification.json",
+          "sha256": "138b3502f294bc8f3e684c62dd4d0330f55b273b1c1ee93564dce56fa2c25052"
+        },
+        {
+          "name": "build_delivery.py",
+          "sha256": "59daf886c6e2a42afeeaa7bde3444695b4b67e97d63bd58dba3e862c59b87c9a"
+        }
+      ],
+      "index_manifest_sha256": "7fc7cc3392cf0cebd4df7b4a7e096ac07be595d95a013d9421f03597eb2d7c54",
+      "physical_attempt_directories": 1461,
+      "response_records": 7338,
+      "manifest_files": 34181,
+      "input_identity_manifest_sha256": "d1b774c6cd356386c213bf809fe6cd58eb29efea57575c3b8a5765821993db66",
+      "method": "Exact delivery-index grid validation; selected-answer and config checks; every preceding attempt included; raw normalized response usage; event/tool-log counts; physical-path and request-ID deduplication; explicit currency amounts only"
+    }
   },
   "publication_status": "Public-safe metadata and aggregate results; no blanket redistribution license for underlying inputs or traces",
-  "cell_count_scope": "Displayed leaderboard cohorts only: eight original three-repeat rows plus two repeat-1 rows",
+  "cell_count_scope": "Displayed rows: eight retained original configurations plus three complete delivery configurations, each with 405 planned cells",
   "original_snapshot": {
     "release_version": "0.1.0",
     "snapshot_date": "2026-11-11",
@@ -2052,7 +2384,7 @@
     "planned_cells": 3645,
     "valid_cells": 3644,
     "path": "snapshots/golden2-20261111.json",
-    "note": "Frozen original nine-model snapshot retained; the old default Sol row is replaced, not relabeled as xhigh",
+    "note": "Frozen original snapshot retained; default Sol has been replaced by the complete xhigh delivery",
     "sha256": "842185afe9346067aac85e99ea244208a4bb1898f6615d69ba449c716dd6ad3c"
   },
   "evaluation_cohorts": [
@@ -2061,24 +2393,14 @@
       "model_count": 8,
       "evaluated_repeats": 3,
       "planned_cells": 3240,
-      "valid_cells": 3239,
-      "provider": "DMX proxy"
+      "valid_cells": 3239
     },
     {
-      "id": "sol-xhigh-rep1-20261111",
-      "model_count": 1,
-      "evaluated_repeats": 1,
-      "planned_cells": 135,
-      "valid_cells": 135,
-      "provider": "OpenAI official API"
-    },
-    {
-      "id": "terra-default-rep1-20261111",
-      "model_count": 1,
-      "evaluated_repeats": 1,
-      "planned_cells": 135,
-      "valid_cells": 135,
-      "provider": "OpenAI official API"
+      "id": "three-models-avg3-delivery-20261112",
+      "model_count": 3,
+      "evaluated_repeats": 3,
+      "planned_cells": 1215,
+      "valid_cells": 1215
     }
   ]
 }

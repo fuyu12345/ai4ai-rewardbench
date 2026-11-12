@@ -75,14 +75,14 @@ class CaseReleaseTests(unittest.TestCase):
     def test_available_repeats_and_unique_trace_records(self):
         total = 0
         valid = 0
-        repeats = {"gpt-6.1-sol": [1], "gpt-6.1-terra": [1],
-                   "gemini-4-argon": [1, 2, 3], "claude-sonnet-5-5": [1, 2, 3]}
+        repeats = {model: [1, 2, 3] for model in ("gpt-6.1-sol", "gpt-6.1-terra",
+                   "claude-opus-5-5", "gemini-4-argon", "claude-sonnet-5-5")}
         expected = {(model, repeat) for model, available in repeats.items() for repeat in available}
-        self.assertEqual(len(expected), 8)
+        self.assertEqual(len(expected), 15)
         for case in self.cases.values():
             traces = case["traces"]
             total += len(traces)
-            self.assertEqual(len(traces), 8)
+            self.assertEqual(len(traces), 15)
             self.assertEqual(case["available_repeats"], repeats)
             self.assertEqual({(t["model"], t["repeat"]) for t in traces}, expected)
             for trace in traces:
@@ -116,17 +116,38 @@ class CaseReleaseTests(unittest.TestCase):
                 if case["mode"] == "reasoning":
                     self.assertFalse(any(event["kind"] == "tool" for event in trace["events"]))
                     self.assertTrue(any(event["kind"] == "input" for event in trace["events"]))
-        self.assertEqual(total, 24)
-        self.assertEqual(valid, 23)
+        self.assertEqual(total, 45)
+        self.assertEqual(valid, 44)
 
     def test_final_explanations_and_observations_are_attributed(self):
         expected_new = {
-            ("AAB15-P016", "gpt-6.1-sol"): ("B", "630156ef2b2621f6439a8f3c5a64d61124db81ef6dac5cf9dfe87a891b8d2e37"),
-            ("AAB15-P016", "gpt-6.1-terra"): ("B", "20137b2d4d633614c7f4ace5e9512d38bfba30c2494c6277f07a445351b8050b"),
-            ("KBV3N-083", "gpt-6.1-sol"): ("B", "a598d76df1a005bf39e571b158a98dc062e0990734a3541dbc1d019c2ad8cd93"),
-            ("KBV3N-083", "gpt-6.1-terra"): ("B", "0c388f26d72a835be20f76ee900f4e02875dd2b357b244159bb46245e88b9751"),
-            ("NG15-P001", "gpt-6.1-sol"): ("A", "af0c3b1904254ae32e4756d43d65d8277d57579b475b6591f4b0842bd246e493"),
-            ("NG15-P001", "gpt-6.1-terra"): ("A", "61ecea4e82de29665245696a200de2d540c973b462a0322b1ad5d6ff5c833a2d"),
+            ('AAB15-P016', 'gpt-6.1-sol', 1): ('B', '630156ef2b2621f6439a8f3c5a64d61124db81ef6dac5cf9dfe87a891b8d2e37', 2),
+            ('AAB15-P016', 'gpt-6.1-sol', 2): ('B', 'e29e1851dd2875510c79cd273c98840d8481f41bad3a0b9bbc54807837a081ca', 1),
+            ('AAB15-P016', 'gpt-6.1-sol', 3): ('B', '7bbbc7adf34c9ed145b99f146590d1ec40878e9d3141b69fe6889c492f2f91c7', 1),
+            ('AAB15-P016', 'gpt-6.1-terra', 1): ('B', '20137b2d4d633614c7f4ace5e9512d38bfba30c2494c6277f07a445351b8050b', 2),
+            ('AAB15-P016', 'gpt-6.1-terra', 2): ('B', '7852108fd2816133a7cb2afe8b7c5bdaff4f40a5be94d87299dace6f7e9d599f', 2),
+            ('AAB15-P016', 'gpt-6.1-terra', 3): ('B', '92e9d41e620889b400d8e6eeec8b75b7cfc7cb492534669754d63d1f0ff3d5f9', 1),
+            ('AAB15-P016', 'claude-opus-5-5', 1): ('B', '791e80ec5064eba52ebe4388cd50e45873af022096980531d2570e003f126658', 1),
+            ('AAB15-P016', 'claude-opus-5-5', 2): ('B', 'cc26bc5f77a09499d7e3fcc11c9d8bdcaa29a02c63260fe1b0b6c5e69e61520d', 1),
+            ('AAB15-P016', 'claude-opus-5-5', 3): ('B', 'b646c2a3ad9c5fa7a7065bbdacd1ec68a22d256d848a592fc7adfa5e105f996f', 1),
+            ('KBV3N-083', 'gpt-6.1-sol', 1): ('B', 'a598d76df1a005bf39e571b158a98dc062e0990734a3541dbc1d019c2ad8cd93', 1),
+            ('KBV3N-083', 'gpt-6.1-sol', 2): ('B', '0a8cba15898deb0304bbc9357585df550ed75bd7627864d5403523e99fdeca90', 1),
+            ('KBV3N-083', 'gpt-6.1-sol', 3): ('B', 'f8f7b365adc44e86f2b63bffa0e707ab445596d1f912de4e7391d2183f070b0a', 1),
+            ('KBV3N-083', 'gpt-6.1-terra', 1): ('B', '0c388f26d72a835be20f76ee900f4e02875dd2b357b244159bb46245e88b9751', 2),
+            ('KBV3N-083', 'gpt-6.1-terra', 2): ('B', '8cabc5adcf1bf724a798836c65b8f58dd4c77857000af47b07942175de208580', 1),
+            ('KBV3N-083', 'gpt-6.1-terra', 3): ('B', '339e4511ff3919b244bece01ee67868f7acb211c3b5cf4043a877d631aec6d37', 1),
+            ('KBV3N-083', 'claude-opus-5-5', 1): ('B', '7cc17de30526b66f33ac398e59229bd4a8e2c083a5ab87ce364ed0c536e07a4a', 1),
+            ('KBV3N-083', 'claude-opus-5-5', 2): ('B', '6f217a0901844621df6f3f88c877ac2f20b001ca9b6da4d25fe1aa63da54317d', 1),
+            ('KBV3N-083', 'claude-opus-5-5', 3): ('B', '036929ee87910f72665e10644532215b4d5471a32a91081a004506609523272c', 1),
+            ('NG15-P001', 'gpt-6.1-sol', 1): ('A', 'af0c3b1904254ae32e4756d43d65d8277d57579b475b6591f4b0842bd246e493', 1),
+            ('NG15-P001', 'gpt-6.1-sol', 2): ('B', '67f360dae44ac45cdbe3420be5556580f02a0d6fa4097da6df0d10eee85be678', 1),
+            ('NG15-P001', 'gpt-6.1-sol', 3): ('A', '497cc1bfb6819abf442197780a679d1840396d57413208a653f4211a3dfc2159', 1),
+            ('NG15-P001', 'gpt-6.1-terra', 1): ('A', '61ecea4e82de29665245696a200de2d540c973b462a0322b1ad5d6ff5c833a2d', 1),
+            ('NG15-P001', 'gpt-6.1-terra', 2): ('A', 'ede9e30b2a104294e239eb48c4b5424979a7fca408b979e65661ebf139547da1', 1),
+            ('NG15-P001', 'gpt-6.1-terra', 3): ('A', '21ce2a1027248cd5dbffd508734b228e173e624fa7ea895ab6b679fd9df18c0b', 1),
+            ('NG15-P001', 'claude-opus-5-5', 1): ('tie', '933d8973988d61df6ed7fa21f79be8087670ef3d63a84f64c551e314d7981d54', 1),
+            ('NG15-P001', 'claude-opus-5-5', 2): ('tie', 'cefa4f951248064f3b7a3792536036785ba4fc87df2983468725319bcbc67884', 1),
+            ('NG15-P001', 'claude-opus-5-5', 3): ('tie', '5a96c349b0bdb9648876a43c8224576834f271694e3539053c9772d3eb69e68c', 1),
         }
         for case in self.cases.values():
             self.assertEqual(case["traces"][0]["model"], "gpt-6.1-sol")
@@ -148,10 +169,21 @@ class CaseReleaseTests(unittest.TestCase):
                     for citation in final["evidence"]:
                         self.assertEqual(set(citation), {"file", "line_start", "line_end", "claim"})
                         self.assert_public_relative_path(citation["file"])
-                    if (case["id"], trace["model"]) in expected_new:
-                        choice, digest = expected_new[(case["id"], trace["model"])]
+                    if (case["id"], trace["model"], trace["repeat"]) in expected_new:
+                        choice, digest, attempt_count = expected_new[(case["id"], trace["model"], trace["repeat"])]
                         self.assertEqual((trace["answer"], final["source"]["sha256"]), (choice, digest))
-                        self.assertEqual(trace["repeat"], 1)
+                        self.assertEqual(len(trace["layers"]), attempt_count)
+                        self.assertEqual(trace["delivery_provenance"]["attempt_count"], attempt_count)
+                        self.assertEqual(trace["repeat_numbering"], "delivery")
+                        expected_original = trace["repeat"] if trace["model"] == "claude-opus-5-5" else {1: 1, 2: 1, 3: 2}[trace["repeat"]]
+                        self.assertEqual(trace["original_repeat"], expected_original)
+                        self.assertEqual({layer["original_repeat"] for layer in trace["layers"]}, {expected_original})
+                        self.assertEqual([layer["delivery_attempt"] for layer in trace["layers"]], list(range(1, attempt_count + 1)))
+                        provenance = trace["delivery_provenance"]
+                        self.assertEqual(provenance["index_file"], f'trajectories/{trace["model"]}/rep{trace["repeat"]}/{case["id"]}/index.json')
+                        self.assert_public_relative_path(provenance["final_result_file"])
+                        self.assertRegex(provenance["index_sha256"], r"^[0-9a-f]{64}$")
+                        self.assertRegex(provenance["final_result_sha256"], r"^[0-9a-f]{64}$")
                 else:
                     self.assertEqual(final["availability"], "refusal")
                     self.assertIsNone(final["reason"])
@@ -211,6 +243,23 @@ class CaseReleaseTests(unittest.TestCase):
                     inspect(child)
 
         inspect(self.data)
+
+    def test_model_order_settings_and_curated_display_fields(self):
+        models = ["gpt-6.1-sol", "gpt-6.1-terra", "claude-opus-5-5", "gemini-4-argon", "claude-sonnet-5-5"]
+        self.assertEqual(self.data["models"], models)
+        self.assertFalse(self.cases["NG15-P001"]["show_limitations"])
+        self.assertTrue(any("Claude Sonnet repeat 2" in note for note in self.cases["AAB15-P016"]["limitations"]))
+        efforts = {"gpt-6.1-sol": "xhigh", "gpt-6.1-terra": "provider_default", "claude-opus-5-5": "high"}
+        for case in self.cases.values():
+            self.assertEqual([trace["model"] for trace in case["traces"]], [model for model in models for _ in range(3)])
+            for trace in case["traces"]:
+                self.assertNotIn("avg@", trace["run_label"])
+                if trace["model"] in efforts:
+                    self.assertEqual(trace["reasoning_effort"], efforts[trace["model"]])
+        sol_second = next(trace for trace in self.cases["NG15-P001"]["traces"]
+                          if trace["model"] == "gpt-6.1-sol" and trace["repeat"] == 2)
+        self.assertEqual(sol_second["answer"], "B")
+        self.assertIn("Favors B", sol_second["analysis_summary"]["text"])
 
     def test_pruning_candidate_summaries_include_both_changed_parameters(self):
         candidates = self.cases["AAB15-P016"]["candidates"]

@@ -17,6 +17,9 @@ spec.loader.exec_module(pipeline)
 merge_spec = importlib.util.spec_from_file_location("merge_results", ROOT / "scripts" / "merge_results.py")
 merger = importlib.util.module_from_spec(merge_spec)
 merge_spec.loader.exec_module(merger)
+delivery_spec = importlib.util.spec_from_file_location("merge_delivery", ROOT / "scripts" / "merge_delivery.py")
+delivery_merger = importlib.util.module_from_spec(delivery_spec)
+delivery_spec.loader.exec_module(delivery_merger)
 
 
 class SnapshotTests(unittest.TestCase):
@@ -39,8 +42,8 @@ class SnapshotTests(unittest.TestCase):
 
     def test_scores_match_frozen_exact_results_and_ties(self):
         expected = {
-            "gemini-4-argon": Fraction(56, 135), "gpt-6.1-sol": Fraction(60, 135),
-            "gpt-6.1-terra": Fraction(56, 135),
+            "gemini-4-argon": Fraction(56, 135), "gpt-6.1-sol": Fraction(178, 405),
+            "gpt-6.1-terra": Fraction(173, 405), "claude-opus-5-5": Fraction(163, 405),
             "hy4": Fraction(47, 135), "claude-sonnet-5-5": Fraction(47, 135),
             "deepseek-v4.1-flash": Fraction(41, 135), "glm-5.3-flash": Fraction(116, 405),
             "qwen3.8-flash": Fraction(109, 405), "kimi-k3.1-pro": Fraction(4, 15),
@@ -48,8 +51,8 @@ class SnapshotTests(unittest.TestCase):
         }
         rows = self.data["leaderboard"]
         self.assertEqual({row["model"] for row in rows}, set(expected))
-        self.assertEqual(self.data["model_count"], 10)
-        self.assertEqual([row["rank"] for row in rows], [1, 2, 2, 4, 4, 6, 7, 8, 9, 10])
+        self.assertEqual(self.data["model_count"], 11)
+        self.assertEqual([row["rank"] for row in rows], [1, 2, 3, 4, 5, 5, 7, 8, 9, 10, 11])
         for row in rows:
             self.assertEqual(Fraction(row["exact_fraction"]), expected[row["model"]])
             self.assertAlmostEqual(row["question_equal_weight_accuracy"], float(expected[row["model"]]), places=14)
@@ -63,16 +66,15 @@ class SnapshotTests(unittest.TestCase):
             self.assertAlmostEqual(sum(score * counts[bench] for bench, score in row["per_bench"].items()) / 135, total, places=14)
 
     def test_coverage_exception_and_usage_denominator(self):
-        self.assertEqual(sum(row["valid"] for row in self.data["leaderboard"]), 3509)
-        self.assertEqual(sum(row["planned"] for row in self.data["leaderboard"]), 3510)
-        self.assertEqual(self.data["valid_cells"], 3509)
-        self.assertEqual(self.data["planned_cells"], 3510)
+        self.assertEqual(sum(row["valid"] for row in self.data["leaderboard"]), 4454)
+        self.assertEqual(sum(row["planned"] for row in self.data["leaderboard"]), 4455)
+        self.assertEqual(self.data["valid_cells"], 4454)
+        self.assertEqual(self.data["planned_cells"], 4455)
         for row in self.data["leaderboard"]:
-            single = row["model"] in ("gpt-6.1-sol", "gpt-6.1-terra")
-            expected_valid = 135 if single else (404 if row["model"] == "claude-sonnet-5-5" else 405)
+            expected_valid = 404 if row["model"] == "claude-sonnet-5-5" else 405
             self.assertEqual(row["valid"], expected_valid)
-            self.assertEqual(row["evaluated_repeats"], 1 if single else 3)
-            self.assertEqual(row["agent_planned_cells"], 105 if single else 315)
+            self.assertEqual(row["evaluated_repeats"], 3)
+            self.assertEqual(row["agent_planned_cells"], 315)
             self.assertAlmostEqual(row["agent_mean_model_turns_per_planned_cell"], row["agent_model_turns"] / row["agent_planned_cells"])
             self.assertLessEqual(row["cached_input_tokens_known"], row["input_tokens_known"])
         exception = self.data["scoring_policy"]["exception"]
@@ -93,28 +95,57 @@ class SnapshotTests(unittest.TestCase):
                 if field != "rank":
                     self.assertEqual(updated[old["model"]][field], value)
 
-    def test_new_rep1_rows_include_all_layers_and_keep_cost_types_separate(self):
+    def test_new_avg3_rows_include_all_layers_and_report_partial_costs(self):
         models = {row["model"]: row for row in self.data["leaderboard"]}
         expected = {
-            "gpt-6.1-sol": (40, 20, 40019290, 757267, 1109, 877, 706, 3163),
-            "gpt-6.1-terra": (37, 19, 16820122, 215519, 755, 701, 491, 2325),
+            "gpt-6.1-sol": (126, 52, 160349315, 2786935, 3023, 2713, 2328, 11035),
+            "gpt-6.1-terra": (116, 57, 46949632, 633300, 2117, 1904, 1417, 6780),
+            "claude-opus-5-5": (106, 57, 89169442, 2077046, 2816, 2685, 2311, 3962),
         }
         for model, values in expected.items():
             row = models[model]
             agent, reasoning, inp, out, requests, turns, rounds, calls = values
-            self.assertAlmostEqual(row["agent_accuracy"], agent / 105)
-            self.assertAlmostEqual(row["reasoning_accuracy"], reasoning / 30)
+            self.assertAlmostEqual(row["agent_accuracy"], agent / 315)
+            self.assertAlmostEqual(row["reasoning_accuracy"], reasoning / 90)
             for field, value in zip(("input_tokens_known", "output_tokens_known", "api_request_attempts", "agent_model_turns", "agent_tool_rounds", "agent_tool_calls"), (inp, out, requests, turns, rounds, calls)):
                 self.assertEqual(row[field], value)
-            self.assertEqual(row["included_repeats"], [1])
-            self.assertIsNone(row["reported_cost_cny"])
-            self.assertGreater(row["estimated_cost_usd"], 0)
-            self.assertEqual(len(row["source_layers"]), 2)
+            self.assertEqual(row["included_repeats"], [1, 2, 3])
+            self.assertGreater(row["reported_cost_cny"], 0)
+            self.assertNotIn("estimated_cost_usd", row)
+            self.assertEqual(row["cost_status"], "partial_explicit_cny")
+            self.assertGreaterEqual(len(row["source_layers"]), 2)
             for field in ("api_request_attempts", "agent_model_turns", "agent_tool_rounds", "agent_tool_calls"):
                 self.assertEqual(row[field], sum(layer.get(field, 0) for layer in row["source_layers"]))
         self.assertEqual(models["gpt-6.1-sol"]["config_label"], "xhigh")
         self.assertEqual(models["gpt-6.1-terra"]["config_label"], "default")
-        self.assertEqual(models["gpt-6.1-terra"]["source_repeats_available"], 3)
+        self.assertEqual(models["claude-opus-5-5"]["config_label"], "high")
+        self.assertIsNone(models["claude-opus-5-5"]["reasoning_tokens_known"])
+        self.assertEqual(models["gpt-6.1-sol"]["returned_model_counts"], {"gpt-6.1-sol":2721, "gpt-6.1-sol-2":12})
+        costs = {"gpt-6.1-sol": (1061.143348, 290, 841, 1131), "gpt-6.1-terra": (81.011926, 295, 626, 921), "claude-opus-5-5": (651.880408, 33, 0, 33)}
+        for model, (cost, missing_usage, missing_response_cost, missing_attempt_cost) in costs.items():
+            row = models[model]
+            self.assertAlmostEqual(row["reported_cost_cny"], cost, places=6)
+            self.assertEqual(row["attempts_without_usage"], missing_usage)
+            self.assertEqual(row["responses_without_cost"], missing_response_cost)
+            self.assertEqual(row["attempts_without_reported_cost"], missing_attempt_cost)
+            self.assertEqual(row["api_request_attempts"], row["usage_response_records"] + row["failed_transport_attempts"])
+            self.assertEqual(row["responses_without_usage"], 0)
+            self.assertEqual(sum(row["returned_model_counts"].values()), row["usage_response_records"])
+
+    def test_delivery_numbering_and_audit_coverage(self):
+        for row in self.data["leaderboard"]:
+            if row["model"] not in delivery_merger.EFFORTS:
+                continue
+            expected = [(1, 1), (2, 2), (3, 3)] if row["model"] == "claude-opus-5-5" else [(1, 1), (2, 1), (3, 2)]
+            self.assertEqual([(item["repeat"], item["source_repeat"]) for item in row["source_repeat_mapping"]], expected)
+            self.assertTrue(all(item["cells"] == 135 for item in row["source_repeat_mapping"]))
+            self.assertEqual(sum(item["correct"] for item in row["repeat_results"]), row["correct"])
+        audit = self.data["provenance"]["delivery"]
+        self.assertEqual(audit["physical_attempt_directories"], 1461)
+        self.assertEqual(audit["response_records"], 7338)
+        self.assertEqual(audit["manifest_files"], 34181)
+        for source in audit["source_files"]:
+            self.assertRegex(source["sha256"], r"^[0-9a-f]{64}$")
 
     def test_baselines_and_publication_boundary(self):
         scores = {row["id"]: row["accuracy"] for row in self.data["baselines"]}
@@ -223,6 +254,49 @@ class NewCohortTests(unittest.TestCase):
             self.assertEqual(totals["agent_tool_rounds"], 2)
             self.assertEqual(totals["agent_tool_calls"], 2)
             self.assertEqual([layer["selected_jobs"] for layer in layers], [1, 1])
+
+
+class DeliveryTests(unittest.TestCase):
+    def setUp(self):
+        self.pairs = {"p": {"mode": "agent", "bench": "AABench"}}
+        self.rows = [{"model": model, "effort": effort, "repeat": repeat, "pair_id": "p",
+                      "bench": "aabench", "mode": "agent", "orientation": "AB", "status": "valid",
+                      "gold": "A", "choice": "A", "correct": True, "input_sha256": "abc"}
+                     for model, effort in delivery_merger.EFFORTS.items() for repeat in (1, 2, 3)]
+
+    def test_complete_delivery_grid_and_index_repeat_validation(self):
+        self.assertEqual(delivery_merger.validate_cells(self.rows, self.pairs), {"p": "abc"})
+        changed = [dict(row) for row in self.rows]
+        changed[1]["repeat"] = 1  # Raw rep1 must not replace the delivery rep2.
+        with self.assertRaisesRegex(ValueError, "Duplicate"):
+            delivery_merger.validate_cells(changed, self.pairs)
+        with self.assertRaisesRegex(ValueError, "Incomplete"):
+            delivery_merger.validate_cells(self.rows[:-1], self.pairs)
+
+    def test_changed_input_or_effort_cannot_be_merged(self):
+        changed = [dict(row) for row in self.rows]
+        changed[2]["input_sha256"] = "changed"
+        with self.assertRaisesRegex(ValueError, "input hashes"):
+            delivery_merger.validate_cells(changed, self.pairs)
+        changed = [dict(row) for row in self.rows]
+        changed[0]["effort"] = "high"
+        with self.assertRaisesRegex(ValueError, "configuration"):
+            delivery_merger.validate_cells(changed, self.pairs)
+
+    def test_normalized_claude_input_includes_cache_and_unknown_is_not_zero(self):
+        result = delivery_merger.normalized_usage({"input_tokens":2, "cache_creation_input_tokens":13641,
+                   "cache_read_input_tokens":7760, "prompt_tokens":21403, "output_tokens":109})
+        self.assertEqual(result["input_tokens"], 21403)
+        self.assertEqual(result["cached_input_tokens"], 7760)
+        self.assertEqual(result["cache_creation_input_tokens"], 13641)
+        self.assertIsNone(result["reasoning_tokens"])
+        self.assertIsNone(delivery_merger.normalized_usage({"usage_unknown":True})["input_tokens"])
+
+    def test_currency_is_never_guessed_or_converted(self):
+        self.assertEqual(str(delivery_merger.explicit_cny("¥0.359726")), "0.359726")
+        self.assertIsNone(delivery_merger.explicit_cny("$0.359726"))
+        self.assertIsNone(delivery_merger.explicit_cny(0.359726))
+        self.assertIsNone(delivery_merger.explicit_cny(None))
 
 
 if __name__ == "__main__":

@@ -13,9 +13,9 @@ This repository is the **v0.1 homepage with a versioned results update**. It con
 | Preference pairs | 135 |
 | Source benchmarks | 17 |
 | Agent / Reasoning pairs | 105 / 30 |
-| Displayed model configurations | 10 |
-| Valid / planned cells in displayed rows | 3,509 / 3,510 |
-| Curated cases / displayed model–repeat trace records | 3 / 24 |
+| Displayed model configurations | 11 |
+| Valid / planned cells in displayed rows | 4,454 / 4,455 |
+| Curated cases / displayed model–repeat trace records | 3 / 45 |
 
 The frozen collection was initially evaluated on 10–11 November 2026, with the displayed model configurations updated on 12 November. It is a manually selected development collection with historical labels, not an independently sampled hidden test set. The current results measure agreement with frozen preferences; preference reversal, reward-model training, and downstream research gains remain future work.
 
@@ -42,7 +42,7 @@ Page links and downloads use relative paths so the site works under `/ai4ai-rewa
 ## What is included
 
 - `data/public-benchmark.json`: 135 task metadata records, benchmark counts, model scores, mode and benchmark breakdowns, cumulative resource metrics, baseline definitions, and source fingerprints.
-- `data/public-cases.json`: three case studies with source references, 24 inspected model–repeat records, and 23 saved final explanations, including the documented refusal. Model predictions are not reference labels.
+- `data/public-cases.json`: three case studies with source references, 45 inspected model–repeat records, and 44 saved final explanations, including the documented refusal. Model predictions are not reference labels.
 - `data/public-tasks.json`: English presentations of all 135 tasks, including background, question, candidates, constraints, decision rule, and public input inventory.
 - `web/src/`: the HTML template, styles, and browser interactions.
 - `scripts/build.mjs` and `scripts/serve.mjs`: dependency-free static build and local server.
@@ -54,13 +54,21 @@ Full candidate packages, datasets, private reference labels, organizer evidence,
 
 ## Read the leaderboard correctly
 
-Every question has equal weight. The new `gpt-6.1-sol · xhigh` result is 60/135 (44.44%); `gpt-6.1-terra · default` is 56/135 (41.48%). Both use **repeat 1 only**. Terra repeats 2 and 3 are excluded, rather than choosing the best repeat. The old default Sol row is replaced; its original result remains in the frozen snapshot.
+Every question has equal weight. Each model is evaluated over three scheduled repeats per task. The updated cohorts are:
 
-The other eight configurations retain their original three-repeat averages. Claude/AAB15-P016 uses repeats 1 and 3 because repeat 2 remained a refusal. Its score is 47/135 = 34.8148%, not pooled 140/404. The page uses the generic label “Accuracy”; it does not mislabel the new scores as three-repeat results. Effort settings, repetition counts, provider routes and recovery budgets differ and limit comparison.
+| Configuration | Overall avg@3 | Agent | Reasoning |
+| --- | ---: | ---: | ---: |
+| gpt-6.1-sol · xhigh | 178/405 = 43.95% | 126/315 = 40.00% | 52/90 = 57.78% |
+| gpt-6.1-terra · default | 173/405 = 42.72% | 116/315 = 36.83% | 57/90 = 63.33% |
+| claude-opus-5-5 · high | 163/405 = 40.25% | 106/315 = 33.65% | 57/90 = 63.33% |
 
-Overall baselines remain 33.33% for uniform A/B/tie, 49.26% for random A/B and 57.78% for always-A. Mode tabs use their own denominators and corresponding baselines. Resource totals include original and recovery attempts for each displayed cohort; mean Agent turns divide by 105 for the new rows and 315 for historical rows. Missing reported CNY charges remain unknown; historical USD estimates are stored separately.
+All 1,215 cells in these three cohorts are valid. The delivery assigns a common repeat 1–3 index across original and recovery batches; original directory repeat numbers are not always the delivery repeat numbers. All three repeats are included, without choosing a best run or splitting a model into separate provider rows. The new Sol and Terra averages replace their previous single-repeat display.
 
-See the [protocol](docs/protocol.md) for the exact policies, limitations and cohort definitions. The unchanged original results snapshot is preserved in `data/snapshots/golden2-20261111.json`.
+The other eight configurations retain their original three-repeat averages. **Claude Sonnet** / AAB15-P016 uses repeats 1 and 3 because repeat 2 remained a refusal. Its score is 47/135 = 34.8148%, not pooled 140/404. This exception does not apply to Opus. Effort settings, provider routes and recovery budgets still differ.
+
+Overall baselines remain 33.33% for uniform A/B/tie, 49.26% for random A/B and 57.78% for always-A. Mode tabs use their own denominators and corresponding baselines. Resource totals include original and recovery attempts for each displayed cohort; mean Agent turns divide by 315 planned Agent cells. The cost column sums known explicit CNY charges, with partial coverage where some responses do not report costs; unknown charges are not zero and currencies are not combined.
+
+See the [protocol](docs/protocol.md) for exact policies, limitations and cohort definitions. The unchanged original results snapshot remains in `data/snapshots/golden2-20261111.json`.
 
 ## Rebuild the data export
 
@@ -68,14 +76,14 @@ The website and tests work with the included public snapshot. Re-exporting the b
 
 ```bash
 python3 scripts/prepare_data.py --handoff /path/to/authorized-handoff
-python3 scripts/merge_results.py --help
+python3 scripts/merge_delivery.py --help
 python3 scripts/prepare_tasks.py --help
-python3 scripts/enrich_cases.py --help
+python3 scripts/enrich_delivery_cases.py --help
 npm test
 npm run build
 ```
 
-The frozen exporter validates the original accepted-repeat matrix and writes the preserved snapshot. The results merger validates the two new cohorts and emits the updated leaderboard with accurate repetition metadata. Task and case exporters have separate source roots and provenance checks; see their help and documentation. It makes no model API calls and does not execute candidates. The source hashes identify the input bytes without distributing private files. Curated cases have a separate extraction and verification record in [case provenance](docs/case-provenance.md).
+The frozen exporter validates the original accepted-repeat matrix and writes the preserved snapshot. The delivery merger validates all three complete model cohorts and emits the updated leaderboard with repeat metadata and all-attempt resource accounting. Task and case exporters have separate source roots and provenance checks; see their help and documentation. It makes no model API calls and does not execute candidates. The source hashes identify the input bytes without distributing private files. Curated cases have a separate extraction and verification record in [case provenance](docs/case-provenance.md).
 
 This is offline score reproduction, not a portable implementation of the historical evaluation runner. A fresh end-to-end model evaluation requires separately versioned runner code, adapters, and authorized task assets. Dataset changes or changed evaluation conditions require a new version instead of overwriting Golden2 results.
 

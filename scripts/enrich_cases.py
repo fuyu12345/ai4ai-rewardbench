@@ -90,7 +90,10 @@ def read_layer(folder, layer):
         parsed = None
         if text:
             try:
-                parsed = json.loads(text)
+                # Removing one enclosing JSON fence is lossless and matches
+                # the delivery parser; retain the response-file fingerprint.
+                fenced = re.fullmatch(r'\s*```(?:json)?\s*\n(.*)\n```\s*', text, re.DOTALL)
+                parsed = json.loads(fenced.group(1) if fenced else text)
             except ValueError:
                 pass
         readable = []
@@ -212,7 +215,10 @@ def enrich_trace(trace, details, pair_id):
     summaries = {
         'AAB15-P016': 'Favors B’s weaker mean repair: matching calibration means alone can distort surviving weights, and stronger perturbations can propagate through later pruning steps. This is the model’s prediction, not an observed validation result.',
         'KBV3N-083': 'Favors B’s contiguous memory access over A’s row-strided warp accesses, while accounting for B’s explicit synchronization and the shared output allocation.',
-        'NG15-P001': ('Expects the optimizer substitution to have only a small effect under the shared Muon branch, schedule and training horizon, and selects tie.' if trace['answer'] == 'tie' else 'Favors A’s AdamW recipe because B changes gradient weighting and BF16 update behavior while retaining the same learning rates and schedule.'),
+        'NG15-P001': (
+            'Expects the optimizer substitution to have only a small effect under the shared Muon branch, schedule and training horizon, and selects tie.' if trace['answer'] == 'tie' else
+            'Favors B’s Nesterov-style adaptive update for reducing momentum lag at the prescribed horizon, while retaining the same Muon optimizer and schedules; the final response also acknowledges numerical and learning-rate risks.' if trace['answer'] == 'B' else
+            'Favors A’s AdamW recipe because B changes gradient weighting and BF16 update behavior while retaining the same learning rates and schedule.'),
     }
     trace['analysis_summary'] = {
         'kind': 'authored_summary',
