@@ -16,7 +16,7 @@
   <a class="skip-link" href="#main">Skip to content</a>
   <header class="header">
     <a class="wordmark" href="#" aria-label="AI4AI RewardBench home"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M2 28V14L16 0v14L2 28Zm14 4V18L30 4v14L16 32Z" fill="currentColor"/></svg><span>AI4AI<span class="wordmark-sub"> / RewardBench</span></span></a>
-    <nav aria-label="Main navigation"><a href="#protocol">Method</a><a href="#leaderboard">Leaderboard</a><a href="#dataset">Dataset</a><a href="#explorer">Explore</a></nav>
+    <nav aria-label="Main navigation"><a href="#pipeline">How it works</a><a href="#protocol">Method</a><a href="#leaderboard">Leaderboard</a><a href="#dataset">Dataset</a><a href="#explorer">Explore</a></nav>
     <a class="nav-github" href="https://github.com/fuyu12345/ai4ai-rewardbench" target="_blank" rel="noreferrer">GitHub <span aria-hidden="true">↗</span></a>
   </header>
   <main id="main">
@@ -28,7 +28,7 @@
           <p class="hero-lead">How does AI judge AI research?</p>
           <p class="hero-description">AI for AI (AI4AI) puts models to work on kernel optimization, ML engineering, scientific discovery, and training algorithms. Each task calls for choosing a promising approach under specific goals and resource constraints.</p>
           <p class="hero-description">RewardBench tests models’ research preferences across these tasks using existing agent artifacts and evidence—without rerunning heavyweight training or GPU experiments.</p>
-          <div class="hero-actions"><a href="#leaderboard" class="button primary">Explore the leaderboard <span>↗</span></a><a href="#explorer" class="text-link">Look inside a task <span>→</span></a></div>
+          <div class="hero-actions"><a href="#leaderboard" class="button primary">Explore the leaderboard <span>↗</span></a><a href="#pipeline" class="text-link">Watch the process <span>→</span></a></div>
         </div>
         <div class="decision-figure" aria-label="Two candidate approaches are compared using task context and evidence to produce a judgment of A, B or tie.">
           <div class="figure-label"><span>THE RESEARCH DECISION</span><span>FIG. 01</span></div>
@@ -41,6 +41,20 @@
       </div>
       <div class="wrap stat-strip"><div><strong>135</strong><span>preference pairs</span></div><div><strong>17</strong><span>source benchmarks</span></div><div><strong id="model-count">11</strong><span>model configurations</span></div><div><strong>2</strong><span>evaluation modes</span></div><a href="#dataset" aria-label="Discover the dataset">DISCOVER THE DATASET <span>↓</span></a></div>
       <div class="the-edge"></div>
+    </section>
+
+    <section id="pipeline" class="dark pipeline-section" aria-labelledby="pipeline-heading">
+      <div class="wrap">
+        <div class="pipeline-intro"><div><p class="eyebrow"><i class="node"></i> HOW IT WORKS</p><h2 id="pipeline-heading">From research runs<br>to reliable judgments.</h2></div><p>Follow the construction of a golden pair, then see how a model judges it. Two workflows, one evidence trail.</p></div>
+        <div class="pipeline-toolbar"><div class="pipeline-tabs" role="group" aria-label="Workflow"><button type="button" data-pipeline="construction" aria-pressed="true">Pair construction</button><button type="button" data-pipeline="evaluation" aria-pressed="false">Evaluation</button></div><div class="pipeline-playback"><span id="pipeline-status">Step 01 / 06</span><button type="button" id="pipeline-previous" aria-label="Previous step">←</button><button type="button" id="pipeline-play" aria-label="Play animation">▶ Play</button><button type="button" id="pipeline-next" aria-label="Next step">→</button></div></div>
+        <div id="pipeline-formats" class="pipeline-options" role="group" aria-label="Run format"><span>Run format</span><button type="button" data-run-type="tree" aria-pressed="true">Search tree</button><button type="button" data-run-type="session" aria-pressed="false">Agent session</button><button type="button" data-run-type="single" aria-pressed="false">Single-step rollout</button></div>
+        <div id="pipeline-modes" class="pipeline-options" role="group" aria-label="Evaluation mode" hidden><span>Evaluation mode</span><button type="button" data-pipeline-mode="agent" aria-pressed="true">Reward Agent</button><button type="button" data-pipeline-mode="reasoning" aria-pressed="false">Reasoning</button></div>
+        <div id="pipeline-steps" class="pipeline-steps" role="group" aria-label="Workflow steps"></div>
+        <div class="pipeline-phase"><span id="pipeline-phase"></span><span id="pipeline-boundary"></span></div>
+        <div id="pipeline-scene"></div>
+        <div id="pipeline-caption" class="pipeline-caption" aria-live="polite" aria-atomic="true"><div><h3 id="pipeline-title"></h3><p id="pipeline-description"></p></div><div class="pipeline-output"><span id="pipeline-output-label" class="tiny-label"></span><p id="pipeline-output"></p></div></div>
+        <p class="pipeline-footnote">Illustrated workflow, not a live run. The curation view describes the new Unit-first process; it does not claim that every v0.1 pair has been rebuilt with it. *Scoring follows the included-repeat policy in Measurement &amp; Method below.</p>
+      </div>
     </section>
 
     <section id="protocol" class="section light protocol-section">

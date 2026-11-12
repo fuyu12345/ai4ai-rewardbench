@@ -1,0 +1,42 @@
+/* Animated process illustrations. Geometry uses the existing FRONTIS palette. */
+.pipeline-scene{margin:0;color:var(--white);background:var(--black);width:100%;font-family:var(--font)}
+.pipeline-scene .scene-desktop{width:100%;height:auto;overflow:visible}
+.pipeline-scene svg text{fill:var(--white);font-family:var(--font);font-weight:400}
+.pipeline-scene .scene-title{font-size:25px;font-weight:500;letter-spacing:-.6px}
+.pipeline-scene .scene-label{font-size:23px;font-weight:500;letter-spacing:-.3px}
+.pipeline-scene .scene-copy{font-size:20px;opacity:.74}
+.pipeline-scene .scene-meta{font-size:18px;opacity:.7;letter-spacing:.15px}
+.pipeline-scene .scene-number{font-size:18px;opacity:.45;letter-spacing:2px}
+.pipeline-scene .scene-review-label{font-size:29px;font-weight:500;letter-spacing:-.7px}
+.pipeline-scene .scene-choice{font-size:56px;letter-spacing:-2px}
+.pipeline-scene .scene-box{fill:var(--black);stroke:var(--gray);stroke-width:1}
+.pipeline-scene .scene-box-active{fill:var(--gray);stroke:none}
+.pipeline-scene .scene-accent{fill:none;stroke:var(--cyan);stroke-width:3}
+.pipeline-scene .scene-link{fill:none;stroke:var(--cyan);stroke-width:1.5;stroke-dasharray:1;stroke-dashoffset:0;animation:scene-path-in .9s var(--ease) both;animation-delay:var(--scene-delay,0ms)}
+.pipeline-scene .scene-link-dashed{stroke:var(--surface);opacity:.4}
+.pipeline-scene .scene-dot{fill:var(--cyan)}
+.pipeline-scene .scene-stack{stroke:var(--gray);stroke-width:1;fill:none}
+.pipeline-scene .scene-review-ring,.pipeline-scene .scene-compare{fill:none;stroke:var(--cyan);stroke-width:1.5}
+.pipeline-scene .scene-divider{fill:none;stroke:var(--gray);stroke-width:1;stroke-dasharray:5 7}
+.pipeline-scene .scene-enter{animation:scene-node-in .65s var(--ease) both;animation-delay:var(--scene-delay,0ms)}
+.pipeline-scene .scene-note{min-height:54px;display:flex;align-items:flex-start;gap:15px;padding:20px 0 0;font-size:15px;line-height:1.75;color:var(--surface);opacity:.75;border-top:1px solid var(--gray);margin-top:16px}
+.pipeline-scene .scene-note-line{display:block;width:24px;height:2px;background:var(--cyan);flex:0 0 24px;margin-top:12px}
+.pipeline-scene .scene-mobile{display:none}
+@keyframes scene-path-in{from{stroke-dashoffset:1}to{stroke-dashoffset:0}}
+@keyframes scene-node-in{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+@media(max-width:900px){
+  .pipeline-scene .scene-desktop{display:none}
+  .pipeline-scene .scene-mobile{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:22px;padding:15px 0 22px}
+  .pipeline-scene .scene-mobile-step{display:flex;gap:15px;border-left:2px solid var(--cyan);padding:3px 0 3px 16px;animation:scene-node-in .6s var(--ease) both;animation-delay:var(--scene-delay,0ms)}
+  .pipeline-scene .scene-mobile-index{font-size:14px;opacity:.45;line-height:1.8;font-variant-numeric:tabular-nums}
+  .pipeline-scene .scene-mobile-step strong{display:block;font-size:18px;line-height:1.4;font-weight:500;letter-spacing:-.3px}
+  .pipeline-scene .scene-mobile-step p{font-size:16px;line-height:1.75;color:var(--surface);opacity:.75;margin-top:10px}
+}
+@media(max-width:580px){
+  .pipeline-scene .scene-mobile{grid-template-columns:1fr;gap:22px}
+  .pipeline-scene .scene-note{font-size:14px;gap:12px}
+  .pipeline-scene .scene-note-line{width:16px;flex-basis:16px}
+}
+@media(prefers-reduced-motion:reduce){
+  .pipeline-scene .scene-enter,.pipeline-scene .scene-link,.pipeline-scene .scene-mobile-step{animation:none}
+}

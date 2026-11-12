@@ -11,9 +11,9 @@ if (taskById.size !== dataset.pair_count || dataset.pairs.some(pair => !taskById
 for (const pair of dataset.pairs) pair.title = taskById.get(pair.pair_id).title;
 const json = JSON.stringify({ dataset, cases, tasks }).replaceAll('<', '\\u003c');
 const html = read('web/src/index.html')
-  .replace('/* INLINE_STYLES */', () => read('web/src/styles.css'))
+  .replace('/* INLINE_STYLES */', () => [read('web/src/styles.css'), read('web/src/pipeline.css'), read('web/src/pipeline-scenes.css')].join('\n'))
   .replace('/* INLINE_DATA */', () => `window.BENCHMARK = ${json};`)
-  .replace('/* INLINE_APP */', () => read('web/src/app.js'));
+  .replace('/* INLINE_APP */', () => [read('web/src/app.js'), read('web/src/pipeline-scenes.js'), read('web/src/pipeline.js')].join('\n'));
 for (const [, script] of html.matchAll(/<script>([\s\S]*?)<\/script>/g)) new Script(script);
 mkdirSync(resolve(root, 'dist'), { recursive: true });
 writeFileSync(resolve(root, 'dist/index.html'), html);
