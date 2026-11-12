@@ -2,7 +2,7 @@
 
 AI4AI RewardBench evaluates whether a model can judge competing algorithmic solutions under a task's conditions, resource constraints, and comparison rule.
 
-[Homepage](https://ai4ai-rewardbench-v01.candid-book-7348.chatgpt.site) · [Repository](https://github.com/fuyu12345/ai4ai-rewardbench) · [Evaluation protocol](docs/protocol.md) · [Data notes](data/README.md)
+[Homepage](https://fuyu12345.github.io/ai4ai-rewardbench/) · [Repository](https://github.com/fuyu12345/ai4ai-rewardbench) · [Evaluation protocol](docs/protocol.md) · [Data notes](data/README.md)
 
 This repository is the **v0.1 homepage with a versioned results update**. It contains a lightweight, responsive website with a mode-filtered leaderboard, benchmark distribution, searchable task catalog, and curated evidence/trace explorer. The visual system follows FRONTIS VI. It has no runtime package dependencies, server database, or model API integration.
 
@@ -32,6 +32,12 @@ npm run dev
 Open the printed local URL, normally `http://127.0.0.1:4173`. Set `PORT` to choose another port. The development command serves `dist/`; rerun `npm run build` after editing source or data, then refresh the browser.
 
 The build creates a self-contained `dist/index.html` with inline CSS, JavaScript, and data. The page can also be opened directly from disk. Keep the other generated files beside it for the protocol and JSON download links to work. Any static host can serve the contents of `dist/`.
+
+## Publish to GitHub Pages
+
+The primary homepage is **https://fuyu12345.github.io/ai4ai-rewardbench/**. Every push to `main` runs the checks, builds `dist/`, and publishes that directory through [the Pages workflow](.github/workflows/pages.yml). The workflow can also be started manually from the repository's Actions tab. GitHub Pages uses **GitHub Actions** as its publishing source; no generated files need to be committed.
+
+Page links and downloads use relative paths so the site works under `/ai4ai-rewardbench/`. The existing [Sites deployment](https://ai4ai-rewardbench-v01.candid-book-7348.chatgpt.site) remains available as a previous hosted copy; GitHub pushes update the Pages site.
 
 ## What is included
 
