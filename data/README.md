@@ -1,5 +1,14 @@
 # Public Golden2 snapshot
 
+`public-runtime.json` and `public-runtime.csv` are a separate illustrative timing
+view added on 2026-11-13: four model configurations, six selected typical
+benchmarks, and the same 31 pairs for each model. Each point summarizes a
+benchmark, not an individual trial. Selection keeps measured benchmark medians
+of at least five minutes and does not depend on judgment speed or accuracy.
+Partial-stage clocks remain explicitly labeled. These files contain only
+allowlisted aggregates, public pair IDs, and audit fingerprints. See
+[timing definitions](../docs/runtime.md) for the scope and exclusions.
+
 `public-benchmark.json` v0.1.2 contains 135 catalog records, 17 benchmark counts,
 11 model configurations, grouped accuracies, cumulative resource totals,
 protocol notes and source SHA-256 digests. Snapshot date: 2026-11-12. Ratios use

@@ -1,0 +1,294 @@
+{
+  "schema_version": "1.0",
+  "updated_at": "2026-11-13",
+  "title": "Selected typical benchmarks",
+  "selection": {
+    "min_benchmark_median_seconds": 300,
+    "timed_pairs": 31,
+    "benchmark_count": 6,
+    "description": "Illustrative selection of typical benchmarks with longer-running measured task slices; not a representative sample of all tasks. Selection depends only on measured experiment/stage time, not judgment speed or accuracy."
+  },
+  "models": [
+    {
+      "id": "gemini-4-argon",
+      "label": "Gemini 4 Argon",
+      "asset": "gemini-4-argon"
+    },
+    {
+      "id": "gpt-6.1-terra",
+      "label": "Terra · default",
+      "asset": "gpt-6.1-terra"
+    },
+    {
+      "id": "claude-opus-5-5",
+      "label": "Opus 5.5 · high",
+      "asset": "claude-opus-5-5"
+    },
+    {
+      "id": "gpt-6.1-sol",
+      "label": "Sol · xhigh",
+      "asset": "gpt-6.1-sol"
+    }
+  ],
+  "benchmarks": [
+    {
+      "name": "AABench",
+      "pairs": 15,
+      "pair_ids": [
+        "AAB15-P002",
+        "AAB15-P004",
+        "AAB15-P005",
+        "AAB15-P007",
+        "AAB15-P008",
+        "AAB15-P009",
+        "AAB15-P010",
+        "AAB15-P011",
+        "AAB15-P012",
+        "AAB15-P013",
+        "AAB15-P015",
+        "AAB15-P016",
+        "AAB15-P018",
+        "AAB15-P019",
+        "AAB15-P020"
+      ],
+      "mode_counts": {
+        "agent": 15,
+        "reasoning": 0
+      },
+      "experiment_seconds": 724.2095732814923,
+      "scope": "complete"
+    },
+    {
+      "name": "MLE-Bench",
+      "pairs": 6,
+      "pair_ids": [
+        "mle5-031",
+        "mle5-035",
+        "mle5-045",
+        "mle5-047",
+        "mle5-048",
+        "mle5-061"
+      ],
+      "mode_counts": {
+        "agent": 6,
+        "reasoning": 0
+      },
+      "experiment_seconds": 432.93884175000005,
+      "scope": "complete"
+    },
+    {
+      "name": "MLSBench",
+      "pairs": 1,
+      "pair_ids": [
+        "MLS15-002"
+      ],
+      "mode_counts": {
+        "agent": 1,
+        "reasoning": 0
+      },
+      "experiment_seconds": 20138.5,
+      "scope": "published_subtask"
+    },
+    {
+      "name": "NatureBench",
+      "pairs": 1,
+      "pair_ids": [
+        "naturebench-s42256-025-01002-0-graph-partner-validation-v3"
+      ],
+      "mode_counts": {
+        "agent": 1,
+        "reasoning": 0
+      },
+      "experiment_seconds": 1020.2455,
+      "scope": "complete"
+    },
+    {
+      "name": "PostTrainBench",
+      "pairs": 3,
+      "pair_ids": [
+        "PTB-P097",
+        "PTB-P103",
+        "PTB-P112"
+      ],
+      "mode_counts": {
+        "agent": 3,
+        "reasoning": 0
+      },
+      "experiment_seconds": 3160.07755,
+      "scope": "training_only"
+    },
+    {
+      "name": "nanoGPT",
+      "pairs": 5,
+      "pair_ids": [
+        "NG15-P001",
+        "NG15-P007",
+        "NG15-P012",
+        "NG15-P020",
+        "NG15-P021"
+      ],
+      "mode_counts": {
+        "agent": 0,
+        "reasoning": 5
+      },
+      "experiment_seconds": 571.5111320894939,
+      "scope": "complete"
+    }
+  ],
+  "points": [
+    {
+      "model": "gemini-4-argon",
+      "bench": "AABench",
+      "judgment_seconds": 603.3187167644501,
+      "judgments": 45
+    },
+    {
+      "model": "gemini-4-argon",
+      "bench": "MLE-Bench",
+      "judgment_seconds": 354.24832224845886,
+      "judgments": 18
+    },
+    {
+      "model": "gemini-4-argon",
+      "bench": "MLSBench",
+      "judgment_seconds": 479.8804979324341,
+      "judgments": 3
+    },
+    {
+      "model": "gemini-4-argon",
+      "bench": "NatureBench",
+      "judgment_seconds": 382.1614475250244,
+      "judgments": 3
+    },
+    {
+      "model": "gemini-4-argon",
+      "bench": "PostTrainBench",
+      "judgment_seconds": 531.570273399353,
+      "judgments": 9
+    },
+    {
+      "model": "gemini-4-argon",
+      "bench": "nanoGPT",
+      "judgment_seconds": 159.15292763710022,
+      "judgments": 15
+    },
+    {
+      "model": "gpt-6.1-terra",
+      "bench": "AABench",
+      "judgment_seconds": 98.11364102363586,
+      "judgments": 45
+    },
+    {
+      "model": "gpt-6.1-terra",
+      "bench": "MLE-Bench",
+      "judgment_seconds": 18.718624591827393,
+      "judgments": 18
+    },
+    {
+      "model": "gpt-6.1-terra",
+      "bench": "MLSBench",
+      "judgment_seconds": 44.959354877471924,
+      "judgments": 3
+    },
+    {
+      "model": "gpt-6.1-terra",
+      "bench": "NatureBench",
+      "judgment_seconds": 26.04074716567993,
+      "judgments": 3
+    },
+    {
+      "model": "gpt-6.1-terra",
+      "bench": "PostTrainBench",
+      "judgment_seconds": 51.497032165527344,
+      "judgments": 9
+    },
+    {
+      "model": "gpt-6.1-terra",
+      "bench": "nanoGPT",
+      "judgment_seconds": 15.001338005065918,
+      "judgments": 15
+    },
+    {
+      "model": "claude-opus-5-5",
+      "bench": "AABench",
+      "judgment_seconds": 110.47450184822083,
+      "judgments": 45
+    },
+    {
+      "model": "claude-opus-5-5",
+      "bench": "MLE-Bench",
+      "judgment_seconds": 47.26882755756378,
+      "judgments": 18
+    },
+    {
+      "model": "claude-opus-5-5",
+      "bench": "MLSBench",
+      "judgment_seconds": 131.58978009223938,
+      "judgments": 3
+    },
+    {
+      "model": "claude-opus-5-5",
+      "bench": "NatureBench",
+      "judgment_seconds": 266.1124849319458,
+      "judgments": 3
+    },
+    {
+      "model": "claude-opus-5-5",
+      "bench": "PostTrainBench",
+      "judgment_seconds": 73.70529794692993,
+      "judgments": 9
+    },
+    {
+      "model": "claude-opus-5-5",
+      "bench": "nanoGPT",
+      "judgment_seconds": 23.148106336593628,
+      "judgments": 15
+    },
+    {
+      "model": "gpt-6.1-sol",
+      "bench": "AABench",
+      "judgment_seconds": 611.4090564250946,
+      "judgments": 45
+    },
+    {
+      "model": "gpt-6.1-sol",
+      "bench": "MLE-Bench",
+      "judgment_seconds": 95.01015913486481,
+      "judgments": 18
+    },
+    {
+      "model": "gpt-6.1-sol",
+      "bench": "MLSBench",
+      "judgment_seconds": 336.19083285331726,
+      "judgments": 3
+    },
+    {
+      "model": "gpt-6.1-sol",
+      "bench": "NatureBench",
+      "judgment_seconds": 239.6583001613617,
+      "judgments": 3
+    },
+    {
+      "model": "gpt-6.1-sol",
+      "bench": "PostTrainBench",
+      "judgment_seconds": 536.1056208610535,
+      "judgments": 9
+    },
+    {
+      "model": "gpt-6.1-sol",
+      "bench": "nanoGPT",
+      "judgment_seconds": 157.27202367782593,
+      "judgments": 15
+    }
+  ],
+  "definitions": {
+    "x": "Median across pairs of the mean of candidate A and B measured times. MLSBench uses 18 published environment-by-seed durations.",
+    "y": "Median of individual judgments on the same pairs, using all three repetitions and cumulative original/recovery attempt times.",
+    "partial": "Open markers: PostTrainBench is training only; MLSBench is one published environment by seed. Neither is a full-task train-plus-validation clock.",
+    "limits": "Judgment includes recorded retries and queueing. Batches, hardware and settings differ. Time alone does not establish equivalent accuracy or downstream research gains."
+  },
+  "provenance": {
+    "timing_summary_sha256": "e495e5d4ba58382b8f6a068fb083f15a47619c33bb273f6dda341ee2ffd79975",
+    "selection_audit_sha256": "d384e726bbb5efdbc623598044cd1473b035084261497c724fff878f941cb505"
+  }
+}

@@ -19,6 +19,40 @@ This repository is the **v0.1 homepage with a versioned results update**. It con
 
 The frozen collection was initially evaluated on 10–11 November 2026, with the displayed model configurations updated on 12 November. It is a manually selected development collection with historical labels, not an independently sampled hidden test set. The current results measure agreement with frozen preferences; preference reversal, reward-model training, and downstream research gains remain future work.
 
+## Time cost on selected typical benchmarks
+
+These points are **selected typical benchmarks**: six longer-running task slices
+covering 31 pairs, with one median point per benchmark. They illustrate the cost
+trend and are **not a representative sample of all 17 benchmarks or all tasks**.
+The selection keeps measured benchmark medians of at least five minutes,
+independently of judgment speed or accuracy. All four models use the same pairs.
+
+[Switch models on the homepage](https://fuyu12345.github.io/ai4ai-rewardbench/#runtime)
+· [Timing definitions and scope](docs/runtime.md)
+· [Download the values](data/public-runtime.csv)
+
+Filled points cover complete candidate execution. Open points mark
+**PostTrainBench: training only** and **MLSBench: one environment × one seed**.
+Judgment time includes recorded retries and queueing; hardware and batch
+conditions differ. Timing alone does not establish equivalent accuracy or
+downstream research gains.
+
+### Gemini 4 Argon
+
+![Gemini 4 Argon: measured time on six selected typical benchmarks](docs/assets/runtime/gemini-4-argon.png)
+
+### Terra · default
+
+![Terra default: measured time on six selected typical benchmarks](docs/assets/runtime/gpt-6.1-terra.png)
+
+### Opus 5.5 · high
+
+![Opus 5.5 high: measured time on six selected typical benchmarks](docs/assets/runtime/claude-opus-5-5.png)
+
+### Sol · xhigh
+
+![Sol xhigh: measured time on six selected typical benchmarks](docs/assets/runtime/gpt-6.1-sol.png)
+
 ## Run locally
 
 Requirements: Node.js 20.11 or later, npm, and Python 3. No `npm install` step is needed.
@@ -44,6 +78,7 @@ Page links and downloads use relative paths so the site works under `/ai4ai-rewa
 - `data/public-benchmark.json`: 135 task metadata records, benchmark counts, model scores, mode and benchmark breakdowns, cumulative resource metrics, baseline definitions, and source fingerprints.
 - `data/public-cases.json`: three case studies with source references, 45 inspected model–repeat records, and 44 saved final explanations, including the documented refusal. Model predictions are not reference labels.
 - `data/public-tasks.json`: English presentations of all 135 tasks, including background, question, candidates, constraints, decision rule, and public input inventory.
+- `data/public-runtime.json` / `.csv`: matched median times for four models on six selected typical benchmarks; no raw trajectories or reference labels.
 - `web/src/`: the HTML template, styles, and browser interactions.
 - `scripts/build.mjs` and `scripts/serve.mjs`: dependency-free static build and local server.
 - `scripts/prepare_data.py`: allowlisted export and exact-rational aggregate scoring from an authorized frozen handoff.
