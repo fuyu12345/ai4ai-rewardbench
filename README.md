@@ -4,7 +4,7 @@ AI4AI RewardBench evaluates whether a model can judge competing algorithmic solu
 
 [Homepage](https://fuyu12345.github.io/ai4ai-rewardbench/) · [Repository](https://github.com/fuyu12345/ai4ai-rewardbench) · [Evaluation protocol](docs/protocol.md) · [Data notes](data/README.md)
 
-This repository is the **v0.1 homepage with a versioned results update**. It contains a lightweight, responsive website with a mode-filtered leaderboard, benchmark distribution, searchable task catalog, and curated evidence/trace explorer. The visual system follows FRONTIS VI. It has no runtime package dependencies, server database, or model API integration.
+This repository is the **v0.1 homepage with a versioned results update**. It contains a lightweight, responsive website with measurement definitions, a mode-filtered leaderboard, and a four-model comparison of real experiment time versus judgment time. Task descriptions and curated case records are retained in the repository data files. The visual system follows FRONTIS VI. It has no runtime package dependencies, server database, or model API integration.
 
 ## Snapshot
 
@@ -15,14 +15,14 @@ This repository is the **v0.1 homepage with a versioned results update**. It con
 | Agent / Reasoning pairs | 105 / 30 |
 | Displayed model configurations | 11 |
 | Valid / planned cells in displayed rows | 4,454 / 4,455 |
-| Curated cases / displayed model–repeat trace records | 3 / 45 |
+| Archived cases / model–repeat trace records | 3 / 45 |
 
 The frozen collection was initially evaluated on 10–11 November 2026, with the displayed model configurations updated on 12 November. It is a manually selected development collection with historical labels, not an independently sampled hidden test set. The current results measure agreement with frozen preferences; preference reversal, reward-model training, and downstream research gains remain future work.
 
 ## Time cost on selected typical benchmarks
 
-These points are **selected typical benchmarks**: six longer-running task slices
-covering 31 pairs, with one median point per benchmark. They illustrate the cost
+These points are **selected typical benchmarks**: six longer-running task slices,
+with one median point per benchmark. They illustrate the cost
 trend and are **not a representative sample of all 17 benchmarks or all tasks**.
 The selection keeps measured benchmark medians of at least five minutes,
 independently of judgment speed or accuracy. All four models use the same pairs.
@@ -85,7 +85,7 @@ Page links and downloads use relative paths so the site works under `/ai4ai-rewa
 - `tests/`: score, coverage, ranking, task-catalog completeness, rationale attribution and publication-boundary checks.
 - `docs/`: the [protocol](docs/protocol.md), [case provenance](docs/case-provenance.md), and [homepage references](docs/references.md).
 
-Full candidate packages, datasets, private reference labels, organizer evidence, and the complete raw trajectory collection are **not included**. The clickable task catalog contains adapted/translated task statements and source-referenced descriptions. Case evidence distinguishes authored observations from actual final model explanations, evidence claims, uncertainties, and selected public assistant messages. Unreturned or encrypted intermediate reasoning is not reconstructed. It is not a full raw-log replay.
+Full candidate packages, datasets, private reference labels, organizer evidence, and the complete raw trajectory collection are **not included**. The public task data contains adapted/translated task statements and source-referenced descriptions. Case evidence distinguishes authored observations from actual final model explanations, evidence claims, uncertainties, and selected public assistant messages. Unreturned or encrypted intermediate reasoning is not reconstructed. It is not a full raw-log replay.
 
 ## Read the leaderboard correctly
 

@@ -16,7 +16,7 @@
   <a class="skip-link" href="#main">Skip to content</a>
   <header class="header">
     <a class="wordmark" href="#" aria-label="AI4AI RewardBench home"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M2 28V14L16 0v14L2 28Zm14 4V18L30 4v14L16 32Z" fill="currentColor"/></svg><span>AI4AI<span class="wordmark-sub"> / RewardBench</span></span></a>
-    <nav aria-label="Main navigation"><a href="#protocol">Method</a><a href="#leaderboard">Leaderboard</a><a href="#dataset">Dataset</a><a href="#explorer">Explore</a></nav>
+    <nav aria-label="Main navigation"><a href="#protocol">Method</a><a href="#leaderboard">Leaderboard</a><a href="#runtime">Time costs</a></nav>
     <a class="nav-github" href="https://github.com/fuyu12345/ai4ai-rewardbench" target="_blank" rel="noreferrer">GitHub <span aria-hidden="true">↗</span></a>
   </header>
   <main id="main">
@@ -28,7 +28,7 @@
           <p class="hero-lead">How does AI judge AI research?</p>
           <p class="hero-description">AI for AI (AI4AI) puts models to work on kernel optimization, ML engineering, scientific discovery, and training algorithms. Each task calls for choosing a promising approach under specific goals and resource constraints.</p>
           <p class="hero-description">RewardBench tests models’ research preferences across these tasks using existing agent artifacts and evidence—without rerunning heavyweight training or GPU experiments.</p>
-          <div class="hero-actions"><a href="#leaderboard" class="button primary">Explore the leaderboard <span>↗</span></a><a href="#explorer" class="text-link">Look inside a task <span>→</span></a></div>
+          <div class="hero-actions"><a href="#leaderboard" class="button primary">Explore the leaderboard <span>↗</span></a><a href="#runtime" class="text-link">Compare time costs <span>→</span></a></div>
         </div>
         <div class="decision-figure" aria-label="Two candidate approaches are compared using task context and evidence to produce a judgment of A, B or tie.">
           <div class="figure-label"><span>THE RESEARCH DECISION</span><span>FIG. 01</span></div>
@@ -39,7 +39,7 @@
           <p class="figure-caption">Same task. Different approaches.<br>A decision worth getting right.</p>
         </div>
       </div>
-      <div class="wrap stat-strip"><div><strong>135</strong><span>preference pairs</span></div><div><strong>17</strong><span>source benchmarks</span></div><div><strong id="model-count">11</strong><span>model configurations</span></div><div><strong>2</strong><span>evaluation modes</span></div><a href="#dataset" aria-label="Discover the dataset">DISCOVER THE DATASET <span>↓</span></a></div>
+      <div class="wrap stat-strip"><div><strong>135</strong><span>preference pairs</span></div><div><strong>17</strong><span>source benchmarks</span></div><div><strong id="model-count">11</strong><span>model configurations</span></div><div><strong>2</strong><span>evaluation modes</span></div><a href="#runtime" aria-label="Compare experiment and judgment time">COMPARE TIME COSTS <span>↓</span></a></div>
       <div class="the-edge"></div>
     </section>
 
@@ -65,37 +65,15 @@
     <section id="runtime" class="dark section runtime-section" aria-labelledby="runtime-heading">
       <div class="the-edge"></div>
       <div class="wrap">
-        <div class="section-heading"><div><p class="eyebrow">SELECTED TYPICAL BENCHMARKS</p><h2 id="runtime-heading">Experiment time.<br>Judgment time.</h2></div><p>Six selected typical benchmarks, one median point each. A view of longer-running tasks, not the full benchmark distribution.</p></div>
+        <div class="section-heading"><div><p class="eyebrow">SELECTED TYPICAL BENCHMARKS</p><h2 id="runtime-heading">Real experiment time vs.<br>Judgment time</h2></div><p>Six selected typical benchmarks, one median point each. A view of longer-running tasks, not the full benchmark distribution.</p></div>
         <div class="runtime-toolbar"><div class="runtime-models" role="group" aria-label="Runtime comparison model"><button type="button" data-runtime-model="gemini-4-argon" aria-pressed="true">Gemini 4 Argon</button><button type="button" data-runtime-model="gpt-6.1-terra" aria-pressed="false">Terra <span>default</span></button><button type="button" data-runtime-model="claude-opus-5-5" aria-pressed="false">Opus 5.5 <span>high</span></button><button type="button" data-runtime-model="gpt-6.1-sol" aria-pressed="false">Sol <span>xhigh</span></button></div><span id="runtime-current" class="runtime-current" aria-live="polite">Gemini 4 Argon</span></div>
         <p class="runtime-mobile-hint">Scroll the chart horizontally to explore all six points.</p>
         <div class="runtime-chart" tabindex="0" role="region" aria-label="Scrollable experiment and judgment time chart" aria-describedby="runtime-caption"><!-- INLINE_RUNTIME_CHARTS --></div>
-        <div id="runtime-caption" class="runtime-caption"><p><i class="node" aria-hidden="true"></i><span><strong>6 typical benchmarks · 31 pairs.</strong> Selected measured medians ≥ 5 minutes. Every model uses the same task subset; both axes are logarithmic.</span></p><p>Open points: PostTrainBench records training only; MLSBench records one published environment × seed. Other points cover complete candidate execution.</p></div>
-        <div class="runtime-links"><a id="runtime-png" class="text-link" href="assets/runtime/gemini-4-argon.png" download>Download PNG <span>↓</span></a><a id="runtime-svg" class="text-link" href="assets/runtime/gemini-4-argon.svg" download>Vector SVG <span>↓</span></a><a class="text-link" href="public-runtime.csv" download>All four models · CSV <span>↓</span></a></div>
-        <details class="runtime-method"><summary>Timing details &amp; values <span aria-hidden="true">+</span></summary><p>X is the benchmark median of per-pair mean A/B candidate times. Y is the median of individual judgments on the same pairs across all three repeats, including recorded retries and queueing. MLSBench uses 18 published environment-by-seed clocks. Agent and Reasoning are pooled within a benchmark.</p><p>These typical benchmarks were selected by measured experiment/stage time, not judgment speed or accuracy. Batch conditions, hardware and settings differ. Time savings alone do not establish equivalent accuracy or downstream research gains.</p><div class="table-scroll"><table class="runtime-table"><caption id="runtime-table-caption">Gemini 4 Argon · measured median times</caption><thead><tr><th scope="col">Benchmark</th><th scope="col">Pairs</th><th scope="col">Experiment / stage</th><th scope="col">One judgment</th><th scope="col">Timing scope</th></tr></thead><tbody id="runtime-values"></tbody></table></div></details>
-      </div>
-    </section>
-
-    <section id="dataset" class="dataset-section section light">
-      <div class="wrap">
-        <div class="section-heading"><div><p class="eyebrow">03 / THE COLLECTION</p><h2>Real tasks. Different decisions.</h2></div><p>The current v0.1 collection: 135 pairs across 17 source benchmarks. More tasks and research domains are planned.</p></div>
-        <div class="collection-status"><span class="release-marker"><i class="node"></i> V0.1 · CURRENT RELEASE</span><p>An initial collection, built to grow. Additional tasks and broader coverage are planned for future releases; they are not part of the current scores.</p></div>
-        <div class="dataset-grid"><div class="mode-overview"><p class="tiny-label">ONE QUESTION. TWO WAYS TO INSPECT.</p><div class="mode-definition"><span class="mode-number">105</span><div><h3>Agent</h3><p>Inspect larger artifacts through a manifest-bound, read-only toolkit. No code execution or web access.</p><span class="mode-tag">READ → INVESTIGATE → JUDGE</span></div></div><div class="mode-definition"><span class="mode-number">30</span><div><h3>Reasoning</h3><p>Read the complete public task materials inline, then return a structured preference.</p><span class="mode-tag">READ → COMPARE → JUDGE</span></div></div><a href="#explorer" class="text-link" id="catalog-shortcut">Browse all 135 pairs <span>→</span></a></div><div class="bench-distribution"><div class="distribution-heading"><span>SOURCE BENCHMARK</span><span>PAIRS / 135</span></div><div id="bench-bars"></div></div></div>
-      </div>
-    </section>
-
-    <section id="explorer" class="dark section explorer-section">
-      <div class="the-edge"></div>
-      <div class="wrap">
-        <div class="section-heading"><div><p class="eyebrow">04 / INSIDE THE BENCHMARK</p><h2>Follow the evidence.</h2></div></div>
-        <div class="explorer-tabs" role="group" aria-label="Explorer view"><button class="active" data-explorer="cases" aria-pressed="true">Case studies <span id="case-count"></span></button><button data-explorer="catalog" aria-pressed="false">Task catalog <span>135</span></button></div>
-        <div id="cases-view"><div class="case-picker" id="case-picker" role="group" aria-label="Select a case"></div><article id="case-detail" class="case-detail"></article></div>
-        <div id="catalog-view" hidden><div class="catalog-filters"><label class="search-label"><span>SEARCH TASKS</span><input aria-label="Search tasks" id="task-search" type="search" placeholder="Pair ID, title, or benchmark…"></label><label><span>MODE</span><select aria-label="Filter by mode" id="mode-filter"><option value="all">All modes</option><option value="agent">Agent</option><option value="reasoning">Reasoning</option></select></label><label><span>BENCHMARK</span><select aria-label="Filter by benchmark" id="bench-filter"><option value="all">All benchmarks</option></select></label></div><p id="catalog-count" class="quiet" aria-live="polite"></p><div id="catalog-list"></div><div class="catalog-pagination"><button id="prev-page" class="button secondary">← Previous</button><span id="page-number"></span><button id="next-page" class="button secondary">Next →</button></div></div>
+        <div id="runtime-caption" class="runtime-caption"><p><i class="node" aria-hidden="true"></i><span><strong>6 typical benchmarks.</strong> Selected measured medians ≥ 5 minutes. Every model uses the same task subset; both axes are logarithmic.</span></p><p>Open points: PostTrainBench records training only; MLSBench records one published environment × seed. Other points cover complete candidate execution.</p></div>
       </div>
     </section>
 
   </main>
-  <footer class="dark"><div class="the-edge"></div><div class="wrap footer-main"><div><a href="#" class="footer-title">AI4AI RewardBench <span>↗</span></a><p>Evidence for better research decisions.</p></div><div class="footer-links"><a href="public-benchmark.json" download>Results & catalog ↓</a><a href="public-tasks.json" download>Task details ↓</a><a href="public-cases.json" download>Curated cases ↓</a><a href="https://github.com/fuyu12345/ai4ai-rewardbench" target="_blank" rel="noreferrer">Source code ↗</a></div></div></footer>
-  <dialog id="task-dialog" class="task-dialog" aria-labelledby="task-dialog-title"><div class="task-dialog-bar"><span>AI4AI / TASK DETAILS</span><button id="close-task" aria-label="Close task details">Close <span aria-hidden="true">×</span></button></div><div id="task-dialog-content"></div></dialog>
   <div class="toast" id="toast" role="status"></div>
   <script>/* INLINE_DATA */</script>
   <script>/* INLINE_APP */</script>
