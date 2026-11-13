@@ -16,7 +16,7 @@
   <a class="skip-link" href="#main">Skip to content</a>
   <header class="header">
     <a class="wordmark" href="#" aria-label="AI4AI RewardBench home"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M2 28V14L16 0v14L2 28Zm14 4V18L30 4v14L16 32Z" fill="currentColor"/></svg><span>AI4AI<span class="wordmark-sub"> / RewardBench</span></span></a>
-    <nav aria-label="Main navigation"><a href="#protocol">Method</a><a href="#leaderboard">Leaderboard</a><a href="#runtime">Time costs</a></nav>
+    <nav aria-label="Main navigation"><a href="#protocol">Method</a><a href="#leaderboard">Leaderboard</a><a href="#dataset">Dataset</a><a href="#explorer">Explore</a></nav>
     <a class="nav-github" href="https://github.com/fuyu12345/ai4ai-rewardbench" target="_blank" rel="noreferrer">GitHub <span aria-hidden="true">↗</span></a>
   </header>
   <main id="main">
@@ -28,7 +28,7 @@
           <p class="hero-lead">How does AI judge AI research?</p>
           <p class="hero-description">AI for AI (AI4AI) puts models to work on kernel optimization, ML engineering, scientific discovery, and training algorithms. Each task calls for choosing a promising approach under specific goals and resource constraints.</p>
           <p class="hero-description">RewardBench tests models’ research preferences across these tasks using existing agent artifacts and evidence—without rerunning heavyweight training or GPU experiments.</p>
-          <div class="hero-actions"><a href="#leaderboard" class="button primary">Explore the leaderboard <span>↗</span></a><a href="#runtime" class="text-link">Compare time costs <span>→</span></a></div>
+          <div class="hero-actions"><a href="#leaderboard" class="button primary">Explore the leaderboard <span>↗</span></a><a href="#explorer" class="text-link">Look inside a task <span>→</span></a></div>
         </div>
         <div class="decision-figure" aria-label="Two candidate approaches are compared using task context and evidence to produce a judgment of A, B or tie.">
           <div class="figure-label"><span>THE RESEARCH DECISION</span><span>FIG. 01</span></div>
@@ -39,7 +39,7 @@
           <p class="figure-caption">Same task. Different approaches.<br>A decision worth getting right.</p>
         </div>
       </div>
-      <div class="wrap stat-strip"><div><strong>135</strong><span>preference pairs</span></div><div><strong>17</strong><span>source benchmarks</span></div><div><strong id="model-count">11</strong><span>model configurations</span></div><div><strong>2</strong><span>evaluation modes</span></div><a href="#runtime" aria-label="Compare experiment and judgment time">COMPARE TIME COSTS <span>↓</span></a></div>
+      <div class="wrap stat-strip"><div><strong>135</strong><span>preference pairs</span></div><div><strong>17</strong><span>source benchmarks</span></div><div><strong id="model-count">11</strong><span>model configurations</span></div><div><strong>2</strong><span>evaluation modes</span></div><a href="#dataset" aria-label="Discover the dataset">DISCOVER THE DATASET <span>↓</span></a></div>
       <div class="the-edge"></div>
     </section>
 
@@ -73,7 +73,27 @@
       </div>
     </section>
 
+    <section id="dataset" class="dataset-section section light">
+      <div class="wrap">
+        <div class="section-heading"><div><p class="eyebrow">03 / THE COLLECTION</p><h2>Real tasks. Different decisions.</h2></div><p>The current v0.1 collection: 135 pairs across 17 source benchmarks. More tasks and research domains are planned.</p></div>
+        <div class="collection-status"><span class="release-marker"><i class="node"></i> V0.1 · CURRENT RELEASE</span><p>An initial collection, built to grow. Additional tasks and broader coverage are planned for future releases; they are not part of the current scores.</p></div>
+        <div class="dataset-grid"><div class="mode-overview"><p class="tiny-label">ONE QUESTION. TWO WAYS TO INSPECT.</p><div class="mode-definition"><span class="mode-number">105</span><div><h3>Agent</h3><p>Inspect larger artifacts through a manifest-bound, read-only toolkit. No code execution or web access.</p><span class="mode-tag">READ → INVESTIGATE → JUDGE</span></div></div><div class="mode-definition"><span class="mode-number">30</span><div><h3>Reasoning</h3><p>Read the complete public task materials inline, then return a structured preference.</p><span class="mode-tag">READ → COMPARE → JUDGE</span></div></div><a href="#explorer" class="text-link" id="catalog-shortcut">Browse all 135 pairs <span>→</span></a></div><div class="bench-distribution"><div class="distribution-heading"><span>SOURCE BENCHMARK</span><span>PAIRS / 135</span></div><div id="bench-bars"></div></div></div>
+      </div>
+    </section>
+
+    <section id="explorer" class="dark section explorer-section">
+      <div class="the-edge"></div>
+      <div class="wrap">
+        <div class="section-heading"><div><p class="eyebrow">04 / INSIDE THE BENCHMARK</p><h2>Follow the evidence.</h2></div></div>
+        <div class="explorer-tabs" role="group" aria-label="Explorer view"><button class="active" data-explorer="cases" aria-pressed="true">Case studies <span id="case-count"></span></button><button data-explorer="catalog" aria-pressed="false">Task catalog <span>135</span></button></div>
+        <div id="cases-view"><div class="case-picker" id="case-picker" role="group" aria-label="Select a case"></div><article id="case-detail" class="case-detail"></article></div>
+        <div id="catalog-view" hidden><div class="catalog-filters"><label class="search-label"><span>SEARCH TASKS</span><input aria-label="Search tasks" id="task-search" type="search" placeholder="Pair ID, title, or benchmark…"></label><label><span>MODE</span><select aria-label="Filter by mode" id="mode-filter"><option value="all">All modes</option><option value="agent">Agent</option><option value="reasoning">Reasoning</option></select></label><label><span>BENCHMARK</span><select aria-label="Filter by benchmark" id="bench-filter"><option value="all">All benchmarks</option></select></label></div><p id="catalog-count" class="quiet" aria-live="polite"></p><div id="catalog-list"></div><div class="catalog-pagination"><button id="prev-page" class="button secondary">← Previous</button><span id="page-number"></span><button id="next-page" class="button secondary">Next →</button></div></div>
+      </div>
+    </section>
+
   </main>
+  <footer class="dark"><div class="the-edge"></div><div class="wrap footer-main"><div><a href="#" class="footer-title">AI4AI RewardBench <span>↗</span></a><p>Evidence for better research decisions.</p></div><div class="footer-links"><a href="public-benchmark.json" download>Results & catalog ↓</a><a href="public-tasks.json" download>Task details ↓</a><a href="public-cases.json" download>Curated cases ↓</a><a href="https://github.com/fuyu12345/ai4ai-rewardbench" target="_blank" rel="noreferrer">Source code ↗</a></div></div></footer>
+  <dialog id="task-dialog" class="task-dialog" aria-labelledby="task-dialog-title"><div class="task-dialog-bar"><span>AI4AI / TASK DETAILS</span><button id="close-task" aria-label="Close task details">Close <span aria-hidden="true">×</span></button></div><div id="task-dialog-content"></div></dialog>
   <div class="toast" id="toast" role="status"></div>
   <script>/* INLINE_DATA */</script>
   <script>/* INLINE_APP */</script>

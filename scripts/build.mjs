@@ -4,6 +4,7 @@ import { Script } from 'node:vm';
 const root = resolve(import.meta.dirname, '..');
 const read = p => readFileSync(resolve(root, p), 'utf8');
 const dataset = JSON.parse(read('data/public-benchmark.json'));
+const cases = JSON.parse(read('data/public-cases.json'));
 const tasks = JSON.parse(read('data/public-tasks.json'));
 const runtime = JSON.parse(read('data/public-runtime.json'));
 const escape = value => String(value).replace(/[&<>"']/g, char => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[char]));
@@ -21,7 +22,7 @@ const runtimeCharts = runtime.models.map((model, index) => {
 const taskById = new Map(tasks.tasks.map(task => [task.pair_id, task]));
 if (taskById.size !== dataset.pair_count || dataset.pairs.some(pair => !taskById.has(pair.pair_id))) throw new Error('Task detail coverage does not match the benchmark catalog');
 for (const pair of dataset.pairs) pair.title = taskById.get(pair.pair_id).title;
-const json = JSON.stringify({ dataset, runtime }).replaceAll('<', '\\u003c');
+const json = JSON.stringify({ dataset, cases, tasks, runtime }).replaceAll('<', '\\u003c');
 const html = read('web/src/index.html')
   .replace('/* INLINE_STYLES */', () => [read('web/src/styles.css'), read('web/src/runtime.css')].join('\n'))
   .replace('<!-- INLINE_RUNTIME_CHARTS -->', () => runtimeCharts)
